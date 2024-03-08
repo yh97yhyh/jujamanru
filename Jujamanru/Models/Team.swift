@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Team {
+enum Team: Identifiable, Hashable {
     case LG
     case KT
     case SSG
@@ -23,25 +23,25 @@ enum Team {
     var id: Int {
         switch self {
         case .LG:
-            return 0
-        case .KT:
             return 1
-        case .SSG:
+        case .KT:
             return 2
-        case .NC:
+        case .SSG:
             return 3
-        case .DS:
+        case .NC:
             return 4
-        case .KIA:
+        case .DS:
             return 5
-        case .LT:
+        case .KIA:
             return 6
-        case .SS:
+        case .LT:
             return 7
-        case .HH:
+        case .SS:
             return 8
-        case .KW:
+        case .HH:
             return 9
+        case .KW:
+            return 10
         }
     }
     
@@ -69,4 +69,8 @@ enum Team {
             return "키움"
         }
     }
+}
+
+extension Team {
+    static let TEAMS = [Team.LG, Team.KT, Team.SSG, Team.NC, Team.DS, Team.KIA, Team.LT, Team.SS, Team.HH, Team.KW]
 }
