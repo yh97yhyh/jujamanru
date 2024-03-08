@@ -15,13 +15,13 @@ struct ReplyCellView: View {
             HStack {
                 if viewModel.reply.isPoster {
                     Text("글쓴이")
-                        .font(.callout)
+                        .font(.footnote)
                 } else {
                     Text("익명")
-                        .font(.callout)
+                        .font(.footnote)
                 }
                 
-                Text(viewModel.reply.modifiedDatetime)
+                Text(viewModel.datetime)
                     .font(.footnote)
                     .foregroundColor(.gray)
                 

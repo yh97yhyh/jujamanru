@@ -10,9 +10,11 @@ import Foundation
 class PostViewModel: ObservableObject {
     @Published var post: Post
     @Published var replies: [Reply]
+    @Published var datetime: String
     
     init(_ post: Post = Post.MOCK_POSTS[0], replies: [Reply] = Reply.MOCK_REPLIES) {
         self.post = post
         self.replies = replies.filter { $0.postId == post.id }
+        self.datetime = formatDatetime(post.createdDatetime)
     }
 }

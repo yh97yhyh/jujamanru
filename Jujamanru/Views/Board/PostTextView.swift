@@ -10,7 +10,6 @@ import SwiftUI
 struct PostTextView: View {
     @StateObject var viewModel: PostViewModel
     
-    
     var body: some View {
         VStack {
             Text(viewModel.post.text)

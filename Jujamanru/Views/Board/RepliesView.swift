@@ -52,7 +52,7 @@ struct RepliesView: View {
             }
             .buttonStyle(ReplyWriteButtonStyle())
             .sheet(isPresented: $isModalPresented) {
-                ReplyWriteView()
+                ReplyWriteView(viewModel: viewModel)
                     .presentationDetents([.height(80)])
             }
         }
