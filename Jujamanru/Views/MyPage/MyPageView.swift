@@ -20,6 +20,8 @@ struct MyPageView: View {
                         .imageScale(.large)
                         .foregroundColor(.black)
                 }
+                .disabled(true)
+                .opacity(0.0)
 
             }
             .padding(.horizontal)

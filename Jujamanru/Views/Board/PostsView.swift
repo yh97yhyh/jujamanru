@@ -42,7 +42,7 @@ struct PostsView: View {
                 }
                 
                 ForEach(filteredProducts, id: \.self) { post in
-                    NavigationLink(destination: Text("")) {
+                    NavigationLink(destination: PostDetailView(viewModel: PostViewModel(post))) {
                         PostCellView(viewModel: PostViewModel(post))
                             .padding(.top, 2)
                             .padding(.bottom, 2)
