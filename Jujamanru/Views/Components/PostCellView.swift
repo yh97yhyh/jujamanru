@@ -19,7 +19,7 @@ struct PostCellView: View {
 //                        .fontWeight(.semibold)
                         .lineLimit(2)
                     
-                    Text("\(viewModel.post.teamName) / \(viewModel.post.createdDatetime) / 조회 \(viewModel.post.viewCount)")
+                    Text("\(viewModel.post.teamName) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }

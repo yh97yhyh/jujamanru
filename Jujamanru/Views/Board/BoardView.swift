@@ -18,7 +18,7 @@ struct BoardView: View {
                     .font(.headline)
                 Spacer()
                 
-                NavigationLink(destination: Text("")) {
+                NavigationLink(destination: PostWriteView()) {
                     Image(systemName: "square.and.pencil")
                         .imageScale(.large)
                         .foregroundColor(.black)

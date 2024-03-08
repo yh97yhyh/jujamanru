@@ -12,18 +12,30 @@ struct PostsView: View {
     @Binding var selectedTeam: Int
     @State var isSeeNotice = true
     
-    private var filteredProducts: [Post] {
+    private var filteredPosts: [Post] {
         if selectedTeam == 0 {
-            return viewModel.posts
+            return viewModel.posts.sorted(by: { $0.createdDatetime > $1.createdDatetime })
         } else {
-            return viewModel.posts.filter { $0.teamId == selectedTeam }
+            return viewModel.posts
+                .filter { $0.teamId == selectedTeam }
+                .sorted(by: { $0.createdDatetime > $1.createdDatetime })
         }
+    }
+    
+    private var newPostsCount: Int {
+        filteredPosts.filter { post in
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let todayDateString = dateFormatter.string(from: currentDate)
+            return post.createdDatetime.starts(with: todayDateString)
+        }.count
     }
     
     var body: some View {
         VStack {
             HStack {
-                Text("새글 0 / \(filteredProducts.count)")
+                Text("새글 \(newPostsCount) / \(filteredPosts.count)")
                     .font(.subheadline)
                 Spacer()
                 Button("공지보기") {
@@ -41,13 +53,11 @@ struct PostsView: View {
                     
                 }
                 
-                ForEach(filteredProducts, id: \.self) { post in
-                    NavigationLink(destination: Text("")) {
+                ForEach(filteredPosts, id: \.self) { post in
+                    NavigationLink(destination: PostDetailView(viewModel: PostViewModel(post))) {
                         PostCellView(viewModel: PostViewModel(post))
                             .padding(.top, 2)
                             .padding(.bottom, 2)
-//                            .frame(height: nil)
-//                            .border(Color.gray, width: 1)
                     }
                     Divider()
                 }

@@ -8,11 +8,70 @@
 import SwiftUI
 
 struct ReplyWriteView: View {
+    @StateObject var viewModel: PostViewModel
+    @State var text: String = ""
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Spacer()
+                Text("댓글 작성")
+                    .font(.subheadline)
+                Spacer()
+            }
+            
+            HStack {
+                TextField("댓글을 입력하세요...", text: $text)
+                    .autocapitalization(.none)
+                    .modifier(ReplyWriteTextFieldModifier())
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("등록")
+                }
+                .buttonStyle(ReplyWriteSubmitButtonStyle())
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+struct ReplyWriteSubmitButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .padding(.horizontal, 4)
+            .frame(height: 32)
+            .background(.white)
+            .foregroundColor(.black)
+            .cornerRadius(6)
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(.gray, lineWidth: 1)
+            )
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+    }
+}
+
+struct ReplyWriteTextFieldModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.subheadline)
+            .padding(12)
+            .frame(height: 32)
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(.gray, lineWidth: 1)
+            )
+//            .background(Color(.systemGray6))
+//            .cornerRadius(10)
+//            .padding(.horizontal, 24)
     }
 }
 
 #Preview {
-    ReplyWriteView()
+    ReplyWriteView(viewModel: PostViewModel())
 }
