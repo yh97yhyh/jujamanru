@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1EEA78DEE5FAAE0174C8CAB0 /* Pods_Jujamanru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */; };
+		F89491222B9B080400437A2E /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491212B9B080400437A2E /* View+Extensions.swift */; };
+		F89491242B9B083A00437A2E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491232B9B083A00437A2E /* API.swift */; };
+		F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491252B9B084F00437A2E /* API+Extensions.swift */; };
+		F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491292B9B087200437A2E /* Bundle+Extensions.swift */; };
+		F894912C2B9B088800437A2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894912B2B9B088800437A2E /* NetworkManager.swift */; };
+		F894912E2B9B08A300437A2E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894912D2B9B08A300437A2E /* User.swift */; };
+		F89491302B9B08B600437A2E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894912F2B9B08B600437A2E /* Post.swift */; };
+		F89491322B9B08C100437A2E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491312B9B08C100437A2E /* Notice.swift */; };
+		F89491342B9B08D100437A2E /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491332B9B08D100437A2E /* Reply.swift */; };
+		F89491362B9B0F4800437A2E /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491352B9B0F4800437A2E /* Team.swift */; };
 		F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0812B9B052000C35971 /* JujamanruApp.swift */; };
 		F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0832B9B052000C35971 /* ContentView.swift */; };
 		F8FAF0862B9B052100C35971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8FAF0852B9B052100C35971 /* Assets.xcassets */; };
@@ -18,6 +28,17 @@
 		65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.debug.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.debug.xcconfig"; sourceTree = "<group>"; };
 		69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jujamanru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.release.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.release.xcconfig"; sourceTree = "<group>"; };
+		F89491202B9B078400437A2E /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		F89491212B9B080400437A2E /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		F89491232B9B083A00437A2E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		F89491252B9B084F00437A2E /* API+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Extensions.swift"; sourceTree = "<group>"; };
+		F89491292B9B087200437A2E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		F894912B2B9B088800437A2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F894912D2B9B08A300437A2E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F894912F2B9B08B600437A2E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F89491312B9B08C100437A2E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		F89491332B9B08D100437A2E /* Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
+		F89491352B9B0F4800437A2E /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		F8FAF07E2B9B052000C35971 /* Jujamanru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jujamanru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAF0812B9B052000C35971 /* JujamanruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JujamanruApp.swift; sourceTree = "<group>"; };
 		F8FAF0832B9B052000C35971 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +64,6 @@
 				65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */,
 				821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -53,6 +73,58 @@
 				69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F894911A2B9B075400437A2E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F894911B2B9B075B00437A2E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F89491212B9B080400437A2E /* View+Extensions.swift */,
+				F89491292B9B087200437A2E /* Bundle+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F894911C2B9B076200437A2E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F89491232B9B083A00437A2E /* API.swift */,
+				F89491252B9B084F00437A2E /* API+Extensions.swift */,
+				F894912B2B9B088800437A2E /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F894911D2B9B076800437A2E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F894912D2B9B08A300437A2E /* User.swift */,
+				F894912F2B9B08B600437A2E /* Post.swift */,
+				F89491312B9B08C100437A2E /* Notice.swift */,
+				F89491332B9B08D100437A2E /* Reply.swift */,
+				F89491352B9B0F4800437A2E /* Team.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F894911E2B9B076E00437A2E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F894911F2B9B077500437A2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8FAF0752B9B052000C35971 = {
@@ -76,10 +148,17 @@
 		F8FAF0802B9B052000C35971 /* Jujamanru */ = {
 			isa = PBXGroup;
 			children = (
+				F894911F2B9B077500437A2E /* Views */,
+				F894911E2B9B076E00437A2E /* ViewModels */,
+				F894911D2B9B076800437A2E /* Models */,
+				F894911C2B9B076200437A2E /* Network */,
+				F894911B2B9B075B00437A2E /* Extensions */,
+				F894911A2B9B075400437A2E /* Utils */,
 				F8FAF0812B9B052000C35971 /* JujamanruApp.swift */,
 				F8FAF0832B9B052000C35971 /* ContentView.swift */,
 				F8FAF0852B9B052100C35971 /* Assets.xcassets */,
 				F8FAF0872B9B052100C35971 /* Preview Content */,
+				F89491202B9B078400437A2E /* Secrets.xcconfig */,
 			);
 			path = Jujamanru;
 			sourceTree = "<group>";
@@ -206,8 +285,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F89491362B9B0F4800437A2E /* Team.swift in Sources */,
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,
+				F89491222B9B080400437A2E /* View+Extensions.swift in Sources */,
+				F89491242B9B083A00437A2E /* API.swift in Sources */,
+				F894912C2B9B088800437A2E /* NetworkManager.swift in Sources */,
+				F894912E2B9B08A300437A2E /* User.swift in Sources */,
+				F89491322B9B08C100437A2E /* Notice.swift in Sources */,
+				F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */,
+				F89491302B9B08B600437A2E /* Post.swift in Sources */,
 				F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */,
+				F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */,
+				F89491342B9B08D100437A2E /* Reply.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +340,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -314,7 +403,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -335,7 +424,7 @@
 		};
 		F8FAF08D2B9B052100C35971 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */;
+			baseConfigurationReference = F89491202B9B078400437A2E /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
