@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyRepliesView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
+    @EnvironmentObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {

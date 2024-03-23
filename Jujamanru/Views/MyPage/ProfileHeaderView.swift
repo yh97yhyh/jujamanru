@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
+    @EnvironmentObject var viewModel: MyPageViewModel
 
     var body: some View {
         VStack {

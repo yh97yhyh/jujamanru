@@ -8,5 +8,5 @@
 import Foundation
 
 extension API {
-    
+    static let baseUrlString = "http://localhost:8080"
 }

@@ -46,6 +46,12 @@
 		F8F7FF9E2BAF1ACB00BC49E8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */; };
 		F8F7FFA22BAF24B800BC49E8 /* MyReplyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */; };
 		F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */; };
+		F8F7FFA62BAF37A700BC49E8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA52BAF37A700BC49E8 /* AuthManager.swift */; };
+		F8F7FFA82BAF37E500BC49E8 /* ScrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */; };
+		F8F7FFAA2BAF547D00BC49E8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */; };
+		F8F7FFAC2BAF549A00BC49E8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */; };
+		F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */; };
+		F8F7FFB02BAF585400BC49E8 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */; };
 		F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0812B9B052000C35971 /* JujamanruApp.swift */; };
 		F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0832B9B052000C35971 /* ContentView.swift */; };
 		F8FAF0862B9B052100C35971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8FAF0852B9B052100C35971 /* Assets.xcassets */; };
@@ -94,6 +100,12 @@
 		F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReplyCellView.swift; sourceTree = "<group>"; };
 		F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostCellView.swift; sourceTree = "<group>"; };
+		F8F7FFA52BAF37A700BC49E8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapView.swift; sourceTree = "<group>"; };
+		F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		F8FAF07E2B9B052000C35971 /* Jujamanru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jujamanru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAF0812B9B052000C35971 /* JujamanruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JujamanruApp.swift; sourceTree = "<group>"; };
 		F8FAF0832B9B052000C35971 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +166,7 @@
 				F89491232B9B083A00437A2E /* API.swift */,
 				F89491252B9B084F00437A2E /* API+Extensions.swift */,
 				F894912B2B9B088800437A2E /* NetworkManager.swift */,
+				F8F7FFA52BAF37A700BC49E8 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -174,10 +187,13 @@
 		F894911E2B9B076E00437A2E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */,
 				F89491482B9B13B300437A2E /* PostViewModel.swift */,
 				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
 				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
+				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
+				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,6 +230,7 @@
 				F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */,
 				F894916C2B9B85EE00437A2E /* MyRepliesView.swift */,
 				F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */,
+				F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -236,6 +253,7 @@
 		F89491442B9B12ED00437A2E /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -417,6 +435,7 @@
 				F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */,
 				F89491222B9B080400437A2E /* View+Extensions.swift in Sources */,
 				F8F7FF982BAF184300BC49E8 /* UIColor+Extensions.swift in Sources */,
+				F8F7FFA62BAF37A700BC49E8 /* AuthManager.swift in Sources */,
 				F89491242B9B083A00437A2E /* API.swift in Sources */,
 				F89491472B9B138D00437A2E /* PostCellView.swift in Sources */,
 				F894915B2B9B6A6E00437A2E /* ReplyCellView.swift in Sources */,
@@ -427,9 +446,12 @@
 				F89491432B9B123600437A2E /* MainTabView.swift in Sources */,
 				F89491552B9B663F00437A2E /* ProfileHeaderView.swift in Sources */,
 				F894915D2B9B6A8200437A2E /* ReplyViewModel.swift in Sources */,
+				F8F7FFAC2BAF549A00BC49E8 /* LoginViewModel.swift in Sources */,
 				F89491412B9B122000437A2E /* MyPageView.swift in Sources */,
 				F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */,
+				F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */,
 				F89491302B9B08B600437A2E /* Post.swift in Sources */,
+				F8F7FFA82BAF37E500BC49E8 /* ScrapView.swift in Sources */,
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
 				F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */,
 				F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */,
@@ -439,9 +461,11 @@
 				F89491592B9B66D500437A2E /* SettingView.swift in Sources */,
 				F89491652B9B7BA400437A2E /* PostWriteView.swift in Sources */,
 				F894913F2B9B121A00437A2E /* BoardView.swift in Sources */,
+				F8F7FFB02BAF585400BC49E8 /* TeamViewModel.swift in Sources */,
 				F89491692B9B7DC500437A2E /* DatetimeUtils.swift in Sources */,
 				F8F7FFA22BAF24B800BC49E8 /* MyReplyCellView.swift in Sources */,
 				F894914D2B9B160F00437A2E /* PostDetailView.swift in Sources */,
+				F8F7FFAA2BAF547D00BC49E8 /* LoginView.swift in Sources */,
 				F894914B2B9B160800437A2E /* PostsView.swift in Sources */,
 				F8F7FF9E2BAF1ACB00BC49E8 /* Common.swift in Sources */,
 				F89491492B9B13B300437A2E /* PostViewModel.swift in Sources */,

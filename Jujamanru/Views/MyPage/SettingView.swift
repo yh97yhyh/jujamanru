@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
-    
+    @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var viewModel: MyPageViewModel
     
     var body: some View {
         VStack {
@@ -22,13 +22,24 @@ struct SettingView: View {
                     Text("작성댓글 보기")
                         .foregroundColor(.black)
                 }
-                NavigationLink(destination: Text("")) {
+                NavigationLink(destination: ScrapView()) {
                     Text("스크랩 보기")
                         .foregroundColor(.black)
                 }
-                NavigationLink(destination: Text("")) {
-                    Text("로그아웃")
-                        .foregroundColor(.black)
+//                NavigationLink(destination: Text("로그아웃")) {
+//                    Text("로그아웃")
+//                        .foregroundColor(.black)
+//                }
+                Button {
+                    authManager.logout()
+                } label: {
+                    HStack {
+                        Text("로그아웃")
+                            .foregroundColor(.black)
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(.black)
+                    }
                 }
                 
             }

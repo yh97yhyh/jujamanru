@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileImageView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
+    @EnvironmentObject var viewModel: MyPageViewModel
 
     var body: some View {
         Image(systemName: "person.circle.fill")

@@ -1,16 +1,17 @@
 //
-//  MyPostsView.swift
+//  ScrapView.swift
 //  Jujamanru
 //
-//  Created by 영현 on 3/9/24.
+//  Created by 영현 on 3/24/24.
 //
 
 import SwiftUI
 
-struct MyPostsView: View {
+struct ScrapView: View {
     @EnvironmentObject var viewModel: MyPageViewModel
+    
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -23,7 +24,7 @@ struct MyPostsView: View {
                 }
                 Spacer()
                 
-                Text("작성글")
+                Text("스크랩")
                     .font(.headline)
                 
                 Spacer()
@@ -35,16 +36,17 @@ struct MyPostsView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                if viewModel.posts.isEmpty {
-                    Text("작성글이 없습니다.. 🙁")
+                if viewModel.scraps.isEmpty {
+                    Text("스크랩한 글이 없습니다.. 🙁")
                         .font(.title3)
                         .foregroundColor(.gray)
                         .padding(.top)
                 } else {
-                    ForEach(viewModel.posts, id: \.self) { post in
-                        NavigationLink(destination: PostDetailView(viewModel: PostViewModel(post))) {
-                            MyPostCellView(viewModel: PostViewModel(post))
+                    ForEach(viewModel.scraps, id: \.self) { scrap in
+                        NavigationLink(destination: PostDetailView(viewModel: PostViewModel(scrap))) {
+                            PostCellView(viewModel: PostViewModel(scrap))
                         }
+                        
                         Divider()
                     }
                 }
@@ -56,5 +58,5 @@ struct MyPostsView: View {
 }
 
 #Preview {
-    MyPostsView()
+    ScrapView()
 }
