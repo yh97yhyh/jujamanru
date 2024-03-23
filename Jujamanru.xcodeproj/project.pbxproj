@@ -43,8 +43,9 @@
 		F894916D2B9B85EE00437A2E /* MyRepliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894916C2B9B85EE00437A2E /* MyRepliesView.swift */; };
 		F894916F2B9B911F00437A2E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F894916E2B9B90FF00437A2E /* Secrets.xcconfig */; };
 		F8F7FF982BAF184300BC49E8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FF972BAF184300BC49E8 /* UIColor+Extensions.swift */; };
-		F8F7FF9A2BAF19E000BC49E8 /* PostsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FF992BAF19E000BC49E8 /* PostsResponse.swift */; };
-		F8F7FF9C2BAF19E900BC49E8 /* RepliesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FF9B2BAF19E900BC49E8 /* RepliesResponse.swift */; };
+		F8F7FF9E2BAF1ACB00BC49E8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */; };
+		F8F7FFA22BAF24B800BC49E8 /* MyReplyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */; };
+		F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */; };
 		F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0812B9B052000C35971 /* JujamanruApp.swift */; };
 		F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0832B9B052000C35971 /* ContentView.swift */; };
 		F8FAF0862B9B052100C35971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8FAF0852B9B052100C35971 /* Assets.xcassets */; };
@@ -90,8 +91,9 @@
 		F894916C2B9B85EE00437A2E /* MyRepliesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRepliesView.swift; sourceTree = "<group>"; };
 		F894916E2B9B90FF00437A2E /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		F8F7FF972BAF184300BC49E8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		F8F7FF992BAF19E000BC49E8 /* PostsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsResponse.swift; sourceTree = "<group>"; };
-		F8F7FF9B2BAF19E900BC49E8 /* RepliesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesResponse.swift; sourceTree = "<group>"; };
+		F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReplyCellView.swift; sourceTree = "<group>"; };
+		F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostCellView.swift; sourceTree = "<group>"; };
 		F8FAF07E2B9B052000C35971 /* Jujamanru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jujamanru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAF0812B9B052000C35971 /* JujamanruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JujamanruApp.swift; sourceTree = "<group>"; };
 		F8FAF0832B9B052000C35971 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,8 +166,7 @@
 				F89491312B9B08C100437A2E /* Notice.swift */,
 				F89491332B9B08D100437A2E /* Reply.swift */,
 				F89491352B9B0F4800437A2E /* Team.swift */,
-				F8F7FF992BAF19E000BC49E8 /* PostsResponse.swift */,
-				F8F7FF9B2BAF19E900BC49E8 /* RepliesResponse.swift */,
+				F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,8 +174,8 @@
 		F894911E2B9B076E00437A2E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 				F89491482B9B13B300437A2E /* PostViewModel.swift */,
+				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
 				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
 			);
@@ -210,7 +211,9 @@
 				F89491562B9B665A00437A2E /* ProfileImageView.swift */,
 				F89491582B9B66D500437A2E /* SettingView.swift */,
 				F894916A2B9B85E500437A2E /* MyPostsView.swift */,
+				F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */,
 				F894916C2B9B85EE00437A2E /* MyRepliesView.swift */,
+				F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,
 				F89491572B9B665A00437A2E /* ProfileImageView.swift in Sources */,
 				F89491532B9B163B00437A2E /* BoardViewModel.swift in Sources */,
+				F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */,
 				F89491222B9B080400437A2E /* View+Extensions.swift in Sources */,
 				F8F7FF982BAF184300BC49E8 /* UIColor+Extensions.swift in Sources */,
 				F89491242B9B083A00437A2E /* API.swift in Sources */,
@@ -424,7 +428,6 @@
 				F89491552B9B663F00437A2E /* ProfileHeaderView.swift in Sources */,
 				F894915D2B9B6A8200437A2E /* ReplyViewModel.swift in Sources */,
 				F89491412B9B122000437A2E /* MyPageView.swift in Sources */,
-				F8F7FF9A2BAF19E000BC49E8 /* PostsResponse.swift in Sources */,
 				F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */,
 				F89491302B9B08B600437A2E /* Post.swift in Sources */,
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
@@ -437,12 +440,13 @@
 				F89491652B9B7BA400437A2E /* PostWriteView.swift in Sources */,
 				F894913F2B9B121A00437A2E /* BoardView.swift in Sources */,
 				F89491692B9B7DC500437A2E /* DatetimeUtils.swift in Sources */,
+				F8F7FFA22BAF24B800BC49E8 /* MyReplyCellView.swift in Sources */,
 				F894914D2B9B160F00437A2E /* PostDetailView.swift in Sources */,
 				F894914B2B9B160800437A2E /* PostsView.swift in Sources */,
+				F8F7FF9E2BAF1ACB00BC49E8 /* Common.swift in Sources */,
 				F89491492B9B13B300437A2E /* PostViewModel.swift in Sources */,
 				F894916B2B9B85E500437A2E /* MyPostsView.swift in Sources */,
 				F89491512B9B162300437A2E /* ReplyWriteView.swift in Sources */,
-				F8F7FF9C2BAF19E900BC49E8 /* RepliesResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

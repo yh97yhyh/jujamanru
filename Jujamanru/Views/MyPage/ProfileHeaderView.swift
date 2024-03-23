@@ -16,12 +16,12 @@ struct ProfileHeaderView: View {
                 ProfileImageView()
                 
                 VStack(alignment: .leading) {
-                    Text("\(viewModel.user.nickname) 님")
+                    Text("\(viewModel.user.nickName) 님")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                     Text(viewModel.user.id)
                         .font(.footnote)
-                    Text(viewModel.user.teamName)
+                    Text(viewModel.user.team?.name ?? "")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.blue)

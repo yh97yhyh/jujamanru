@@ -24,8 +24,15 @@ struct PostDetailView: View {
                 }
                 Spacer()
                 
-                Text(viewModel.post.teamName)
-                    .font(.headline)
+                if viewModel.post.teamId != nil {
+                    Text("전체")
+                        .font(.headline)
+
+                } else {
+                    Text(viewModel.post.teamName!)
+                        .font(.headline)
+
+                }
                 
                 Spacer()
 
@@ -59,7 +66,7 @@ struct PostDetailView: View {
                 Divider()
                 
                 ForEach(viewModel.replies.prefix(3), id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply))
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
                     
                     Divider()
                 }

@@ -20,9 +20,15 @@ struct PostHeaderView: View {
             Text("익명")
                 .font(.footnote)
             
-            Text("\(viewModel.post.teamName) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
-                .font(.footnote)
-                .foregroundColor(.gray)
+            if viewModel.post.teamId != nil {
+                Text("\(viewModel.post.teamName!) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+            } else {
+                Text("전체 / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+            }
 
         }
         .padding(.horizontal)

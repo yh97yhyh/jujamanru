@@ -14,11 +14,12 @@ struct PostsView: View {
     
     private var filteredPosts: [Post] {
         if selectedTeam == 0 {
-            return viewModel.posts.sorted(by: { $0.createdDatetime > $1.createdDatetime })
+//            return viewModel.posts.sorted(by: { $0.createdDatetime > $1.createdDatetime })
+            return viewModel.posts
         } else {
             return viewModel.posts
                 .filter { $0.teamId == selectedTeam }
-                .sorted(by: { $0.createdDatetime > $1.createdDatetime })
+//                .sorted(by: { $0.createdDatetime > $1.createdDatetime })
         }
     }
     
@@ -28,7 +29,7 @@ struct PostsView: View {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let todayDateString = dateFormatter.string(from: currentDate)
-            return post.createdDatetime.starts(with: todayDateString)
+            return post.modifiedDatetime.starts(with: todayDateString)
         }.count
     }
     

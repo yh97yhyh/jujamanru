@@ -42,7 +42,7 @@ struct MyPostsView: View {
                         .padding(.top)
                 } else {
                     ForEach(viewModel.posts, id: \.self) { post in
-                        PostCellView(viewModel: PostViewModel(post))
+                        MyPostCellView(viewModel: PostViewModel(post))
                         Divider()
                     }
                 }

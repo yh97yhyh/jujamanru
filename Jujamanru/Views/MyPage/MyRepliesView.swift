@@ -42,7 +42,7 @@ struct MyRepliesView: View {
                         .padding(.top)
                 } else {
                     ForEach(viewModel.replies, id: \.self) { reply in
-                        ReplyCellView(viewModel: ReplyViewModel(reply))
+                        MyReplyCellView(viewModel: ReplyViewModel(reply))
                         
                         Divider()
                     }

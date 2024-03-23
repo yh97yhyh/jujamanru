@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostWriteView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var team: Team = Team.LG
+    @State var team: Team = Team.MOCK_TEAMS[0]
     @State var title: String = ""
     @State var text: String = ""
     
@@ -41,7 +41,7 @@ struct PostWriteView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Picker("Team", selection: $team) {
-                        ForEach(Team.TEAMS, id: \.self) { team in
+                        ForEach(Team.MOCK_TEAMS, id: \.self) { team in
                             Text(team.name).tag(team)
                         }
                     }

@@ -1,13 +1,13 @@
 //
-//  PostCellView.swift
+//  MyPostCellView.swift
 //  Jujamanru
 //
-//  Created by 영현 on 3/8/24.
+//  Created by 영현 on 3/23/24.
 //
 
 import SwiftUI
 
-struct PostCellView: View {
+struct MyPostCellView: View {
     @StateObject var viewModel: PostViewModel
     
     var body: some View {
@@ -20,22 +20,11 @@ struct PostCellView: View {
                         .lineLimit(2)
                     
                     if viewModel.post.teamId != nil {
-                        
-                        HStack {
-                            Text("\(viewModel.post.teamName!)")
-                                .font(.footnote)
-                                .foregroundColor(.blue)
-                            
-                            Text("\(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
-                        }
-                    } else {
-                        Text("전체")
+                        Text("\(viewModel.post.teamName!) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
                             .font(.footnote)
-                            .foregroundColor(.blue)
-                        
-                        Text("\(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
+                            .foregroundColor(.gray)
+                    } else {
+                        Text("전체 / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
                             .font(.footnote)
                             .foregroundColor(.gray)
                     }

@@ -12,10 +12,10 @@ class BoardViewModel: ObservableObject {
     
     @Published var teams: [Team]
     @Published var posts: [Post]
-    @Published var notices: [Notice]
+    @Published var notices: [Post]
 //    @Published var newPostsCount: Int = 0
     
-    init(_ teams: [Team] = Team.TEAMS, _ posts: [Post] = Post.MOCK_POSTS, _ notices: [Notice] = Notice.MOCK_NOTCIES) {
+    init(_ teams: [Team] = Team.MOCK_TEAMS, _ posts: [Post] = Post.MOCK_POSTS, _ notices: [Post] = Post.MOCK_NOTICES) {
         self.teams = teams
         self.posts = posts
         self.notices = notices

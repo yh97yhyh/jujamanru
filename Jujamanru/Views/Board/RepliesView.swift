@@ -37,7 +37,7 @@ struct RepliesView: View {
             
             ScrollView(showsIndicators: false) {
                 ForEach(viewModel.replies, id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply))
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
                     
                     Divider()
                 }
