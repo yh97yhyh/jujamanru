@@ -38,6 +38,9 @@ struct HomeView: View {
                 }
                 .padding()
                 
+//                Rectangle()
+//                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+//                    .frame(width: nil, height: 8)
                 Divider()
                 
                 VStack {
@@ -50,8 +53,11 @@ struct HomeView: View {
                 }
                 .padding()
                 
+//                Rectangle()
+//                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+//                    .frame(width: nil, height: 8)
                 Divider()
-                
+
                 VStack {
                     HStack {
                         Text("공지 ")

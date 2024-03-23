@@ -22,14 +22,15 @@ struct SettingView: View {
                     Text("작성댓글 보기")
                         .foregroundColor(.black)
                 }
-//                NavigationLink(destination: Text("")) {
-//                    Text("스크랩 보기")
-//                        .foregroundColor(.black)
-//                }
+                NavigationLink(destination: Text("")) {
+                    Text("스크랩 보기")
+                        .foregroundColor(.black)
+                }
                 NavigationLink(destination: Text("")) {
                     Text("로그아웃")
                         .foregroundColor(.black)
                 }
+                
             }
         }
     }

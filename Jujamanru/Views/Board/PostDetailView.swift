@@ -42,7 +42,9 @@ struct PostDetailView: View {
                 
                 PostTextView(viewModel: viewModel)
                 
-                Divider()
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 16)
                 
                 HStack {
                     Text("댓글 \(viewModel.post.replyCount)")
