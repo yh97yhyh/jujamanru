@@ -10,17 +10,17 @@ import Foundation
 struct Post: Identifiable, Codable, Hashable {
     let id: Int
     let title: String
-    let text: String
+    let text: String?
     let teamId: Int?
     let teamName: String?
     let viewCount: Int
     let replyCount: Int
     let createdBy: String
     let modifiedDatetime: String
-    let isUpdated: Bool
+    let isUpdated: Bool?
     let isNotice: Bool
     let mustRead: Bool
-    let replies: [Reply]
+    let replies: [Reply]?
     let timeView: String
 }
 

@@ -35,7 +35,6 @@ class AuthManager: ObservableObject {
         clearUserData()
     }
     
-    
     func checkLoginStatus() {
         if isLoggedIn {
             print("state : Login..")

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReplyWriteView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: PostViewModel
     @State var text: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -73,5 +74,5 @@ struct ReplyWriteTextFieldModifier: ViewModifier {
 }
 
 #Preview {
-    ReplyWriteView(viewModel: PostViewModel())
+    ReplyWriteView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
 }

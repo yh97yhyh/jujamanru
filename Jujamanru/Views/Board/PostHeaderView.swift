@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PostHeaderView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: PostViewModel
     
     var body: some View {
@@ -36,5 +37,5 @@ struct PostHeaderView: View {
 }
 
 #Preview {
-    PostHeaderView(viewModel: PostViewModel())
+    PostHeaderView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
 }

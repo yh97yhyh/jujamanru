@@ -44,5 +44,5 @@ struct MyPostCellView: View {
 }
 
 #Preview {
-    PostCellView(viewModel: PostViewModel())
+    PostCellView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
 }

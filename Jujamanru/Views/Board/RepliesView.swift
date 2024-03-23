@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RepliesView: View {
-    @StateObject var viewModel: PostViewModel
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var viewModel: RepliesViewModel
+//    @StateObject var postViewModel: PostViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
     
@@ -37,7 +39,7 @@ struct RepliesView: View {
             
             ScrollView(showsIndicators: false) {
                 ForEach(viewModel.replies, id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostViewModel(postId: reply.postId, userId: myPageViewModel.user.id))
                     
                     Divider()
                 }
@@ -52,7 +54,7 @@ struct RepliesView: View {
             }
             .buttonStyle(ReplyWriteButtonStyle())
             .sheet(isPresented: $isModalPresented) {
-                ReplyWriteView(viewModel: viewModel)
+                ReplyWriteView(viewModel: PostViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
                     .presentationDetents([.height(80)])
             }
         }
@@ -62,5 +64,5 @@ struct RepliesView: View {
 }
 
 #Preview {
-    RepliesView(viewModel: PostViewModel())
+    RepliesView(viewModel: RepliesViewModel(postId: 4))
 }

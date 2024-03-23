@@ -13,6 +13,6 @@ class ReplyViewModel: ObservableObject {
 
     init(_ reply: Reply = Reply.MOCK_REPLIES[0]) {
         self.reply = reply
-        self.datetime = formatDatetime(reply.modifiedDatetime)
+        self.datetime = reply.timeView
     }
 }

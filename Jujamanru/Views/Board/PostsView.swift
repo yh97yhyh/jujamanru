@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PostsView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
     @StateObject var viewModel = BoardViewModel.shared
     @Binding var selectedTeam: Int
     @State var isSeeNotice = true
@@ -55,8 +57,8 @@ struct PostsView: View {
                 }
                 
                 ForEach(filteredPosts, id: \.self) { post in
-                    NavigationLink(destination: PostDetailView(viewModel: PostViewModel(post))) {
-                        PostCellView(viewModel: PostViewModel(post))
+                    NavigationLink(destination: PostDetailView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                        PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
                             .padding(.top, 2)
                             .padding(.bottom, 2)
                     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PostDetailView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: PostViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
@@ -24,10 +25,9 @@ struct PostDetailView: View {
                 }
                 Spacer()
                 
-                if viewModel.post.teamId != nil {
+                if viewModel.post.teamId != 0 {
                     Text("전체")
                         .font(.headline)
-
                 } else {
                     Text(viewModel.post.teamName!)
                         .font(.headline)
@@ -56,7 +56,7 @@ struct PostDetailView: View {
                 HStack {
                     Text("댓글 \(viewModel.post.replyCount)")
                     Spacer()
-                    NavigationLink(destination: RepliesView(viewModel: viewModel)) {
+                    NavigationLink(destination: RepliesView(viewModel: RepliesViewModel(postId: viewModel.post.id))) {
                         Text("더보기")
                             .foregroundColor(.black)
                     }
@@ -65,7 +65,7 @@ struct PostDetailView: View {
                 
                 Divider()
                 
-                ForEach(viewModel.replies.prefix(3), id: \.self) { reply in
+                ForEach(viewModel.post.replies ?? [], id: \.self) { reply in
                     ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
                     
                     Divider()
@@ -108,5 +108,5 @@ struct ReplyWriteButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    PostDetailView(viewModel: PostViewModel())
+    PostDetailView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
 }

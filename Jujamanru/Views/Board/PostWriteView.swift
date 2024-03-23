@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PostWriteView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @Environment(\.dismiss) private var dismiss
     @State var team: Team = Team.MOCK_TEAMS[0]
     @State var title: String = ""

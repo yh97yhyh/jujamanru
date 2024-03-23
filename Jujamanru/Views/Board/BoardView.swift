@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BoardView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
     @StateObject var viewModel = BoardViewModel.shared
     @State private var selectedTeam: Int = 0
     
@@ -39,7 +41,7 @@ struct BoardView: View {
                             }
                             .buttonStyle(TeamButtonStyle(isSelected: selectedTeam == 0))
                             .id(0)
-                            ForEach(viewModel.teams, id: \.self) { team in
+                            ForEach(teamViewModel.teams, id: \.self) { team in
                                 Button(team.name) {
                                     withAnimation {
                                         selectedTeam = team.id
@@ -55,7 +57,7 @@ struct BoardView: View {
                     .padding()
                 }
                 .onChange(of: selectedTeam) { newTeam in
-                    let scrollToCategoryID = newTeam == 0 ? 0 : viewModel.teams[newTeam - 1].id
+                    let scrollToCategoryID = newTeam == 0 ? 0 : teamViewModel.teams[newTeam - 1].id
                     scrollProxy.scrollTo(scrollToCategoryID, anchor: .center)
                 }
             }
@@ -64,13 +66,13 @@ struct BoardView: View {
                 .padding(.bottom, 4)
             
             TabView(selection: $selectedTeam) {
-                ForEach(0...viewModel.teams.count, id: \.self) { index in
+                ForEach(0...teamViewModel.teams.count, id: \.self) { index in
                     if index == 0 {
                         PostsView(selectedTeam: $selectedTeam)
                             .tag(0)
                     } else {
                         PostsView(selectedTeam: $selectedTeam)
-                            .tag(viewModel.teams[index-1].id)
+                            .tag(teamViewModel.teams[index-1].id)
                     }
                 }
                 
