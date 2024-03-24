@@ -54,7 +54,7 @@ struct PostCellView: View {
                 Text("\(viewModel.post.replyCount)")
                     .font(.body)
                     .fontWeight(.semibold)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.black)
             }
             
         }
