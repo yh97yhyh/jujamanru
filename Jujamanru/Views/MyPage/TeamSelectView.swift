@@ -8,10 +8,24 @@
 import SwiftUI
 
 struct TeamSelectView: View {
+    @EnvironmentObject var teamViewModel: TeamViewModel
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @State var selectedTeam: Team?
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(teamViewModel.teams) { team in
+            Button(action: {
+                selectedTeam = team
+                myPageViewModel.updateTeam(team.id)
+                dismiss()
+            }) {
+                Text(team.name)
+            }
+        }
     }
 }
+
 
 #Preview {
     TeamSelectView()

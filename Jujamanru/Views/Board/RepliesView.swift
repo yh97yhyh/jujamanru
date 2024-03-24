@@ -13,6 +13,7 @@ struct RepliesView: View {
 //    @StateObject var postViewModel: PostViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
+    @State private var isEndReached: Bool = false
     
     var body: some View {
         VStack {
@@ -26,7 +27,7 @@ struct RepliesView: View {
                 }
                 Spacer()
                 
-                Text("댓글 \(viewModel.replies.count)")
+                Text("댓글 \(viewModel.totalCount)")
                     .font(.headline)
                 
                 Spacer()
@@ -43,6 +44,17 @@ struct RepliesView: View {
                     
                     Divider()
                 }
+                Color.clear
+                    .frame(width: 0, height: 0, alignment: .bottom)
+                    .onAppear {
+                        isEndReached = true
+                    }
+            }
+            .onChange(of: isEndReached) { isEndReached in
+                if isEndReached {
+                    viewModel.addReplies(viewModel.postId)
+                    self.isEndReached = false
+                }
             }
             
             Divider()
@@ -54,7 +66,7 @@ struct RepliesView: View {
             }
             .buttonStyle(ReplyWriteButtonStyle())
             .sheet(isPresented: $isModalPresented) {
-                ReplyWriteView(viewModel: PostViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
+                ReplyWriteView(viewModel: ReplyWriteViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
                     .presentationDetents([.height(80)])
             }
         }

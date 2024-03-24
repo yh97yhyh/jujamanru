@@ -53,6 +53,9 @@
 		F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */; };
 		F8F7FFB02BAF585400BC49E8 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */; };
 		F8F7FFB42BAF660E00BC49E8 /* RepliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */; };
+		F8F7FFB62BAF70A100BC49E8 /* ReplyWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */; };
+		F8F7FFB82BAF72EB00BC49E8 /* PostWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */; };
+		F8F7FFBA2BAF79B700BC49E8 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */; };
 		F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0812B9B052000C35971 /* JujamanruApp.swift */; };
 		F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0832B9B052000C35971 /* ContentView.swift */; };
 		F8FAF0862B9B052100C35971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8FAF0852B9B052100C35971 /* Assets.xcassets */; };
@@ -108,6 +111,9 @@
 		F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewModel.swift; sourceTree = "<group>"; };
 		F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyWriteViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWriteViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
 		F8FAF07E2B9B052000C35971 /* Jujamanru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jujamanru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAF0812B9B052000C35971 /* JujamanruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JujamanruApp.swift; sourceTree = "<group>"; };
 		F8FAF0832B9B052000C35971 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -193,8 +199,10 @@
 				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
 				F89491482B9B13B300437A2E /* PostViewModel.swift */,
+				F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */,
 				F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */,
 				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
+				F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */,
 				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
 				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
 			);
@@ -234,6 +242,7 @@
 				F894916C2B9B85EE00437A2E /* MyRepliesView.swift */,
 				F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */,
 				F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */,
+				F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -433,6 +442,7 @@
 				F894913D2B9B120B00437A2E /* HomeView.swift in Sources */,
 				F89491362B9B0F4800437A2E /* Team.swift in Sources */,
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,
+				F8F7FFB62BAF70A100BC49E8 /* ReplyWriteViewModel.swift in Sources */,
 				F89491572B9B665A00437A2E /* ProfileImageView.swift in Sources */,
 				F89491532B9B163B00437A2E /* BoardViewModel.swift in Sources */,
 				F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */,
@@ -444,6 +454,7 @@
 				F894915B2B9B6A6E00437A2E /* ReplyCellView.swift in Sources */,
 				F894912C2B9B088800437A2E /* NetworkManager.swift in Sources */,
 				F89491612B9B712F00437A2E /* PostHeaderView.swift in Sources */,
+				F8F7FFB82BAF72EB00BC49E8 /* PostWriteViewModel.swift in Sources */,
 				F894912E2B9B08A300437A2E /* User.swift in Sources */,
 				F89491322B9B08C100437A2E /* Notice.swift in Sources */,
 				F89491432B9B123600437A2E /* MainTabView.swift in Sources */,
@@ -452,6 +463,7 @@
 				F8F7FFAC2BAF549A00BC49E8 /* LoginViewModel.swift in Sources */,
 				F89491412B9B122000437A2E /* MyPageView.swift in Sources */,
 				F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */,
+				F8F7FFBA2BAF79B700BC49E8 /* TeamSelectView.swift in Sources */,
 				F8F7FFB42BAF660E00BC49E8 /* RepliesViewModel.swift in Sources */,
 				F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */,
 				F89491302B9B08B600437A2E /* Post.swift in Sources */,

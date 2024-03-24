@@ -31,7 +31,7 @@ struct PostCellView: View {
                                 .foregroundColor(.gray)
                         }
                     } else {
-                        Text("전체")
+                        Text("")
                             .font(.footnote)
                             .foregroundColor(.blue)
                         

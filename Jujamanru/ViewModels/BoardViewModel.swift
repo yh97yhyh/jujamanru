@@ -37,7 +37,6 @@ class BoardViewModel: ObservableObject {
         self.notices = notices
         
         fetchPosts()
-        fetchNotices()
     }
     
     func fetchPosts() {
@@ -51,35 +50,13 @@ class BoardViewModel: ObservableObject {
             switch result {
             case .success(let postsResponse):
                 self.posts = postsResponse.content
+                self.isCanAddPosts = !postsResponse.last
+                self.notices = postsResponse.content.filter { $0.isNotice == true }
                 self.totalPages = postsResponse.totalPages
                 self.totalCount = postsResponse.totalElements
                 print("succeed to get posts!")
             case .failure(let error):
                 print("failed to get posts.. \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func fetchNotices() {
-//        var parameters = Parameters()
-//        if selectedTeam != 0 {
-//            parameters = [
-//                "teamId": selectedTeam
-//            ]
-//        }
-        let parameters: Parameters = [
-            "mustRead": true,
-            "userId": true
-        ]
-        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.notices = postsResponse.content
-                self.totalPages = postsResponse.totalPages
-                self.totalCount = postsResponse.totalElements
-                print("succeed to get notices!")
-            case .failure(let error):
-                print("failed to get notices.. \(error.localizedDescription)")
             }
         }
     }
@@ -116,7 +93,7 @@ class BoardViewModel: ObservableObject {
     
     func toggleFetch() {
         self.fetchCount += 1
-        if self.fetchCount >= 2 {
+        if self.fetchCount >= 1 {
             self.isFetching = false
             self.fetchCount = 0
         }

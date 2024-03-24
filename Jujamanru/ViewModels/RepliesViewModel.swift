@@ -53,6 +53,7 @@ class RepliesViewModel: ObservableObject {
         }
         
         let parameters: Parameters = [
+                "page": page,
                 "postId": postId
             ]
         

@@ -78,7 +78,7 @@ struct PostDetailView: View {
                 }
                 .buttonStyle(ReplyWriteButtonStyle())
                 .sheet(isPresented: $isModalPresented) {
-                    ReplyWriteView(viewModel: viewModel)
+                    ReplyWriteView(viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
                         .presentationDetents([.height(80)])
                 }
                 

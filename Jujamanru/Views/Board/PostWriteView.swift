@@ -9,10 +9,9 @@ import SwiftUI
 
 struct PostWriteView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
+    @StateObject var viewModel: PostWriteViewModel
     @Environment(\.dismiss) private var dismiss
-    @State var team: Team = Team.MOCK_TEAMS[0]
-    @State var title: String = ""
-    @State var text: String = ""
     
     var body: some View {
         VStack {
@@ -27,6 +26,7 @@ struct PostWriteView: View {
                 Spacer()
                 
                 Button {
+                    viewModel.writePost()
                     dismiss()
                 } label: {
                     Text("등록")
@@ -41,9 +41,10 @@ struct PostWriteView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Picker("Team", selection: $team) {
-                        ForEach(Team.MOCK_TEAMS, id: \.self) { team in
-                            Text(team.name).tag(team)
+                    Picker("Team", selection: $viewModel.selectedTeam) {
+                        Text("선택X ").tag(0)
+                        ForEach(teamViewModel.teams, id: \.self) { team in
+                            Text("\(team.name) ").tag(team.id)
                         }
                     }
                     .accentColor(.black)
@@ -51,7 +52,7 @@ struct PostWriteView: View {
                     Spacer()
                 }
                 
-                TextField("제목을 입력해주세요.", text: $text)
+                TextField("제목을 입력해주세요.", text: $viewModel.title)
                     .font(.title3)
                     .autocapitalization(.none)
                     .padding(.horizontal)
@@ -60,15 +61,13 @@ struct PostWriteView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                TextField("내용을 입력해주세요...", text: $text)
+                TextField("내용을 입력해주세요...", text: $viewModel.text)
                     .autocapitalization(.none)
                     .padding(.horizontal)
             }
             
 //            .pickerStyle(SegmentedPickerStyle())
 //            .padding(.horizontal)
-            
-            
             
         }
         .navigationBarHidden(true)
@@ -95,5 +94,5 @@ struct PostWriteSubmitButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    PostWriteView()
+    PostWriteView(viewModel: PostWriteViewModel(userId: "ssg1"))
 }
