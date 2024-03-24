@@ -10,7 +10,7 @@ import SwiftUI
 struct ReplyCellView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: ReplyViewModel
-    @StateObject var postViewModel: PostViewModel
+    @StateObject var postViewModel: PostDetailViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -54,5 +54,5 @@ struct ReplyCellView: View {
 }
 
 #Preview {
-    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostViewModel(postId: 4, userId: "ssg1"))
+    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

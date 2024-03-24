@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostHeaderView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
-    @StateObject var viewModel: PostViewModel
+    @StateObject var viewModel: PostDetailViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -57,5 +57,5 @@ struct PostHeaderView: View {
 }
 
 #Preview {
-    PostHeaderView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
+    PostHeaderView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

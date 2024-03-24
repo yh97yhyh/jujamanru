@@ -42,7 +42,7 @@ struct MyPostsView: View {
                         .padding(.top)
                 } else {
                     ForEach(viewModel.posts, id: \.self) { post in
-                        NavigationLink(destination: PostDetailView(viewModel: PostViewModel(postId: post.id, userId: viewModel.user.id))) {
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: viewModel.user.id))) {
                             MyPostCellView(viewModel: PostViewModel(postId: post.id, userId: viewModel.user.id))
                         }
                         Divider()

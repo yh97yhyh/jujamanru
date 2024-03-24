@@ -57,6 +57,7 @@
 		F8F7FFB82BAF72EB00BC49E8 /* PostWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */; };
 		F8F7FFBA2BAF79B700BC49E8 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */; };
 		F8F7FFBC2BB07BEF00BC49E8 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */; };
+		F8F7FFBE2BB09ABA00BC49E8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F7FFBD2BB09ABA00BC49E8 /* HomeViewModel.swift */; };
 		F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0812B9B052000C35971 /* JujamanruApp.swift */; };
 		F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAF0832B9B052000C35971 /* ContentView.swift */; };
 		F8FAF0862B9B052100C35971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8FAF0852B9B052100C35971 /* Assets.xcassets */; };
@@ -116,6 +117,7 @@
 		F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWriteViewModel.swift; sourceTree = "<group>"; };
 		F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
 		F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
+		F8F7FFBD2BB09ABA00BC49E8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F8FAF07E2B9B052000C35971 /* Jujamanru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jujamanru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAF0812B9B052000C35971 /* JujamanruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JujamanruApp.swift; sourceTree = "<group>"; };
 		F8FAF0832B9B052000C35971 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -197,17 +199,18 @@
 		F894911E2B9B076E00437A2E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F8F7FFBD2BB09ABA00BC49E8 /* HomeViewModel.swift */,
 				F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */,
 				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
 				F89491482B9B13B300437A2E /* PostViewModel.swift */,
+				F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */,
 				F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */,
 				F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */,
 				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
 				F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */,
 				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
 				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
-				F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
 				F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */,
 				F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */,
+				F8F7FFBE2BB09ABA00BC49E8 /* HomeViewModel.swift in Sources */,
 				F894916D2B9B85EE00437A2E /* MyRepliesView.swift in Sources */,
 				F89491342B9B08D100437A2E /* Reply.swift in Sources */,
 				F894914F2B9B161800437A2E /* RepliesView.swift in Sources */,

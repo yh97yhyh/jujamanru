@@ -38,5 +38,5 @@ struct MyReplyCellView: View {
 }
 
 #Preview {
-    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostViewModel(postId: 4, userId: "ssg1"))
+    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

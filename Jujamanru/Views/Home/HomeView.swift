@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var viewModel: HomeViewModel
+    
     var body: some View {
         VStack {
             HStack {
@@ -38,10 +41,22 @@ struct HomeView: View {
                 }
                 .padding()
                 
-//                Rectangle()
-//                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
-//                    .frame(width: nil, height: 8)
-                Divider()
+                ScrollView(showsIndicators: false) {
+                    Divider()
+                    ForEach(viewModel.popularPosts, id: \.self) { post in
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                            PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                .padding(.top, 2)
+                                .padding(.bottom, 2)
+                        }
+                        Divider()
+                    }
+                }
+                
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 8)
+//                Divider()
                 
                 VStack {
                     HStack {
@@ -53,10 +68,29 @@ struct HomeView: View {
                 }
                 .padding()
                 
-//                Rectangle()
-//                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
-//                    .frame(width: nil, height: 8)
-                Divider()
+                if viewModel.myTeamPopularPosts.isEmpty {
+                    Text("팀을 선택해 주세요!")
+//                        .font()
+                        .foregroundColor(.gray)
+                        .padding(.top)
+                } else {
+                    Divider()
+                    ScrollView(showsIndicators: false) {
+                        ForEach(viewModel.myTeamPopularPosts, id: \.self) { post in
+                            NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                                PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                    .padding(.top, 2)
+                                    .padding(.bottom, 2)
+                            }
+                            Divider()
+                        }
+                    }
+                }
+                
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 8)
+//                Divider()
 
                 VStack {
                     HStack {
@@ -67,6 +101,18 @@ struct HomeView: View {
                     }
                 }
                 .padding()
+                
+                Divider()
+                ScrollView(showsIndicators: false) {
+                    ForEach(viewModel.notices, id: \.self) { post in
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                            PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                .padding(.top, 2)
+                                .padding(.bottom, 2)
+                        }
+                        Divider()
+                    }
+                }
             }
             
             
@@ -77,5 +123,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: HomeViewModel(myTeamId: 1))
 }

@@ -38,9 +38,9 @@ struct RepliesView: View {
             
             Divider()
             
-            ScrollView(showsIndicators: false) {
+            ScrollView(showsIndicators: true) {
                 ForEach(viewModel.replies, id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostViewModel(postId: reply.postId, userId: myPageViewModel.user.id))
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostDetailViewModel(postId: reply.postId, userId: myPageViewModel.user.id))
                     
                     Divider()
                 }
@@ -67,7 +67,7 @@ struct RepliesView: View {
             .buttonStyle(ReplyWriteButtonStyle())
             .sheet(isPresented: $isModalPresented) {
                 ReplyWriteView(repliesViewModel: viewModel,
-                               postViewModel: PostViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id),
+                               postViewModel: PostDetailViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id),
                                viewModel: ReplyWriteViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
                     .presentationDetents([.height(80)])
             }

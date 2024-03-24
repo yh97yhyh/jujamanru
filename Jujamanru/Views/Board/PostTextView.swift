@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostTextView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
-    @StateObject var viewModel: PostViewModel
+    @StateObject var viewModel: PostDetailViewModel
     
     var body: some View {
         VStack {
@@ -21,5 +21,5 @@ struct PostTextView: View {
 }
 
 #Preview {
-    PostTextView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
+    PostTextView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

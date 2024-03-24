@@ -10,7 +10,7 @@ import SwiftUI
 struct PostDetailView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var boardViewModel = BoardViewModel.shared
-    @StateObject var viewModel: PostViewModel
+    @StateObject var viewModel: PostDetailViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
     
@@ -108,5 +108,5 @@ struct ReplyWriteButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    PostDetailView(viewModel: PostViewModel(postId: 4, userId: "ssg1"))
+    PostDetailView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

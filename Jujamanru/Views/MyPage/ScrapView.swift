@@ -43,7 +43,7 @@ struct ScrapView: View {
                         .padding(.top)
                 } else {
                     ForEach(viewModel.scraps, id: \.self) { scrap in
-                        NavigationLink(destination: PostDetailView(viewModel: PostViewModel(postId: scrap.id, userId: viewModel.user.id))) {
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: scrap.id, userId: viewModel.user.id))) {
                             PostCellView(viewModel: PostViewModel(postId: scrap.id, userId: viewModel.user.id))
                         }
                         

@@ -11,7 +11,6 @@ import Alamofire
 class PostViewModel: ObservableObject {
     @Published var post: Post
     @Published var datetime: String
-    @Published var onClcik = false
     
     init(_ post: Post = Post.MOCK_POSTS[0], postId: Int, userId: String) {
         self.post = post
@@ -39,18 +38,18 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func addViewCount() {
-        print("postId : \(post.id)")
-        DispatchQueue.global().async {
-            NetworkManager<Int>.callPut(urlString: "/posts/\(self.post.id)/view-count", parameters: Parameters()) { result in
-                switch result {
-                case .success:
-                    print("succeed to update view count!")
-                case .failure(let error):
-                    print("failed to update view count.. \(error.localizedDescription)")
-                }
-            }
-        }
-    }
+//    func addViewCount() {
+//        print("postId : \(post.id)")
+//        DispatchQueue.global().async {
+//            NetworkManager<Int>.callPut(urlString: "/posts/\(self.post.id)/view-count", parameters: Parameters()) { result in
+//                switch result {
+//                case .success:
+//                    print("succeed to update view count!")
+//                case .failure(let error):
+//                    print("failed to update view count.. \(error.localizedDescription)")
+//                }
+//            }
+//        }
+//    }
     
 }

@@ -14,10 +14,23 @@ struct PostCellView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(viewModel.post.title)
-                        .font(.callout)
-//                        .fontWeight(.semibold)
-                        .lineLimit(2)
+                    HStack {
+                        if viewModel.post.isNotice {
+                            Text("공지")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        if viewModel.post.isNotice && viewModel.post.mustRead {
+                            Text("필독")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
+                        
+                        Text(viewModel.post.title)
+                            .font(.callout)
+                            .lineLimit(2)
+                    }
                     
                     if viewModel.post.teamId != nil {
                         HStack {

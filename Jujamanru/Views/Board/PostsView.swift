@@ -52,13 +52,13 @@ struct PostsView: View {
             
             Divider()
             
-            ScrollView(showsIndicators: false) {
+            ScrollView(showsIndicators: true) {
                 if isSeeNotice {
                     
                 }
                 
                 ForEach(viewModel.posts, id: \.self) { post in
-                    NavigationLink(destination: PostDetailView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                    NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
                         PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
                             .padding(.top, 2)
                             .padding(.bottom, 2)
