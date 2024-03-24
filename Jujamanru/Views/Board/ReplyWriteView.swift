@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReplyWriteView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var repliesViewModel: RepliesViewModel
+    @StateObject var postViewModel: PostViewModel
     @StateObject var viewModel: ReplyWriteViewModel
 //    @State var text: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -28,7 +30,16 @@ struct ReplyWriteView: View {
                     .modifier(ReplyWriteTextFieldModifier())
                 
                 Button {
-                    viewModel.writeReply()
+                    viewModel.writeReply { result in
+                        switch result {
+                        case .success(let replyId):
+                            repliesViewModel.fetchReplies(viewModel.postId)
+                            postViewModel.fetchPost(viewModel.postId, myPageViewModel.user.id)
+                            print("succeed to write reply! \(replyId)!")
+                        case .failure(let error):
+                            print("failed to write reply.. \(error.localizedDescription)")
+                        }
+                    }
                     dismiss()
                 } label: {
                     Text("등록")
@@ -75,5 +86,5 @@ struct ReplyWriteTextFieldModifier: ViewModifier {
 }
 
 #Preview {
-    ReplyWriteView(viewModel: ReplyWriteViewModel(postId: 4, userId: "ssg1"))
+    ReplyWriteView(repliesViewModel: RepliesViewModel(postId: 4), postViewModel: PostViewModel(postId: 4, userId: "ssg1"), viewModel: ReplyWriteViewModel(postId: 4, userId: "ssg1"))
 }

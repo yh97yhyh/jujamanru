@@ -59,9 +59,9 @@ class RepliesViewModel: ObservableObject {
         
         NetworkManager<RepliesResponse>.callGet(urlString: "/replies", parameters: parameters) { result in
             switch result {
-            case .success(let postsResponse):
-                self.isCanAddReplies = !postsResponse.last
-                self.replies += postsResponse.content
+            case .success(let repliesResponse):
+                self.isCanAddReplies = !repliesResponse.last
+                self.replies += repliesResponse.content
                 print("succeed to add replies \(self.page)page!")
                 self.page += 1
             case .failure(let error):

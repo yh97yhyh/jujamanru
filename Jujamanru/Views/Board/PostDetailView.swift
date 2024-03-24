@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PostDetailView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var boardViewModel = BoardViewModel.shared
     @StateObject var viewModel: PostViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
@@ -31,11 +32,9 @@ struct PostDetailView: View {
                 } else {
                     Text(viewModel.post.teamName!)
                         .font(.headline)
-
                 }
                 
                 Spacer()
-
             }
             .padding(.horizontal)
 //            .padding(.bottom)
@@ -78,7 +77,9 @@ struct PostDetailView: View {
                 }
                 .buttonStyle(ReplyWriteButtonStyle())
                 .sheet(isPresented: $isModalPresented) {
-                    ReplyWriteView(viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
+                    ReplyWriteView(repliesViewModel: RepliesViewModel(postId: viewModel.post.id),
+                                   postViewModel: viewModel,
+                                   viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
                         .presentationDetents([.height(80)])
                 }
                 
@@ -86,7 +87,6 @@ struct PostDetailView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        
     }
 }
 

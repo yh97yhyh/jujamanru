@@ -18,6 +18,7 @@ struct MyPostCellView: View {
                         .font(.callout)
 //                        .fontWeight(.semibold)
                         .lineLimit(2)
+                        .foregroundColor(.black)
                     
                     if viewModel.post.teamId != nil {
                         Text("\(viewModel.post.teamName!) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
@@ -36,6 +37,13 @@ struct MyPostCellView: View {
                     .font(.body)
                     .fontWeight(.semibold)
                     .foregroundColor(.blue)
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.gray)
+                }
             }
             
         }

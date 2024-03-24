@@ -10,6 +10,7 @@ import SwiftUI
 struct PostWriteView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @EnvironmentObject var teamViewModel: TeamViewModel
+    @StateObject var boardViewModel = BoardViewModel.shared
     @StateObject var viewModel: PostWriteViewModel
     @Environment(\.dismiss) private var dismiss
     
@@ -26,7 +27,15 @@ struct PostWriteView: View {
                 Spacer()
                 
                 Button {
-                    viewModel.writePost()
+                    viewModel.writePost { result in
+                        switch result {
+                        case .success(let postId):
+                            boardViewModel.fetchPosts()
+                            print("succeed to write post! \(postId)!")
+                        case .failure(let error):
+                            print("failed to write post.. \(error.localizedDescription)")
+                        }
+                    }
                     dismiss()
                 } label: {
                     Text("등록")
@@ -61,9 +70,11 @@ struct PostWriteView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                TextField("내용을 입력해주세요...", text: $viewModel.text)
+                TextEditor(text: $viewModel.text)
                     .autocapitalization(.none)
                     .padding(.horizontal)
+                
+                
             }
             
 //            .pickerStyle(SegmentedPickerStyle())

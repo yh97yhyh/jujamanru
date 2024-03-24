@@ -21,6 +21,13 @@ struct MyReplyCellView: View {
                     .foregroundColor(.gray)
                 
                 Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.gray)
+                }
             }
             
             Text(viewModel.reply.text)

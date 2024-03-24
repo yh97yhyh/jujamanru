@@ -19,19 +19,14 @@ class ReplyWriteViewModel: ObservableObject {
         self.userId = userId
     }
     
-    func writeReply() {
+    func writeReply(completion: @escaping (Result<Int, NetworkError>) -> Void) {
         let parameters: Parameters = [
             "postId": postId,
             "userId": userId,
             "text": text
         ]
         NetworkManager<Int>.callPost(urlString: "/replies", parameters: parameters) { result in
-            switch result {
-            case .success(let replyId):
-                print("succeed to write reply! \(replyId)!")
-            case .failure(let error):
-                print("failed to write reply.. \(error.localizedDescription)")
-            }
+            completion(result)
         }
     }
 }

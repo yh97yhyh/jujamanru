@@ -121,6 +121,41 @@ final class NetworkManager<T: Codable> {
             }
     }
     
+    static func callPut2(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        let url = URL(string: API.baseUrlString + urlString)!
+        
+        AF.request(url, method: .put, encoding: JSONEncoding.default)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success(let data):
+                    guard let data = data else {
+                        completion(.failure(.invalidData))
+                        return
+                    }
+                    
+                    do {
+                        let json = try JSONDecoder().decode(T.self, from: data)
+                        completion(.success(json))
+                    } catch let err {
+                        print(String(describing: err))
+                        completion(.failure(.decodingError(err: err.localizedDescription)))
+                    }
+                    
+                case .failure(let error):
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode == 401 {
+                            completion(.failure(.error(err: "Unauthorized")))
+                        } else {
+                            completion(.failure(.error(err: "Status code: \(statusCode)")))
+                        }
+                    } else {
+                        completion(.failure(.error(err: error.localizedDescription)))
+                    }
+                }
+            }
+    }
+    
     static func callDelete(urlString: String, parameters: Parameters = Parameters(), completion: @escaping (Result<Void, NetworkError>) -> Void) {
         let url = URL(string: API.baseUrlString + urlString)!
         

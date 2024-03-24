@@ -20,7 +20,7 @@ class PostWriteViewModel: ObservableObject {
     }
     
     
-    func writePost() {
+    func writePost(completion: @escaping (Result<Int, NetworkError>) -> Void) {
         var parameters = Parameters()
         if selectedTeam == 0 {
             parameters = [
@@ -41,12 +41,7 @@ class PostWriteViewModel: ObservableObject {
             ]
         }
         NetworkManager<Int>.callPost(urlString: "/posts", parameters: parameters) { result in
-            switch result {
-            case .success(let postId):
-                print("succeed to write post! \(postId)!")
-            case .failure(let error):
-                print("failed to write post.. \(error.localizedDescription)")
-            }
+            completion(result)
         }
     }
     

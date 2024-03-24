@@ -20,7 +20,6 @@ struct PostCellView: View {
                         .lineLimit(2)
                     
                     if viewModel.post.teamId != nil {
-                        
                         HStack {
                             Text("\(viewModel.post.teamName!)")
                                 .font(.footnote)
@@ -31,10 +30,6 @@ struct PostCellView: View {
                                 .foregroundColor(.gray)
                         }
                     } else {
-                        Text("")
-                            .font(.footnote)
-                            .foregroundColor(.blue)
-                        
                         Text("\(viewModel.datetime) / 조회 \(viewModel.post.viewCount)")
                             .font(.footnote)
                             .foregroundColor(.gray)

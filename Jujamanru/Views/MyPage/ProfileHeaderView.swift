@@ -23,16 +23,16 @@ struct ProfileHeaderView: View {
                         .fontWeight(.semibold)
                     Text(viewModel.user.id)
                         .font(.footnote)
-                    Text(viewModel.user.team?.name ?? "")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                                        isTeamSelectionSheetPresented.toggle()
-                                    }
-                        .sheet(isPresented: $isTeamSelectionSheetPresented) {
-                            TeamSelectView()
-                        }
+//                    Text(viewModel.user.team?.name ?? "")
+//                        .font(.subheadline)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(.blue)
+//                        .onTapGesture {
+//                                        isTeamSelectionSheetPresented.toggle()
+//                                    }
+//                        .sheet(isPresented: $isTeamSelectionSheetPresented) {
+//                            TeamSelectView()
+//                        }
                     
 //                    Picker("Team", selection: $viewModel.myTeam) {
 //                        Text("팀 없음 ").tag(0)
