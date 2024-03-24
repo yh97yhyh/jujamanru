@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyRepliesView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
+    @EnvironmentObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -42,7 +42,7 @@ struct MyRepliesView: View {
                         .padding(.top)
                 } else {
                     ForEach(viewModel.replies, id: \.self) { reply in
-                        ReplyCellView(viewModel: ReplyViewModel(reply))
+                        MyReplyCellView(viewModel: ReplyViewModel(reply))
                         
                         Divider()
                     }

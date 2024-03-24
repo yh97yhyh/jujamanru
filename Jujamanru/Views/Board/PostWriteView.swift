@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PostWriteView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
+    @StateObject var boardViewModel = BoardViewModel.shared
+    @StateObject var viewModel: PostWriteViewModel
     @Environment(\.dismiss) private var dismiss
-    @State var team: Team = Team.LG
-    @State var title: String = ""
-    @State var text: String = ""
     
     var body: some View {
         VStack {
@@ -26,6 +27,15 @@ struct PostWriteView: View {
                 Spacer()
                 
                 Button {
+                    viewModel.writePost { result in
+                        switch result {
+                        case .success(let postId):
+                            boardViewModel.fetchPosts()
+                            print("succeed to write post! \(postId)!")
+                        case .failure(let error):
+                            print("failed to write post.. \(error.localizedDescription)")
+                        }
+                    }
                     dismiss()
                 } label: {
                     Text("등록")
@@ -40,9 +50,10 @@ struct PostWriteView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Picker("Team", selection: $team) {
-                        ForEach(Team.TEAMS, id: \.self) { team in
-                            Text(team.name).tag(team)
+                    Picker("Team", selection: $viewModel.selectedTeam) {
+                        Text("선택X ").tag(0)
+                        ForEach(teamViewModel.teams, id: \.self) { team in
+                            Text("\(team.name) ").tag(team.id)
                         }
                     }
                     .accentColor(.black)
@@ -50,7 +61,7 @@ struct PostWriteView: View {
                     Spacer()
                 }
                 
-                TextField("제목을 입력해주세요.", text: $text)
+                TextField("제목을 입력해주세요.", text: $viewModel.title)
                     .font(.title3)
                     .autocapitalization(.none)
                     .padding(.horizontal)
@@ -59,15 +70,15 @@ struct PostWriteView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                TextField("내용을 입력해주세요...", text: $text)
+                TextEditor(text: $viewModel.text)
                     .autocapitalization(.none)
                     .padding(.horizontal)
+                
+                
             }
             
 //            .pickerStyle(SegmentedPickerStyle())
 //            .padding(.horizontal)
-            
-            
             
         }
         .navigationBarHidden(true)
@@ -94,5 +105,5 @@ struct PostWriteSubmitButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    PostWriteView()
+    PostWriteView(viewModel: PostWriteViewModel(userId: "ssg1"))
 }

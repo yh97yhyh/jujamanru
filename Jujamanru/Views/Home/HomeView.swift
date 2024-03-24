@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var viewModel: HomeViewModel
+    @State private var isInit = true
+    
     var body: some View {
         VStack {
             HStack {
@@ -38,7 +42,22 @@ struct HomeView: View {
                 }
                 .padding()
                 
-                Divider()
+                ScrollView(showsIndicators: false) {
+                    Divider()
+                    ForEach(viewModel.popularPosts, id: \.self) { post in
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                            PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                .padding(.top, 2)
+                                .padding(.bottom, 2)
+                        }
+                        Divider()
+                    }
+                }
+                
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 12)
+//                Divider()
                 
                 VStack {
                     HStack {
@@ -50,8 +69,34 @@ struct HomeView: View {
                 }
                 .padding()
                 
-                Divider()
+                if viewModel.myTeamPopularPosts.isEmpty && myPageViewModel.user.team == nil {
+                    Text("팀을 선택해주세요!")
+                        .foregroundColor(.gray)
+                        .padding(.top)
+                } else if viewModel.myTeamPopularPosts.isEmpty && myPageViewModel.user.team != nil {
+                    Text("우리팀 인기글이 없습니다.. 🙁")
+                        .foregroundColor(.gray)
+                        .padding(.top)
                 
+                } else {
+                    Divider()
+                    ScrollView(showsIndicators: false) {
+                        ForEach(viewModel.myTeamPopularPosts, id: \.self) { post in
+                            NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                                PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                    .padding(.top, 2)
+                                    .padding(.bottom, 2)
+                            }
+                            Divider()
+                        }
+                    }
+                }
+                
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 12)
+//                Divider()
+
                 VStack {
                     HStack {
                         Text("공지 ")
@@ -61,15 +106,37 @@ struct HomeView: View {
                     }
                 }
                 .padding()
+                
+                Divider()
+                ScrollView(showsIndicators: false) {
+                    ForEach(viewModel.notices, id: \.self) { post in
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
+                            PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
+                                .padding(.top, 2)
+                                .padding(.bottom, 2)
+                        }
+                        Divider()
+                    }
+                }
             }
             
             
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchPopularPosts()
+                if myPageViewModel.user.team != nil {
+                    viewModel.fetchMyTeamPopularPosts(myPageViewModel.user.team!.id)
+                }
+                viewModel.fetchNotices()
+            }
+            isInit = false
+        }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: HomeViewModel(myTeamId: 1))
 }

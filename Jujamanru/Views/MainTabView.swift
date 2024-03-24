@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @State private var selectedIndex = 0
     
     var body: some View {
@@ -16,7 +17,7 @@ struct MainTabView: View {
                 Color.clear
                     .ignoresSafeArea()
                 TabView(selection: $selectedIndex) {
-                    HomeView()
+                    HomeView(viewModel: getHomeViewModel())
                         .onAppear {
                             selectedIndex = 0
                         }
@@ -46,6 +47,15 @@ struct MainTabView: View {
                 }
                 .accentColor(.black)
             }
+        }
+    }
+    
+    func getHomeViewModel() -> HomeViewModel {
+        if myPageViewModel.user.team != nil {
+            print("현재 유저의 팀 : \(myPageViewModel.user.team!.name)")
+            return HomeViewModel(myTeamId: myPageViewModel.user.team!.id)
+        } else {
+            return HomeViewModel()
         }
     }
 }

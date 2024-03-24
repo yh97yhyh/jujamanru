@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PostHeaderView: View {
-    @StateObject var viewModel: PostViewModel
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var viewModel: PostDetailViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,9 +21,35 @@ struct PostHeaderView: View {
             Text("익명")
                 .font(.footnote)
             
-            Text("\(viewModel.post.teamName) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
-                .font(.footnote)
-                .foregroundColor(.gray)
+            HStack {
+                if viewModel.post.teamId != nil {
+                    Text("\(viewModel.post.teamName!) / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                } else {
+                    Text("전체 / \(viewModel.datetime) / 조회 \(viewModel.post.viewCount) / 댓글 \(viewModel.post.replyCount)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+                
+                Spacer()
+                
+                if myPageViewModel.user.id == viewModel.post.createdBy {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "pencil.line")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "trash")
+                            .foregroundColor(.gray)
+                    }
+                }
+            }
 
         }
         .padding(.horizontal)
@@ -30,5 +57,5 @@ struct PostHeaderView: View {
 }
 
 #Preview {
-    PostHeaderView(viewModel: PostViewModel())
+    PostHeaderView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

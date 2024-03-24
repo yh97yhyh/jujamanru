@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ReplyWriteView: View {
-    @StateObject var viewModel: PostViewModel
-    @State var text: String = ""
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var repliesViewModel: RepliesViewModel
+    @StateObject var postViewModel: PostDetailViewModel
+    @StateObject var viewModel: ReplyWriteViewModel
+//    @State var text: String = ""
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -22,11 +25,21 @@ struct ReplyWriteView: View {
             }
             
             HStack {
-                TextField("댓글을 입력하세요...", text: $text)
+                TextField("댓글을 입력하세요...", text: $viewModel.text)
                     .autocapitalization(.none)
                     .modifier(ReplyWriteTextFieldModifier())
                 
                 Button {
+                    viewModel.writeReply { result in
+                        switch result {
+                        case .success(let replyId):
+                            repliesViewModel.fetchReplies(viewModel.postId)
+                            postViewModel.fetchPost(viewModel.postId, myPageViewModel.user.id)
+                            print("succeed to write reply! \(replyId)!")
+                        case .failure(let error):
+                            print("failed to write reply.. \(error.localizedDescription)")
+                        }
+                    }
                     dismiss()
                 } label: {
                     Text("등록")
@@ -73,5 +86,5 @@ struct ReplyWriteTextFieldModifier: ViewModifier {
 }
 
 #Preview {
-    ReplyWriteView(viewModel: PostViewModel())
+    ReplyWriteView(repliesViewModel: RepliesViewModel(postId: 4), postViewModel: PostDetailViewModel(postId: 4, userId: "ssg1"), viewModel: ReplyWriteViewModel(postId: 4, userId: "ssg1"))
 }

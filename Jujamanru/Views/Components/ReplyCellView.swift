@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ReplyCellView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: ReplyViewModel
+    @StateObject var postViewModel: PostDetailViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                if viewModel.reply.isPoster {
-                    Text("글쓴이")
-                        .font(.footnote)
+                if postViewModel.post.createdBy == viewModel.reply.createdBy {
+                        Text("글쓴이")
+                            .font(.footnote)
                 } else {
                     Text("익명")
                         .font(.footnote)
@@ -26,6 +28,22 @@ struct ReplyCellView: View {
                     .foregroundColor(.gray)
                 
                 Spacer()
+                
+                if myPageViewModel.user.id == viewModel.reply.createdBy {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "pencil.line")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "trash")
+                            .foregroundColor(.gray)
+                    }
+                }
             }
             
             Text(viewModel.reply.text)
@@ -36,5 +54,5 @@ struct ReplyCellView: View {
 }
 
 #Preview {
-    ReplyCellView(viewModel: ReplyViewModel())
+    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }

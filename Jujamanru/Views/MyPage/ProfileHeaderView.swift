@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @StateObject var viewModel = MyPageViewModel.shared
+    @EnvironmentObject var teamViewModel: TeamViewModel
+    @EnvironmentObject var viewModel: MyPageViewModel
+    @State private var isTeamSelectionSheetPresented = false
 
     var body: some View {
         VStack {
@@ -16,15 +18,44 @@ struct ProfileHeaderView: View {
                 ProfileImageView()
                 
                 VStack(alignment: .leading) {
-                    Text("\(viewModel.user.nickname) 님")
+                    Text("\(viewModel.user.nickName) 님")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                    Text(viewModel.user.id)
+//                        .padding(.bottom, 2)
+                    Text("아이디 : \(viewModel.user.id)")
                         .font(.footnote)
-                    Text(viewModel.user.teamName)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.blue)
+//                        .padding(.bottom, 2)
+                    
+                    HStack {
+                        Text(viewModel.user.team?.name ?? "팀을 선택해주세요!")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.blue)
+                        
+                        Button {
+                            isTeamSelectionSheetPresented.toggle()
+                        } label: {
+                            Text("팀변경")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                        }
+                        .sheet(isPresented: $isTeamSelectionSheetPresented) {
+                            TeamSelectView()
+                        }
+                    }
+//                        .onTapGesture {
+//                                        isTeamSelectionSheetPresented.toggle()
+//                                    }
+//                        .sheet(isPresented: $isTeamSelectionSheetPresented) {
+//                            TeamSelectView()
+//                        }
+                    
+//                    Picker("Team", selection: $viewModel.myTeam) {
+//                        ForEach(teamViewModel.teams, id: \.self) { team in
+//                            Text("\(team.name) ").tag(team.id)
+//                        }
+//                    }
+//                    .accentColor(.blue)
                 }
                 .padding(.leading, 32)
             }

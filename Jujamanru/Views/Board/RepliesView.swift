@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct RepliesView: View {
-    @StateObject var viewModel: PostViewModel
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var viewModel: RepliesViewModel
+//    @StateObject var postViewModel: PostViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
+    @State private var isEndReached: Bool = false
     
     var body: some View {
         VStack {
@@ -24,7 +27,7 @@ struct RepliesView: View {
                 }
                 Spacer()
                 
-                Text("댓글 \(viewModel.replies.count)")
+                Text("댓글 \(viewModel.totalCount)")
                     .font(.headline)
                 
                 Spacer()
@@ -35,11 +38,22 @@ struct RepliesView: View {
             
             Divider()
             
-            ScrollView(showsIndicators: false) {
+            ScrollView(showsIndicators: true) {
                 ForEach(viewModel.replies, id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply))
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostDetailViewModel(postId: reply.postId, userId: myPageViewModel.user.id))
                     
                     Divider()
+                }
+                Color.clear
+                    .frame(width: 0, height: 0, alignment: .bottom)
+                    .onAppear {
+                        isEndReached = true
+                    }
+            }
+            .onChange(of: isEndReached) { isEndReached in
+                if isEndReached {
+                    viewModel.addReplies(viewModel.postId)
+                    self.isEndReached = false
                 }
             }
             
@@ -52,7 +66,9 @@ struct RepliesView: View {
             }
             .buttonStyle(ReplyWriteButtonStyle())
             .sheet(isPresented: $isModalPresented) {
-                ReplyWriteView(viewModel: viewModel)
+                ReplyWriteView(repliesViewModel: viewModel,
+                               postViewModel: PostDetailViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id),
+                               viewModel: ReplyWriteViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
                     .presentationDetents([.height(80)])
             }
         }
@@ -62,5 +78,5 @@ struct RepliesView: View {
 }
 
 #Preview {
-    RepliesView(viewModel: PostViewModel())
+    RepliesView(viewModel: RepliesViewModel(postId: 4))
 }

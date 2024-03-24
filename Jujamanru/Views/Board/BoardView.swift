@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct BoardView: View {
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
     @StateObject var viewModel = BoardViewModel.shared
-    @State private var selectedTeam: Int = 0
     
     var body: some View {
         VStack {
@@ -18,7 +19,7 @@ struct BoardView: View {
                     .font(.headline)
                 Spacer()
                 
-                NavigationLink(destination: PostWriteView()) {
+                NavigationLink(destination: PostWriteView(viewModel: PostWriteViewModel(userId: myPageViewModel.user.id))) {
                     Image(systemName: "square.and.pencil")
                         .imageScale(.large)
                         .foregroundColor(.black)
@@ -33,20 +34,20 @@ struct BoardView: View {
                         HStack(spacing: 20) {
                             Button("전체") {
                                 withAnimation {
-                                    selectedTeam = 0
+                                    viewModel.selectedTeam = 0
                                     scrollProxy.scrollTo(0, anchor: .center)
                                 }
                             }
-                            .buttonStyle(TeamButtonStyle(isSelected: selectedTeam == 0))
+                            .buttonStyle(TeamButtonStyle(isSelected: viewModel.selectedTeam == 0))
                             .id(0)
-                            ForEach(viewModel.teams, id: \.self) { team in
+                            ForEach(teamViewModel.teams, id: \.self) { team in
                                 Button(team.name) {
                                     withAnimation {
-                                        selectedTeam = team.id
-                                        scrollProxy.scrollTo(selectedTeam, anchor: .center)
+                                        viewModel.selectedTeam = team.id
+                                        scrollProxy.scrollTo(viewModel.selectedTeam, anchor: .center)
                                     }
                                 }
-                                .buttonStyle(TeamButtonStyle(isSelected: selectedTeam == team.id))
+                                .buttonStyle(TeamButtonStyle(isSelected: viewModel.selectedTeam == team.id))
                                 .id(team.id)
                             }
                         }
@@ -54,8 +55,8 @@ struct BoardView: View {
                     }
                     .padding()
                 }
-                .onChange(of: selectedTeam) { newTeam in
-                    let scrollToCategoryID = newTeam == 0 ? 0 : viewModel.teams[newTeam - 1].id
+                .onChange(of: viewModel.selectedTeam) { newTeam in
+                    let scrollToCategoryID = newTeam == 0 ? 0 : teamViewModel.teams[newTeam - 1].id
                     scrollProxy.scrollTo(scrollToCategoryID, anchor: .center)
                 }
             }
@@ -63,14 +64,14 @@ struct BoardView: View {
             Divider()
                 .padding(.bottom, 4)
             
-            TabView(selection: $selectedTeam) {
-                ForEach(0...viewModel.teams.count, id: \.self) { index in
+            TabView(selection: $viewModel.selectedTeam) {
+                ForEach(0...teamViewModel.teams.count, id: \.self) { index in
                     if index == 0 {
-                        PostsView(selectedTeam: $selectedTeam)
+                        PostsView(selectedTeam: $viewModel.selectedTeam)
                             .tag(0)
                     } else {
-                        PostsView(selectedTeam: $selectedTeam)
-                            .tag(viewModel.teams[index-1].id)
+                        PostsView(selectedTeam: $viewModel.selectedTeam)
+                            .tag(teamViewModel.teams[index-1].id)
                     }
                 }
                 

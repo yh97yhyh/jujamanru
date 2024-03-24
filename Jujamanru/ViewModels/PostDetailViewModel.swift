@@ -1,14 +1,14 @@
 //
-//  PostViewModel.swift
+//  PostDetailViewModel.swift
 //  Jujamanru
 //
-//  Created by 영현 on 3/8/24.
+//  Created by 영현 on 3/25/24.
 //
 
 import Foundation
 import Alamofire
 
-class PostViewModel: ObservableObject {
+class PostDetailViewModel: ObservableObject {
     @Published var post: Post
     @Published var datetime: String
     
@@ -17,7 +17,6 @@ class PostViewModel: ObservableObject {
         self.datetime = post.timeView
         
         fetchPost(postId, userId)
-//        addViewCount()
     }
     
     func fetchPost(_ postId: Int, _ userId: String) {
@@ -28,28 +27,31 @@ class PostViewModel: ObservableObject {
             switch result {
             case .success(let post):
                 self.post = post
-//                print("postId1 : \(post.id)")
                 self.datetime = post.timeView
-//                self.replies = post.replies ?? []
-//                print("succeed to get post!")
+                if post.createdBy != userId {
+                    self.addViewCount()
+                }
+                print("succeed to get post!")
             case .failure(let error):
                 print("failed to get post.. \(error.localizedDescription)")
             }
         }
     }
     
-//    func addViewCount() {
-//        print("postId : \(post.id)")
-//        DispatchQueue.global().async {
-//            NetworkManager<Int>.callPut(urlString: "/posts/\(self.post.id)/view-count", parameters: Parameters()) { result in
-//                switch result {
-//                case .success:
-//                    print("succeed to update view count!")
-//                case .failure(let error):
-//                    print("failed to update view count.. \(error.localizedDescription)")
-//                }
-//            }
-//        }
-//    }
+    func addViewCount() {
+        print("postId : \(post.id)")
+        DispatchQueue.global().async {
+            NetworkManager<Int>.callPutWithoutResponse(urlString: "/posts/\(self.post.id)/view-count") { result in
+                switch result {
+                case 1:
+                    print("succeed to update view count!")
+                case 2:
+                    print("failed to update view count..")
+                default:
+                    print("failed to update view count..")
+                }
+            }
+        }
+    }
     
 }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PostDetailView: View {
-    @StateObject var viewModel: PostViewModel
+    @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var boardViewModel = BoardViewModel.shared
+    @StateObject var viewModel: PostDetailViewModel
     @State private var isModalPresented = false
     @Environment(\.dismiss) private var dismiss
     
@@ -24,11 +26,15 @@ struct PostDetailView: View {
                 }
                 Spacer()
                 
-                Text(viewModel.post.teamName)
-                    .font(.headline)
+                if viewModel.post.teamId != 0 {
+                    Text("전체")
+                        .font(.headline)
+                } else {
+                    Text(viewModel.post.teamName!)
+                        .font(.headline)
+                }
                 
                 Spacer()
-
             }
             .padding(.horizontal)
 //            .padding(.bottom)
@@ -42,12 +48,14 @@ struct PostDetailView: View {
                 
                 PostTextView(viewModel: viewModel)
                 
-                Divider()
+                Rectangle()
+                    .fill(Color(UIColor(hexCode: "#EFEFEF")))
+                    .frame(width: nil, height: 16)
                 
                 HStack {
                     Text("댓글 \(viewModel.post.replyCount)")
                     Spacer()
-                    NavigationLink(destination: RepliesView(viewModel: viewModel)) {
+                    NavigationLink(destination: RepliesView(viewModel: RepliesViewModel(postId: viewModel.post.id))) {
                         Text("더보기")
                             .foregroundColor(.black)
                     }
@@ -56,8 +64,8 @@ struct PostDetailView: View {
                 
                 Divider()
                 
-                ForEach(viewModel.replies.prefix(3), id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply))
+                ForEach(viewModel.post.replies ?? [], id: \.self) { reply in
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
                     
                     Divider()
                 }
@@ -69,7 +77,9 @@ struct PostDetailView: View {
                 }
                 .buttonStyle(ReplyWriteButtonStyle())
                 .sheet(isPresented: $isModalPresented) {
-                    ReplyWriteView(viewModel: viewModel)
+                    ReplyWriteView(repliesViewModel: RepliesViewModel(postId: viewModel.post.id),
+                                   postViewModel: viewModel,
+                                   viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
                         .presentationDetents([.height(80)])
                 }
                 
@@ -77,7 +87,6 @@ struct PostDetailView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        
     }
 }
 
@@ -99,5 +108,5 @@ struct ReplyWriteButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    PostDetailView(viewModel: PostViewModel())
+    PostDetailView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
 }
