@@ -12,7 +12,7 @@
 ## Screenshots
 <img src="https://github.com/yh97yhyh/weather-app/assets/47898473/e3b64693-f23b-4f98-9a5e-bac22730d3b5" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/weather-app/assets/47898473/27207ff9-3a8f-4284-89c3-6ca5116178fc" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/7f1823af-7378-4b64-a1bf-0cd5d341247b" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/5f1ea1fd-3892-4b5f-9546-3ba9df4ef8cb" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/weather-app/assets/47898473/65a66974-c96b-49c2-9717-98d4750e0632" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/weather-app/assets/47898473/5260e301-6f14-46b4-99da-b891aacad7c8" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/weather-app/assets/47898473/856ae407-5c77-45b9-baba-fb82a8443f53" width="30%" height="30%"/>
