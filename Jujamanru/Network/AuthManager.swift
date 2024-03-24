@@ -15,14 +15,17 @@ class AuthManager: ObservableObject {
     @Published var currentUser: User?
     
     init() {
-        isLoggedIn = getAccessToken() != nil
-        
+        isLoggedIn = getUserId() != nil
+        if isLoggedIn {
+//            fetchUser()
+        }
     }
     
     func login(parameters: Parameters) {
-        NetworkManager<User>.callPost(urlString: "/auth/login", parameters: parameters) { result in
+        NetworkManager<UserAuth>.callPost(urlString: "/auth/login", parameters: parameters) { result in
             switch result {
-            case .success(let user):
+            case .success(let userAuth):
+                let user = User(id: userAuth.id, nickName: userAuth.nickName, isAdmin: userAuth.isAdmin, team: userAuth.team)
                 self.saveuser(user)
                 print("succeed to login! \(user.id)!")
             case .failure(let error):
@@ -44,11 +47,11 @@ class AuthManager: ObservableObject {
     }
 
     func registerAndLogin(parameters: Parameters) {
-        NetworkManager<User>.callPost(urlString: "/auth/signup", parameters: parameters) { result in
+        NetworkManager<UserAuth>.callPost(urlString: "/auth/signup", parameters: parameters) { result in
             switch result {
             case .success(let user):
                 let loginParameters: Parameters = [
-                    "mail": parameters["mail"] as! String,
+                    "userId": parameters["userId"] as! String,
                     "password": parameters["password"] as! String
                 ]
                 self.login(parameters: loginParameters)
@@ -59,7 +62,7 @@ class AuthManager: ObservableObject {
         }
     }
     
-    private func saveuser(_ user: User) {
+    func saveuser(_ user: User) {
         let encodedData = try? JSONEncoder().encode(user)
         UserDefaults.standard.set(encodedData, forKey: "currentUser")
         currentUser = user
@@ -67,17 +70,29 @@ class AuthManager: ObservableObject {
         print("succeed to save user to userdefaults! \(user.id)")
     }
 
-    private func getAccessToken() -> String? {
+    private func getUserId() -> String? {
         // UserDefaults에서 user 정보를 가져옴
         if let encodedData = UserDefaults.standard.data(forKey: "currentUser"),
            let currentUser = try? JSONDecoder().decode(User.self, from: encodedData) {
             self.currentUser = currentUser
             print("succeed to get user from userdefaults! \(currentUser.id)")
-            return currentUser.accessToken
+            return currentUser.id
         }
         print("failed to get user from userdefaults..")
         return nil
     }
+//    
+//    func fetchUser(_ currentUser: User) {
+//        NetworkManager<User>.callGet(urlString: "/users/\(currentUser.id)") { result in
+//            switch result {
+//            case .success(let user):
+//                self.currentUser = user
+//                print("succeed to get user!")
+//            case .failure(let error):
+//                print("failed to get user.. \(error.localizedDescription)")
+//            }
+//        }
+//    }
 
     private func clearUserData() {
         // UserDefaults에서 사용자 정보 삭제

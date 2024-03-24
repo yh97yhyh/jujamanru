@@ -21,6 +21,8 @@ struct TeamSelectView: View {
                 dismiss()
             }) {
                 Text(team.name)
+                    .font(.footnote)
+                    .foregroundColor(.black)
             }
         }
     }

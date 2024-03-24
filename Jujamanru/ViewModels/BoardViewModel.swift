@@ -31,7 +31,7 @@ class BoardViewModel: ObservableObject {
     
     @Published var isFetching = true
     
-    init(_ teams: [Team] = Team.MOCK_TEAMS, _ posts: [Post] = Post.MOCK_POSTS, _ notices: [Post] = Post.MOCK_NOTICES) {
+    init(_ teams: [Team] = [], _ posts: [Post] = [], _ notices: [Post] = []) {
 //        self.teams = teams
         self.posts = posts
         self.notices = notices

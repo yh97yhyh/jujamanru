@@ -12,18 +12,14 @@ class HomeViewModel: ObservableObject {
     @Published var popularPosts: [Post]
     @Published var myTeamPopularPosts: [Post]
     @Published var notices: [Post]
-    @Published var myTeamId: Int?
     
     init(_ popularPosts: [Post] = [], _ myTeamPopularPosts: [Post] = [], _ notices: [Post] = [], myTeamId: Int? = nil) {
         self.popularPosts = popularPosts
         self.myTeamPopularPosts = myTeamPopularPosts
         self.notices = notices
-        self.myTeamId = myTeamId
         
         fetchPopularPosts()
-        if self.myTeamId != nil {
-            fetchMyTeamPopularPosts()
-        }
+        fetchMyTeamPopularPosts(myTeamId)
         fetchNotices()
     }
     
@@ -46,7 +42,11 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func fetchMyTeamPopularPosts() {
+    func fetchMyTeamPopularPosts(_ myTeamId: Int?) {
+        if myTeamId == nil {
+            return
+        }
+        
         let parameters: Parameters = [
                 "isPopular": true,
                 "teamId": myTeamId!

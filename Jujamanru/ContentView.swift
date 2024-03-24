@@ -23,11 +23,12 @@ struct ContentView: View {
     }
     
     func getMyPageViewModel() -> MyPageViewModel {
-        if let currentUser = authManager.currentUser {
-            return MyPageViewModel(currentUser)
-        } else {
-            return MyPageViewModel()
-        }
+//        if let currentUser = authManager.currentUser {
+//            return MyPageViewModel(currentUser)
+//        } else {
+//            return MyPageViewModel()
+//        }
+        return MyPageViewModel(authManager.currentUser!)
     }
     
     func getTeamViewModel() -> TeamViewModel {

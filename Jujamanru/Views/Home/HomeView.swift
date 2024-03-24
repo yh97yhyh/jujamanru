@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: HomeViewModel
+    @State private var isInit = true
     
     var body: some View {
         VStack {
@@ -55,7 +56,7 @@ struct HomeView: View {
                 
                 Rectangle()
                     .fill(Color(UIColor(hexCode: "#EFEFEF")))
-                    .frame(width: nil, height: 8)
+                    .frame(width: nil, height: 12)
 //                Divider()
                 
                 VStack {
@@ -68,11 +69,15 @@ struct HomeView: View {
                 }
                 .padding()
                 
-                if viewModel.myTeamPopularPosts.isEmpty {
-                    Text("팀을 선택해 주세요!")
-//                        .font()
+                if viewModel.myTeamPopularPosts.isEmpty && myPageViewModel.user.team == nil {
+                    Text("팀을 선택해주세요!")
                         .foregroundColor(.gray)
                         .padding(.top)
+                } else if viewModel.myTeamPopularPosts.isEmpty && myPageViewModel.user.team != nil {
+                    Text("우리팀 인기글이 없습니다.. 🙁")
+                        .foregroundColor(.gray)
+                        .padding(.top)
+                
                 } else {
                     Divider()
                     ScrollView(showsIndicators: false) {
@@ -89,7 +94,7 @@ struct HomeView: View {
                 
                 Rectangle()
                     .fill(Color(UIColor(hexCode: "#EFEFEF")))
-                    .frame(width: nil, height: 8)
+                    .frame(width: nil, height: 12)
 //                Divider()
 
                 VStack {
@@ -119,6 +124,16 @@ struct HomeView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchPopularPosts()
+                if myPageViewModel.user.team != nil {
+                    viewModel.fetchMyTeamPopularPosts(myPageViewModel.user.team!.id)
+                }
+                viewModel.fetchNotices()
+            }
+            isInit = false
+        }
     }
 }
 

@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 
 class MyPageViewModel: ObservableObject {
-    static let shared = MyPageViewModel()
+//    static let shared = MyPageViewModel()
     
     @Published var user: User
-//    @Published var myTeam: Team?
+    @Published var myTeam: Team?
     @Published var posts: [Post]
     @Published var replies: [Reply]
     @Published var scraps: [Post]
@@ -29,7 +29,7 @@ class MyPageViewModel: ObservableObject {
     private var repliesPage = 1
     private var totalRepliesPages = 0
     
-    init(_ user: User = User.MOCK_USER_SSG, _ posts: [Post] = Post.MOCK_POSTS, _ replies: [Reply] = Reply.MOCK_REPLIES, _ scraps: [Post] = []) {
+    init(_ user: User, _ posts: [Post] = [], _ replies: [Reply] = [], _ scraps: [Post] = []) {
         self.user = user
         self.posts = posts.filter  { $0.createdBy == user.id }
         self.replies = replies.filter { $0.createdBy == user.id }
@@ -37,6 +37,21 @@ class MyPageViewModel: ObservableObject {
         
         fetchMyPosts()
         fetchMyReplies()
+    }
+    
+    func fetchMyTeam() {
+        NetworkManager<User>.callGet(urlString: "/users/\(user.id)") { result in
+            switch result {
+            case .success(let user):
+                self.user = user
+                self.myTeam = user.team
+                AuthManager.shared.saveuser(user)
+                print(self.myTeam!.name)
+                print("succeed to get user's team!")
+            case .failure(let error):
+                print("failed to get user's team.. \(error.localizedDescription)")
+            }
+        }
     }
     
     func updateTeam(_ teamId: Int) {
@@ -47,6 +62,7 @@ class MyPageViewModel: ObservableObject {
             switch result {
             case .success(let teamId):
                 print("succeed to update team! \(teamId)")
+                self.fetchMyTeam()
             case .failure(let error):
                 print("failed to update team.. \(error.localizedDescription)")
             }
@@ -65,9 +81,9 @@ class MyPageViewModel: ObservableObject {
                 self.isCanAddPosts = !postsResponse.last
                 self.totalPostPages = postsResponse.totalPages
                 self.totalPostsCount = postsResponse.totalElements
-                print("succeed to get posts!")
+                print("succeed to get my posts!")
             case .failure(let error):
-                print("failed to get posts.. \(error.localizedDescription)")
+                print("failed to get my posts.. \(error.localizedDescription)")
             }
         }
     }
@@ -87,10 +103,10 @@ class MyPageViewModel: ObservableObject {
             case .success(let postsResponse):
                 self.isCanAddPosts = !postsResponse.last
                 self.posts += postsResponse.content
-                print("succeed to add posts \(self.postsPage)page!")
+                print("succeed to add my posts \(self.postsPage)page!")
                 self.postsPage += 1
             case .failure(let error):
-                print("failed to add posts \(self.postsPage)page.. \(error.localizedDescription)")
+                print("failed to add my posts \(self.postsPage)page.. \(error.localizedDescription)")
             }
         }
     }
@@ -106,9 +122,9 @@ class MyPageViewModel: ObservableObject {
                 self.replies = repliesResponse.content
                 self.totalRepliesPages = repliesResponse.totalPages
                 self.totalRepliesCount = repliesResponse.totalElements
-                print("succeed to get replies!")
+                print("succeed to get my replies!")
             case .failure(let error):
-                print("failed to get replies.. \(error.localizedDescription)")
+                print("failed to get my replies.. \(error.localizedDescription)")
             }
         }
     }
@@ -128,10 +144,10 @@ class MyPageViewModel: ObservableObject {
             case .success(let postsResponse):
                 self.isCanAddReplies = !postsResponse.last
                 self.replies += postsResponse.content
-                print("succeed to add replies \(self.repliesPage)page!")
+                print("succeed to add my replies \(self.repliesPage)page!")
                 self.repliesPage += 1
             case .failure(let error):
-                print("failed to add replies \(self.repliesPage)page.. \(error.localizedDescription)")
+                print("failed to add my replies \(self.repliesPage)page.. \(error.localizedDescription)")
             }
         }
     }

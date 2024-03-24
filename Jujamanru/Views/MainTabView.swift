@@ -52,9 +52,10 @@ struct MainTabView: View {
     
     func getHomeViewModel() -> HomeViewModel {
         if myPageViewModel.user.team != nil {
-            HomeViewModel(myTeamId: myPageViewModel.user.team!.id)
+            print("현재 유저의 팀 : \(myPageViewModel.user.team!.name)")
+            return HomeViewModel(myTeamId: myPageViewModel.user.team!.id)
         } else {
-            HomeViewModel()
+            return HomeViewModel()
         }
     }
 }

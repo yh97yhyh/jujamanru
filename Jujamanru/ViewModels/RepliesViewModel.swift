@@ -22,7 +22,7 @@ class RepliesViewModel: ObservableObject {
     
     @Published var isFetching = true
 
-    init(_ replies: [Reply] = Reply.MOCK_REPLIES_POST1, postId: Int) {
+    init(_ replies: [Reply] = [], postId: Int) {
         self.replies = replies
         self.postId = postId
         
