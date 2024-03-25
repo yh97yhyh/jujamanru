@@ -15,4 +15,10 @@ class ReplyViewModel: ObservableObject {
         self.reply = reply
         self.datetime = reply.timeView
     }
+    
+    func deleteReply(completion: @escaping (Int) -> Void) {
+        NetworkManager<Int>.callDeleteWithoutResponse(urlString: "/replies/\(reply.id)") { result in
+            completion(result)
+        }
+    }
 }

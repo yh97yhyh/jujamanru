@@ -11,9 +11,12 @@ struct RepliesView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var viewModel: RepliesViewModel
 //    @StateObject var postViewModel: PostViewModel
-    @State private var isModalPresented = false
+    @State var isWriteModalPresented = false
+    @State var isEditModalPresented = false
     @Environment(\.dismiss) private var dismiss
-    @State private var isEndReached: Bool = false
+    @State var isEndReached: Bool = false
+    @State var isInit = true
+    @State var isReplyRemoved = false
     
     var body: some View {
         VStack {
@@ -40,7 +43,11 @@ struct RepliesView: View {
             
             ScrollView(showsIndicators: true) {
                 ForEach(viewModel.replies, id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostDetailViewModel(postId: reply.postId, userId: myPageViewModel.user.id))
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostViewModel(postId: reply.postId, userId: myPageViewModel.user.id), isWriteModalPresented: $isWriteModalPresented, isEditModalPresented: $isEditModalPresented, isReplyRemoved: $isReplyRemoved)
+                        .sheet(isPresented: $isEditModalPresented ) {
+                            ReplyEditView(viewModel: ReplyEditViewModel(reply))
+                                .presentationDetents([.height(80)])
+                        }
                     
                     Divider()
                 }
@@ -60,20 +67,43 @@ struct RepliesView: View {
             Divider()
             
             Button {
-                isModalPresented.toggle()
+                isWriteModalPresented.toggle()
             } label: {
                 Text("댓글쓰기")
             }
             .buttonStyle(ReplyWriteButtonStyle())
-            .sheet(isPresented: $isModalPresented) {
-                ReplyWriteView(repliesViewModel: viewModel,
-                               postViewModel: PostDetailViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id),
-                               viewModel: ReplyWriteViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
+            .sheet(isPresented: $isWriteModalPresented) {
+                ReplyWriteView(viewModel: ReplyWriteViewModel(postId: viewModel.postId, userId: myPageViewModel.user.id))
                     .presentationDetents([.height(80)])
+            }
+            .onChange(of: isWriteModalPresented) { isPresented in
+                if !isPresented {
+                    print("RepliesView - modal disappear")
+                    viewModel.fetchReplies(viewModel.postId)
+                }
+            }
+            .onChange(of: isEditModalPresented) { isPresented in
+                if !isPresented {
+                    print("RepliesView - modal disappear")
+                    viewModel.fetchReplies(viewModel.postId)
+                }
             }
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                print("onAppear")
+            }
+            isInit = false
+        }
+        .onChange(of: isReplyRemoved) { isPresented in
+            if isReplyRemoved {
+                print("RepliesView - isReplyRemoved")
+                viewModel.fetchReplies(viewModel.postId)
+                isReplyRemoved = false
+            }
+        }
     }
 }
 

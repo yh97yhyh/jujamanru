@@ -11,9 +11,12 @@ struct PostDetailView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @StateObject var boardViewModel = BoardViewModel.shared
     @StateObject var viewModel: PostDetailViewModel
-    @State private var isModalPresented = false
+    @State var isWriteModalPresented = false
+    @State var isEditModalPresented = false
     @Environment(\.dismiss) private var dismiss
-    
+    @State var isInit = true
+    @State var isReplyRemoved = false
+
     var body: some View {
         VStack {
             HStack {
@@ -26,7 +29,7 @@ struct PostDetailView: View {
                 }
                 Spacer()
                 
-                if viewModel.post.teamId != 0 {
+                if viewModel.post.teamId == nil {
                     Text("전체")
                         .font(.headline)
                 } else {
@@ -65,28 +68,54 @@ struct PostDetailView: View {
                 Divider()
                 
                 ForEach(viewModel.post.replies ?? [], id: \.self) { reply in
-                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: viewModel)
+                    ReplyCellView(viewModel: ReplyViewModel(reply), postViewModel: PostViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id), isWriteModalPresented: $isWriteModalPresented, isEditModalPresented: $isEditModalPresented, isReplyRemoved: $isReplyRemoved)
+                        .sheet(isPresented: $isEditModalPresented ) {
+                            ReplyEditView(viewModel: ReplyEditViewModel(reply))
+                                .presentationDetents([.height(80)])
+                        }
                     
                     Divider()
                 }
                 
                 Button {
-                    isModalPresented.toggle()
+                    isWriteModalPresented.toggle()
                 } label: {
                     Text("댓글쓰기")
                 }
                 .buttonStyle(ReplyWriteButtonStyle())
-                .sheet(isPresented: $isModalPresented) {
-                    ReplyWriteView(repliesViewModel: RepliesViewModel(postId: viewModel.post.id),
-                                   postViewModel: viewModel,
-                                   viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
+                .sheet(isPresented: $isWriteModalPresented) {
+                    ReplyWriteView(viewModel: ReplyWriteViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id))
                         .presentationDetents([.height(80)])
                 }
-                
+                .onChange(of: isWriteModalPresented) { isPresented in
+                    if !isPresented {
+                        print("PostDetailView - modal disappear")
+                        viewModel.fetchPost(viewModel.post.id, myPageViewModel.user.id, isAddCount: false)
+                    }
+                }
+                .onChange(of: isEditModalPresented) { isPresented in
+                    if !isPresented {
+                        print("PostDetailView - modal disappear")
+                        viewModel.fetchPost(viewModel.post.id, myPageViewModel.user.id, isAddCount: false)
+                    }
+                }
             }
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchPost(viewModel.post.id, myPageViewModel.user.id, isAddCount: true)
+            }
+            isInit = false
+        }
+        .onChange(of: isReplyRemoved) { isPresented in
+            if isReplyRemoved {
+                print("PostDetailView - isReplyRemoved")
+                viewModel.fetchPost(viewModel.post.id, myPageViewModel.user.id, isAddCount: false)
+                isReplyRemoved = false
+            }
+        }
     }
 }
 

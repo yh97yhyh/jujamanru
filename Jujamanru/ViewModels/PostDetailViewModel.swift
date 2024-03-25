@@ -16,10 +16,10 @@ class PostDetailViewModel: ObservableObject {
         self.post = post
         self.datetime = post.timeView
         
-        fetchPost(postId, userId)
+        fetchPost(postId, userId, isAddCount: true)
     }
     
-    func fetchPost(_ postId: Int, _ userId: String) {
+    func fetchPost(_ postId: Int, _ userId: String, isAddCount: Bool) {
         let parameters: Parameters = [
                 "userId": userId
             ]
@@ -28,13 +28,19 @@ class PostDetailViewModel: ObservableObject {
             case .success(let post):
                 self.post = post
                 self.datetime = post.timeView
-                if post.createdBy != userId {
+                if post.createdBy != userId && isAddCount {
                     self.addViewCount()
                 }
                 print("succeed to get post!")
             case .failure(let error):
                 print("failed to get post.. \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func deletePost(completion: @escaping (Int) -> Void) {
+        NetworkManager<Int>.callDeleteWithoutResponse(urlString: "/posts/\(post.id)") { result in
+            completion(result)
         }
     }
     

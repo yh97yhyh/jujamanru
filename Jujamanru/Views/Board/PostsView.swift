@@ -39,7 +39,7 @@ struct PostsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("새글 \(newPostsCount) / \(viewModel.posts.count)")
+                Text("새글 \(newPostsCount) / \(viewModel.totalCount)")
                     .font(.subheadline)
                 Spacer()
                 Button("공지보기") {
@@ -77,6 +77,7 @@ struct PostsView: View {
                     self.isEndReached = false
                 }
             }
+            
         }
     }
 }

@@ -13,8 +13,6 @@ class BoardViewModel: ObservableObject {
     
     @Published var selectedTeam = 0 {
         didSet {
-            page = 1
-            isCanAddPosts = true
             fetchPosts()
         }
     }
@@ -40,6 +38,9 @@ class BoardViewModel: ObservableObject {
     }
     
     func fetchPosts() {
+        page = 1
+        isCanAddPosts = true
+        
         var parameters = Parameters()
         if selectedTeam != 0 {
             parameters = [

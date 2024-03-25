@@ -11,6 +11,7 @@ struct BoardView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
     @EnvironmentObject var teamViewModel: TeamViewModel
     @StateObject var viewModel = BoardViewModel.shared
+    @State private var isInit = true
     
     var body: some View {
         VStack {
@@ -82,6 +83,12 @@ struct BoardView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchPosts()
+            }
+            isInit = false
+        }
     }
 }
 

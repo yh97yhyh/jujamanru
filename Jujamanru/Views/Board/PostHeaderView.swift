@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PostHeaderView: View {
     @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @StateObject var boardViewModel = BoardViewModel.shared
     @StateObject var viewModel: PostDetailViewModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,15 +37,25 @@ struct PostHeaderView: View {
                 Spacer()
                 
                 if myPageViewModel.user.id == viewModel.post.createdBy {
-                    Button {
-                        
-                    } label: {
+                    NavigationLink(destination: 
+                                    PostEditView(postDetailViewModel: PostDetailViewModel(postId: viewModel.post.id, userId: myPageViewModel.user.id),
+                                                 viewModel: PostEditViewModel(post: viewModel.post))) {
                         Image(systemName: "pencil.line")
                             .foregroundColor(.gray)
                     }
                     
                     Button {
-                        
+                        viewModel.deletePost { result in
+                            switch result {
+                            case 1:
+                                print("succeed to delete post!")
+                            case 2:
+                                print("failed to delete post..")
+                            default:
+                                print("failed to delete post..")
+                            }
+                            dismiss()
+                        }
                     } label: {
                         Image(systemName: "trash")
                             .foregroundColor(.gray)

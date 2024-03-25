@@ -30,6 +30,9 @@ class RepliesViewModel: ObservableObject {
     }
     
     func fetchReplies(_ postId: Int) {
+        page = 1
+        isCanAddReplies = true
+        
         let parameters: Parameters = [
                 "postId": postId
             ]
