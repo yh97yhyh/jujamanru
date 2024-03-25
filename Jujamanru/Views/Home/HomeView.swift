@@ -43,14 +43,13 @@ struct HomeView: View {
                 .padding()
                 
                 ScrollView(showsIndicators: false) {
-                    Divider()
-                    ForEach(viewModel.popularPosts, id: \.self) { post in
+                    ForEach(viewModel.popularPosts.prefix(5), id: \.self) { post in
+                        Divider()
                         NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
                             PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
                                 .padding(.top, 2)
                                 .padding(.bottom, 2)
                         }
-                        Divider()
                     }
                 }
                 
@@ -79,15 +78,15 @@ struct HomeView: View {
                         .padding(.top)
                 
                 } else {
-                    Divider()
+//                    Divider()
                     ScrollView(showsIndicators: false) {
                         ForEach(viewModel.myTeamPopularPosts, id: \.self) { post in
+                            Divider()
                             NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
                                 PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
                                     .padding(.top, 2)
                                     .padding(.bottom, 2)
                             }
-                            Divider()
                         }
                     }
                 }
@@ -107,16 +106,17 @@ struct HomeView: View {
                 }
                 .padding()
                 
-                Divider()
+//                Divider()
                 ScrollView(showsIndicators: false) {
                     ForEach(viewModel.notices, id: \.self) { post in
+                        Divider()
                         NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: myPageViewModel.user.id))) {
                             PostCellView(viewModel: PostViewModel(postId: post.id, userId: myPageViewModel.user.id))
                                 .padding(.top, 2)
                                 .padding(.bottom, 2)
                         }
-                        Divider()
                     }
+                    Divider()
                 }
             }
             

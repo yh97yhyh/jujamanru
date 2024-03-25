@@ -137,6 +137,22 @@ final class NetworkManager<T: Codable> {
             }
     }
     
+    static func callDeleteWithoutResponse(urlString: String, completion: @escaping (Int) -> Void) {
+        let url = URL(string: API.baseUrlString + urlString)!
+        
+        AF.request(url, method: .delete, parameters: Parameters(), encoding: JSONEncoding.default)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(1)
+                    
+                case .failure(let error):
+                    completion(0)
+                }
+            }
+    }
+    
     static func callDelete(urlString: String, parameters: Parameters = Parameters(), completion: @escaping (Result<Void, NetworkError>) -> Void) {
         let url = URL(string: API.baseUrlString + urlString)!
         

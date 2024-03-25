@@ -37,8 +37,8 @@ struct SettingView: View {
                         Text("로그아웃")
                             .foregroundColor(.black)
                         Spacer()
-                        Image(systemName: "chevron.forward")
-                            .foregroundColor(.black)
+//                        Image(systemName: "chevron.forward")
+//                            .foregroundColor(.black)
                     }
                 }
                 

@@ -44,16 +44,16 @@ struct LoginView: View {
                 Spacer()
                 Divider()
                 
-//                NavigationLink(destination: AddEmailView()) {
-//                    Text("계정이 없으신가요?")
-//                        .font(.footnote)
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(.black)
-//                    Text("회원가입")
-//                        .font(.footnote)
-//                        .foregroundColor(.black)
-//                }
-//                .padding(.vertical, 16)
+                NavigationLink(destination: RegisterationView()) {
+                    Text("계정이 없으신가요?")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                    Text("회원가입")
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                }
+                .padding(.vertical, 16)
                 
             }
         }

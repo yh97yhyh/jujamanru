@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1EEA78DEE5FAAE0174C8CAB0 /* Pods_Jujamanru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */; };
+		F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C072BB209D000FA84EF /* PostEditViewModel.swift */; };
+		F8217C0A2BB20A8300FA84EF /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C092BB20A8300FA84EF /* PostEditView.swift */; };
+		F8217C0C2BB211D000FA84EF /* ReplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */; };
+		F8217C0E2BB211DA00FA84EF /* ReplyEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0D2BB211DA00FA84EF /* ReplyEditViewModel.swift */; };
+		F8217C102BB23D5F00FA84EF /* RegisterationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */; };
 		F89491222B9B080400437A2E /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491212B9B080400437A2E /* View+Extensions.swift */; };
 		F89491242B9B083A00437A2E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491232B9B083A00437A2E /* API.swift */; };
 		F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491252B9B084F00437A2E /* API+Extensions.swift */; };
@@ -68,6 +73,11 @@
 		65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.debug.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.debug.xcconfig"; sourceTree = "<group>"; };
 		69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jujamanru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.release.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.release.xcconfig"; sourceTree = "<group>"; };
+		F8217C072BB209D000FA84EF /* PostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewModel.swift; sourceTree = "<group>"; };
+		F8217C092BB20A8300FA84EF /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
+		F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyEditView.swift; sourceTree = "<group>"; };
+		F8217C0D2BB211DA00FA84EF /* ReplyEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyEditViewModel.swift; sourceTree = "<group>"; };
+		F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationView.swift; sourceTree = "<group>"; };
 		F89491212B9B080400437A2E /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		F89491232B9B083A00437A2E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F89491252B9B084F00437A2E /* API+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Extensions.swift"; sourceTree = "<group>"; };
@@ -206,9 +216,11 @@
 				F89491482B9B13B300437A2E /* PostViewModel.swift */,
 				F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */,
 				F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */,
+				F8217C072BB209D000FA84EF /* PostEditViewModel.swift */,
 				F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */,
 				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
 				F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */,
+				F8217C0D2BB211DA00FA84EF /* ReplyEditViewModel.swift */,
 				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
 				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
 			);
@@ -262,8 +274,10 @@
 				F89491602B9B712F00437A2E /* PostHeaderView.swift */,
 				F89491622B9B73F000437A2E /* PostTextView.swift */,
 				F89491642B9B7BA300437A2E /* PostWriteView.swift */,
+				F8217C092BB20A8300FA84EF /* PostEditView.swift */,
 				F894914E2B9B161800437A2E /* RepliesView.swift */,
 				F89491502B9B162300437A2E /* ReplyWriteView.swift */,
+				F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -272,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */,
+				F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -444,11 +459,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8217C0E2BB211DA00FA84EF /* ReplyEditViewModel.swift in Sources */,
 				F894913B2B9B11BD00437A2E /* MyPageViewModel.swift in Sources */,
 				F894913D2B9B120B00437A2E /* HomeView.swift in Sources */,
+				F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */,
 				F89491362B9B0F4800437A2E /* Team.swift in Sources */,
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,
 				F8F7FFB62BAF70A100BC49E8 /* ReplyWriteViewModel.swift in Sources */,
+				F8217C0A2BB20A8300FA84EF /* PostEditView.swift in Sources */,
 				F89491572B9B665A00437A2E /* ProfileImageView.swift in Sources */,
 				F89491532B9B163B00437A2E /* BoardViewModel.swift in Sources */,
 				F8F7FFA42BAF24EF00BC49E8 /* MyPostCellView.swift in Sources */,
@@ -473,6 +491,7 @@
 				F8F7FFBA2BAF79B700BC49E8 /* TeamSelectView.swift in Sources */,
 				F8F7FFB42BAF660E00BC49E8 /* RepliesViewModel.swift in Sources */,
 				F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */,
+				F8217C0C2BB211D000FA84EF /* ReplyEditView.swift in Sources */,
 				F89491302B9B08B600437A2E /* Post.swift in Sources */,
 				F8F7FFA82BAF37E500BC49E8 /* ScrapView.swift in Sources */,
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
@@ -493,6 +512,7 @@
 				F894914B2B9B160800437A2E /* PostsView.swift in Sources */,
 				F8F7FF9E2BAF1ACB00BC49E8 /* Common.swift in Sources */,
 				F89491492B9B13B300437A2E /* PostViewModel.swift in Sources */,
+				F8217C102BB23D5F00FA84EF /* RegisterationView.swift in Sources */,
 				F894916B2B9B85E500437A2E /* MyPostsView.swift in Sources */,
 				F89491512B9B162300437A2E /* ReplyWriteView.swift in Sources */,
 			);

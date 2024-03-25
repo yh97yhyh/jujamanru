@@ -14,26 +14,14 @@ class RegisterationViewModel: ObservableObject {
     @Published var id = ""
     @Published var password = ""
     @Published var nickname = ""
-    @Published var teamId: Int?
     
     func createUser() {
-        var parameters = Parameters()
-        if teamId != nil {
-            parameters = [
-                "userId": id,
-                "password": password,
-                "nickName": nickname,
-                "isAdmin": false,
-                "teamId": teamId!
-            ]
-        } else {
-            parameters = [
+        let parameters: Parameters = [
                 "userId": id,
                 "password": password,
                 "nickName": nickname,
                 "isAdmin": false
             ]
-        }
         
         AuthManager.shared.registerAndLogin(parameters: parameters)
         

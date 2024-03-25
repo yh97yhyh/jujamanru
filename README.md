@@ -10,12 +10,12 @@
 ---
 
 ## Screenshots
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/e3b64693-f23b-4f98-9a5e-bac22730d3b5" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/27207ff9-3a8f-4284-89c3-6ca5116178fc" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/5f1ea1fd-3892-4b5f-9546-3ba9df4ef8cb" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/65a66974-c96b-49c2-9717-98d4750e0632" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/5260e301-6f14-46b4-99da-b891aacad7c8" width="30%" height="30%"/>
-<img src="https://github.com/yh97yhyh/weather-app/assets/47898473/856ae407-5c77-45b9-baba-fb82a8443f53" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/3466bf43-c352-4400-99f9-c241e154b42c" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/5aa0310c-f9d5-4e49-82c9-540ac902d6f3" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/4746c2eb-75ed-44ec-ac5d-d897891f6ed9" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/463f53f7-2be5-4224-93e9-b9db28cb1bba" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/14038f2e-90f3-4d59-af10-cf2f66a03f4a" width="30%" height="30%"/>
+<img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/b5dca36c-083b-44e8-9981-00df03a8239e" width="30%" height="30%"/>
 
 ---
 
@@ -35,6 +35,15 @@
 ## Planning
 
 [Jujamanru Planning](https://docs.google.com/presentation/d/1z2i7LD6ECaTbBOmL2rnLFlmrePKS7nn8Bmm0twjr61M/edit?hl=ko#slide=id.p)
+
+---
+
+## Features to add
+
+- [ ]  댓글 수정 수정하기
+- [ ]  마이페이지에서 작성글, 댓글 삭제하기
+- [ ]  스크랩 구현
+- [ ]  iOS 16 이하 버전에서 BoardView에서 스크롤뷰 위치 움직이는 거 수정
 
 ---
 
