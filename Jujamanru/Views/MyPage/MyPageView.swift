@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyPageView: View {
     @EnvironmentObject var viewModel: MyPageViewModel
+    @State private var isInit = true
     
     var body: some View {
         VStack {
@@ -36,6 +37,14 @@ struct MyPageView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchMyTeam()
+                viewModel.fetchMyPosts()
+                viewModel.fetchMyReplies()
+            }
+            isInit = false
+        }
     }
 }
 
