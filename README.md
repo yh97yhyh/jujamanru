@@ -10,7 +10,7 @@
 ---
 
 ## Screenshots
-[Youtube](https://www.youtube.com/watch?v=UWt_-05jwqM) ▶️
+[Youtube](https://youtu.be/wkm_GMOHmI0) ▶️
 <br>
 <br>
 <img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/3466bf43-c352-4400-99f9-c241e154b42c" width="30%" height="30%"/>
