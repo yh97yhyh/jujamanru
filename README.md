@@ -10,6 +10,9 @@
 ---
 
 ## Screenshots
+[Youtube](https://www.youtube.com/watch?v=UWt_-05jwqM) ▶️
+<br>
+<br>
 <img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/3466bf43-c352-4400-99f9-c241e154b42c" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/5aa0310c-f9d5-4e49-82c9-540ac902d6f3" width="30%" height="30%"/>
 <img src="https://github.com/yh97yhyh/jujamanru/assets/47898473/4746c2eb-75ed-44ec-ac5d-d897891f6ed9" width="30%" height="30%"/>
