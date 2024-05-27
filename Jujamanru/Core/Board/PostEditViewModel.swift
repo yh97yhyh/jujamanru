@@ -40,7 +40,7 @@ class PostEditViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<Int>.callPut(urlString: "/posts/\(post.id)", parameters: parameters) { result in
+        NetworkManager<Int>.request(route: .updatePost(postId: post.id, parameters: parameters)) { result in
             completion(result)
         }
     }

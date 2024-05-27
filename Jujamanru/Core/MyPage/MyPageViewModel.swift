@@ -40,7 +40,7 @@ class MyPageViewModel: ObservableObject {
     }
     
     func fetchMyTeam() {
-        NetworkManager<User>.callGet(urlString: "/users/\(user.id)") { result in
+        NetworkManager<User>.request(route: .getUser(userId: user.id)) { result in
             switch result {
             case .success(let user):
                 self.user = user
@@ -58,7 +58,8 @@ class MyPageViewModel: ObservableObject {
         let parameters: Parameters = [
             "teamId": teamId
         ]
-        NetworkManager<Int>.callPut(urlString: "/users/\(user.id)/team", parameters: parameters) { result in
+        
+        NetworkManager<Int>.request(route: .updateTeam(userId: user.id, parameters: parameters)) { result in
             switch result {
             case .success(let teamId):
                 print("succeed to update team! \(teamId)")
@@ -74,7 +75,7 @@ class MyPageViewModel: ObservableObject {
             "userId": user.id
         ]
         
-        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
             switch result {
             case .success(let postsResponse):
                 self.posts = postsResponse.content
@@ -98,7 +99,7 @@ class MyPageViewModel: ObservableObject {
             "page": postsPage
         ]
         
-        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
             switch result {
             case .success(let postsResponse):
                 self.isCanAddPosts = !postsResponse.last
@@ -116,7 +117,7 @@ class MyPageViewModel: ObservableObject {
                 "userId": user.id
             ]
         
-        NetworkManager<RepliesResponse>.callGet(urlString: "/replies", parameters: parameters) { result in
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
             switch result {
             case .success(let repliesResponse):
                 self.replies = repliesResponse.content
@@ -139,7 +140,7 @@ class MyPageViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.callGet(urlString: "/replies", parameters: parameters) { result in
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
             switch result {
             case .success(let postsResponse):
                 self.isCanAddReplies = !postsResponse.last

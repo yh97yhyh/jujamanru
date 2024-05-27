@@ -40,7 +40,8 @@ class PostWriteViewModel: ObservableObject {
                 "text": text
             ]
         }
-        NetworkManager<Int>.callPost(urlString: "/posts", parameters: parameters) { result in
+        
+        NetworkManager<Int>.request(route: .writePost(parameters)) { result in
             completion(result)
         }
     }

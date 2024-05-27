@@ -25,7 +25,7 @@ class ReplyEditViewModel: ObservableObject {
             "text": text
         ]
         
-        NetworkManager<Int>.callPut(urlString: "/replies/\(reply.id)", parameters: parameters) { result in
+        NetworkManager<Int>.request(route: .updateReply(replyId: reply.id, parameters: parameters)) { result in
             completion(result)
         }
     }

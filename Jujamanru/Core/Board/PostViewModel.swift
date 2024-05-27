@@ -24,14 +24,12 @@ class PostViewModel: ObservableObject {
         let parameters: Parameters = [
                 "userId": userId
             ]
-        NetworkManager<Post>.callGet(urlString: "/posts/\(postId)", parameters: parameters) { result in
+        
+        NetworkManager<Post>.request(route: .getPost(postId: postId, parameters: parameters)) { result in
             switch result {
             case .success(let post):
                 self.post = post
-//                print("postId1 : \(post.id)")
                 self.datetime = post.timeView
-//                self.replies = post.replies ?? []
-//                print("succeed to get post!")
             case .failure(let error):
                 print("failed to get post.. \(error.localizedDescription)")
             }

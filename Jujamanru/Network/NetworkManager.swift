@@ -16,47 +16,78 @@ enum NetworkError: Error {
 }
 
 enum APIRouter: URLRequestConvertible {
-    case post(String, Parameters)
-    case get(String, Parameters)
-    case put(String, Parameters)
-    case putWithoutResponse(String)
-    case delete(String, Parameters)
-    case deleteWithoutResponse(String)
+    case writePost(Parameters)
+    case writeReply(Parameters)
+    case login(Parameters)
+    case signup(Parameters)
+    
+    case updateViewCount(postId: Int)
+    case updatePost(postId: Int, parameters: Parameters)
+    case updateReply(replyId: Int, parameters: Parameters)
+    case updateTeam(userId: String, parameters: Parameters)
+    
+    case getPosts(parameters: Parameters)
+    case getPost(postId: Int, parameters: Parameters)
+    case getTeams
+    case getReplies(parameters: Parameters)
+    case getUser(userId: String)
+    
+    case deletePost(postId: Int)
+    case deleteReply(replyId: Int)
     
     var method: HTTPMethod {
-            switch self {
-            case .post:
-                return .post
-            case .get:
-                return .get
-            case .put, .putWithoutResponse:
-                return .put
-            case .delete, .deleteWithoutResponse:
-                return .delete
-            }
+        switch self {
+        case .writePost, .writeReply, .signup, .login:
+            return .post
+        case .getPosts, .getPost, .getTeams, .getReplies, .getUser:
+            return .get
+        case .updateViewCount, .updatePost, .updateReply, .updateTeam:
+            return .put
+        case .deletePost, .deleteReply:
+            return .delete
         }
+    }
     
     var path: String {
         switch self {
-        case .post(let urlString, _),
-                .get(let urlString, _),
-                .put(let urlString, _),
-                .putWithoutResponse(let urlString),
-                .delete(let urlString, _),
-                .deleteWithoutResponse(let urlString):
-            return urlString
+        case .writePost:
+            return "/posts"
+        case .writeReply:
+            return "/replies"
+        case .login:
+            return "/auth/login"
+        case .signup:
+            return "/auth/signup"
+        case .updateViewCount(let postId):
+            return "/posts/\(postId)/view-count"
+        case .updatePost(let postId, _):
+            return "/posts/\(postId)"
+        case .updateReply(let replyId, _):
+            return "/replies/\(replyId)"
+        case .updateTeam(let userId, _):
+            return "/users/\(userId)/team"
+        case .getPosts:
+            return "/posts"
+        case .getPost(let postId, _):
+            return "/posts/\(postId)"
+        case .getTeams:
+            return "/teams"
+        case .getReplies:
+            return "/replies"
+        case .getUser(let userId):
+            return "/users/\(userId)"
+        case .deletePost(let postId):
+            return "/posts/\(postId)"
+        case .deleteReply(let replyId):
+            return "/replies/\(replyId)"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .post(_, let parameters),
-                .get(_, let parameters),
-                .put(_, let parameters),
-                .delete(_, let parameters):
+        case .writePost(let parameters), .writeReply(let parameters), .login(let parameters), .signup(let parameters), .updatePost(_, let parameters), .updateReply(_, let parameters), .updateTeam(_, let parameters), .getPosts(let parameters), .getPost(_, let parameters), .getReplies(let parameters):
             return parameters
-        case .putWithoutResponse,
-                .deleteWithoutResponse:
+        case .updateViewCount, .getTeams, .getUser, .deletePost, .deleteReply:
             return Parameters()
         }
     }
@@ -69,7 +100,7 @@ enum APIRouter: URLRequestConvertible {
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        switch self {
+        switch method {
         case .get:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         default:
@@ -82,35 +113,19 @@ enum APIRouter: URLRequestConvertible {
 
 final class NetworkManager<T: Codable> {
     
-    static func callPost(urlString: String, parameters: Parameters, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json"
-        ]
-
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+    static func request(route: APIRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        AF.request(route)
             .validate()
-            .response { response in
+            .responseDecodable(of: T.self) { response in
                 switch response.result {
-                case .success(let data):
-                    guard let data = data else {
-                        completion(.failure(.invalidData))
-                        return
-                    }
-                    
-                    do {
-                        let json = try JSONDecoder().decode(T.self, from: data)
-                        completion(.success(json))
-                    } catch let err {
-                        print(String(describing: err))
-                        completion(.failure(.decodingError(err: err.localizedDescription)))
-                    }
-                    
+                case .success(let value):
+                    completion(.success(value))
                 case .failure(let error):
                     if let statusCode = response.response?.statusCode {
-                        if statusCode == 401 {
+                        switch statusCode {
+                        case 401:
                             completion(.failure(.error(err: "Unauthorized")))
-                        } else {
+                        default:
                             completion(.failure(.error(err: "Status code: \(statusCode)")))
                         }
                     } else {
@@ -120,131 +135,17 @@ final class NetworkManager<T: Codable> {
             }
     }
     
-    static func callGet(urlString: String, parameters: Parameters = Parameters(), completion: @escaping (Result<T, NetworkError>) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-
-        AF.request(url, method: .get, parameters: parameters)
-            .validate()
-            .response { response in
-                switch response.result {
-                case .success(let data):
-                    guard let data = data else {
-                        completion(.failure(.invalidData))
-                        return
-                    }
-                    
-                    do {
-                        let json = try JSONDecoder().decode(T.self, from: data)
-                        completion(.success(json))
-                    } catch let err {
-                        print(String(describing: err))
-                        completion(.failure(.decodingError(err: err.localizedDescription)))
-                    }
-                    
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        if statusCode == 401 {
-                            completion(.failure(.error(err: "Unauthorized")))
-                        } else {
-                            completion(.failure(.error(err: "Status code: \(statusCode)")))
-                        }
-                    } else {
-                        completion(.failure(.error(err: error.localizedDescription)))
-                    }
-                }
-            }
-    }
-    
-    static func callPut(urlString: String, parameters: Parameters = Parameters(), completion: @escaping (Result<T, NetworkError>) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .validate()
-            .response { response in
-                switch response.result {
-                case .success(let data):
-                    guard let data = data else {
-                        completion(.failure(.invalidData))
-                        return
-                    }
-                    
-                    do {
-                        let json = try JSONDecoder().decode(T.self, from: data)
-                        completion(.success(json))
-                    } catch let err {
-                        print(String(describing: err))
-                        completion(.failure(.decodingError(err: err.localizedDescription)))
-                    }
-                    
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        if statusCode == 401 {
-                            completion(.failure(.error(err: "Unauthorized")))
-                        } else {
-                            completion(.failure(.error(err: "Status code: \(statusCode)")))
-                        }
-                    } else {
-                        completion(.failure(.error(err: error.localizedDescription)))
-                    }
-                }
-            }
-    }
-    
-    static func callPutWithoutResponse(urlString: String, completion: @escaping (Int) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-        
-        AF.request(url, method: .put, parameters: Parameters(), encoding: JSONEncoding.default)
+    static func requestWithoutResponse(route: APIRouter, completion: @escaping (Int) -> Void) {
+        AF.request(route)
             .validate()
             .response { response in
                 switch response.result {
                 case .success:
                     completion(1)
-                    
-                case .failure(let error):
+                case .failure:
                     completion(0)
-                }
-            }
-    }
-    
-    static func callDeleteWithoutResponse(urlString: String, completion: @escaping (Int) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-        
-        AF.request(url, method: .delete, parameters: Parameters(), encoding: JSONEncoding.default)
-            .validate()
-            .response { response in
-                switch response.result {
-                case .success:
-                    completion(1)
-                    
-                case .failure(let error):
-                    completion(0)
-                }
-            }
-    }
-    
-    static func callDelete(urlString: String, parameters: Parameters = Parameters(), completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        let url = URL(string: API.baseUrlString + urlString)!
-        
-        AF.request(url, method: .delete, parameters: parameters)
-            .validate()
-            .response { response in
-                switch response.result {
-                case .success:
-                    completion(.success(()))
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        if statusCode == 401 {
-                            completion(.failure(.error(err: "Unauthorized")))
-                        } else {
-                            completion(.failure(.error(err: "Status code: \(statusCode)")))
-                        }
-                    } else {
-                        completion(.failure(.error(err: error.localizedDescription)))
-                    }
                 }
             }
     }
 }
+

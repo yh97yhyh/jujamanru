@@ -23,7 +23,7 @@ class PostDetailViewModel: ObservableObject {
         let parameters: Parameters = [
                 "userId": userId
             ]
-        NetworkManager<Post>.callGet(urlString: "/posts/\(postId)", parameters: parameters) { result in
+        NetworkManager<Post>.request(route: .getPost(postId: postId, parameters: parameters)) { result in
             switch result {
             case .success(let post):
                 self.post = post
@@ -39,15 +39,16 @@ class PostDetailViewModel: ObservableObject {
     }
     
     func deletePost(completion: @escaping (Int) -> Void) {
-        NetworkManager<Int>.callDeleteWithoutResponse(urlString: "/posts/\(post.id)") { result in
+        NetworkManager<Int>.requestWithoutResponse(route: .deletePost(postId: post.id)) { result in
             completion(result)
         }
     }
     
     func addViewCount() {
         print("postId : \(post.id)")
+        
         DispatchQueue.global().async {
-            NetworkManager<Int>.callPutWithoutResponse(urlString: "/posts/\(self.post.id)/view-count") { result in
+            NetworkManager<Int>.requestWithoutResponse(route: .updateViewCount(postId: self.post.id)) { result in
                 switch result {
                 case 1:
                     print("succeed to update view count!")

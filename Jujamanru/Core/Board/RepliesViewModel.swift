@@ -37,7 +37,7 @@ class RepliesViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.callGet(urlString: "/replies", parameters: parameters) { result in
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
             switch result {
             case .success(let repliesResponse):
                 self.replies = repliesResponse.content
@@ -60,7 +60,7 @@ class RepliesViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.callGet(urlString: "/replies", parameters: parameters) { result in
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
             switch result {
             case .success(let repliesResponse):
                 self.isCanAddReplies = !repliesResponse.last

@@ -22,7 +22,7 @@ class AuthManager: ObservableObject {
     }
     
     func login(parameters: Parameters) {
-        NetworkManager<UserAuth>.callPost(urlString: "/auth/login", parameters: parameters) { result in
+        NetworkManager<UserAuth>.request(route: .login(parameters)) { result in
             switch result {
             case .success(let userAuth):
                 let user = User(id: userAuth.id, nickName: userAuth.nickName, isAdmin: userAuth.isAdmin, team: userAuth.team)
@@ -47,7 +47,7 @@ class AuthManager: ObservableObject {
     }
 
     func registerAndLogin(parameters: Parameters) {
-        NetworkManager<UserAuth>.callPost(urlString: "/auth/signup", parameters: parameters) { result in
+        NetworkManager<UserAuth>.request(route: .signup(parameters)) { result in
             switch result {
             case .success(let user):
                 let loginParameters: Parameters = [

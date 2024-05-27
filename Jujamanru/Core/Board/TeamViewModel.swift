@@ -18,7 +18,7 @@ class TeamViewModel: ObservableObject {
     }
     
     func fetchTeams() {
-        NetworkManager<[Team]>.callGet(urlString: "/teams") { result in
+        NetworkManager<[Team]>.request(route: .getTeams) { result in
             switch result {
             case .success(let teams):
                 self.teams = teams

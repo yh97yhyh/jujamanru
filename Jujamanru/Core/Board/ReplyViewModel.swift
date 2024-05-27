@@ -17,7 +17,7 @@ class ReplyViewModel: ObservableObject {
     }
     
     func deleteReply(completion: @escaping (Int) -> Void) {
-        NetworkManager<Int>.callDeleteWithoutResponse(urlString: "/replies/\(reply.id)") { result in
+        NetworkManager<Int>.requestWithoutResponse(route: .deleteReply(replyId: reply.id)) { result in
             completion(result)
         }
     }

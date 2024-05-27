@@ -47,7 +47,8 @@ class BoardViewModel: ObservableObject {
                 "teamId": selectedTeam
             ]
         }
-        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
+        
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
             switch result {
             case .success(let postsResponse):
                 self.posts = postsResponse.content
@@ -79,7 +80,7 @@ class BoardViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
             switch result {
             case .success(let postsResponse):
                 self.isCanAddPosts = !postsResponse.last

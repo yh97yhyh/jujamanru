@@ -25,7 +25,8 @@ class ReplyWriteViewModel: ObservableObject {
             "userId": userId,
             "text": text
         ]
-        NetworkManager<Int>.callPost(urlString: "/replies", parameters: parameters) { result in
+        
+        NetworkManager<Int>.request(route: .writeReply(parameters)) { result in
             completion(result)
         }
     }
