@@ -54,5 +54,5 @@ struct ReplyEditView: View {
 
 #Preview {
     ReplyEditView(viewModel: ReplyEditViewModel(Reply.MOCK_REPLIES[0]))
-//    ReplyEditView(reply: Reply.MOCK_REPLIES[0])
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

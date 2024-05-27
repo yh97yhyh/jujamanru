@@ -1,17 +1,16 @@
 //
-//  ScrapView.swift
+//  MyPostsView.swift
 //  Jujamanru
 //
-//  Created by 영현 on 3/24/24.
+//  Created by 영현 on 3/9/24.
 //
 
 import SwiftUI
 
-struct ScrapView: View {
+struct MyPostsView: View {
     @EnvironmentObject var viewModel: MyPageViewModel
-    
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -24,7 +23,7 @@ struct ScrapView: View {
                 }
                 Spacer()
                 
-                Text("스크랩")
+                Text("작성글")
                     .font(.headline)
                 
                 Spacer()
@@ -36,17 +35,16 @@ struct ScrapView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                if viewModel.scraps.isEmpty {
-                    Text("스크랩한 글이 없습니다.. 🙁")
+                if viewModel.posts.isEmpty {
+                    Text("작성글이 없습니다.. 🙁")
                         .font(.title3)
                         .foregroundColor(.gray)
                         .padding(.top)
                 } else {
-                    ForEach(viewModel.scraps, id: \.self) { scrap in
-                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: scrap.id, userId: viewModel.user.id))) {
-                            PostCellView(viewModel: PostViewModel(postId: scrap.id, userId: viewModel.user.id))
+                    ForEach(viewModel.posts, id: \.self) { post in
+                        NavigationLink(destination: PostDetailView(viewModel: PostDetailViewModel(postId: post.id, userId: viewModel.user.id))) {
+                            MyPostCellView(viewModel: PostViewModel(postId: post.id, userId: viewModel.user.id))
                         }
-                        
                         Divider()
                     }
                 }
@@ -58,5 +56,6 @@ struct ScrapView: View {
 }
 
 #Preview {
-    ScrapView()
+    MyPostsView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

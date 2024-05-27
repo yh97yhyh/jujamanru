@@ -84,4 +84,6 @@ struct PostsView: View {
 
 #Preview {
     PostsView(selectedTeam: .constant(0))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
+        .environmentObject(TeamViewModel())
 }

@@ -70,4 +70,5 @@ struct PostHeaderView: View {
 
 #Preview {
     PostHeaderView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

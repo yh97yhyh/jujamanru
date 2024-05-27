@@ -109,4 +109,5 @@ struct RepliesView: View {
 
 #Preview {
     RepliesView(viewModel: RepliesViewModel(postId: 4))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

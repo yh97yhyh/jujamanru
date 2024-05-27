@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TeamSelectView: View {
-    @EnvironmentObject var teamViewModel: TeamViewModel
     @EnvironmentObject var myPageViewModel: MyPageViewModel
+    @EnvironmentObject var teamViewModel: TeamViewModel
     @State var selectedTeam: Team?
     @Environment(\.dismiss) private var dismiss
 
@@ -31,4 +31,6 @@ struct TeamSelectView: View {
 
 #Preview {
     TeamSelectView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
+        .environmentObject(TeamViewModel())
 }

@@ -21,4 +21,5 @@ struct ProfileImageView: View {
 
 #Preview {
     ProfileImageView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

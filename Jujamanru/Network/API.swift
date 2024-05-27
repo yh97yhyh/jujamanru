@@ -10,3 +10,7 @@ import Foundation
 class API {
     
 }
+
+extension API {
+    static let baseUrlString = "http://localhost:8080"
+}

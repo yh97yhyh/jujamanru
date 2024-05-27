@@ -15,7 +15,6 @@
 		F8217C102BB23D5F00FA84EF /* RegisterationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */; };
 		F89491222B9B080400437A2E /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491212B9B080400437A2E /* View+Extensions.swift */; };
 		F89491242B9B083A00437A2E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491232B9B083A00437A2E /* API.swift */; };
-		F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491252B9B084F00437A2E /* API+Extensions.swift */; };
 		F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89491292B9B087200437A2E /* Bundle+Extensions.swift */; };
 		F894912C2B9B088800437A2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894912B2B9B088800437A2E /* NetworkManager.swift */; };
 		F894912E2B9B08A300437A2E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F894912D2B9B08A300437A2E /* User.swift */; };
@@ -80,7 +79,6 @@
 		F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationView.swift; sourceTree = "<group>"; };
 		F89491212B9B080400437A2E /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		F89491232B9B083A00437A2E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		F89491252B9B084F00437A2E /* API+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Extensions.swift"; sourceTree = "<group>"; };
 		F89491292B9B087200437A2E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		F894912B2B9B088800437A2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F894912D2B9B08A300437A2E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -164,36 +162,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F894911A2B9B075400437A2E /* Utils */ = {
+		F894911A2B9B075400437A2E /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				F89491682B9B7DC500437A2E /* DatetimeUtils.swift */,
 			);
-			path = Utils;
+			path = Util;
 			sourceTree = "<group>";
 		};
-		F894911B2B9B075B00437A2E /* Extensions */ = {
+		F894911B2B9B075B00437A2E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				F89491212B9B080400437A2E /* View+Extensions.swift */,
 				F89491292B9B087200437A2E /* Bundle+Extensions.swift */,
 				F8F7FF972BAF184300BC49E8 /* UIColor+Extensions.swift */,
 			);
-			path = Extensions;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		F894911C2B9B076200437A2E /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				F89491232B9B083A00437A2E /* API.swift */,
-				F89491252B9B084F00437A2E /* API+Extensions.swift */,
 				F894912B2B9B088800437A2E /* NetworkManager.swift */,
 				F8F7FFA52BAF37A700BC49E8 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		F894911D2B9B076800437A2E /* Models */ = {
+		F894911D2B9B076800437A2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				F894912D2B9B08A300437A2E /* User.swift */,
@@ -203,47 +200,27 @@
 				F89491352B9B0F4800437A2E /* Team.swift */,
 				F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		F894911E2B9B076E00437A2E /* ViewModels */ = {
+		F894911F2B9B077500437A2E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F8F7FFBD2BB09ABA00BC49E8 /* HomeViewModel.swift */,
-				F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */,
-				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
-				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
-				F89491482B9B13B300437A2E /* PostViewModel.swift */,
-				F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */,
-				F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */,
-				F8217C072BB209D000FA84EF /* PostEditViewModel.swift */,
-				F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */,
-				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
-				F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */,
-				F8217C0D2BB211DA00FA84EF /* ReplyEditViewModel.swift */,
-				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
-				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		F894911F2B9B077500437A2E /* Views */ = {
-			isa = PBXGroup;
-			children = (
+				F89491422B9B123600437A2E /* MainTabView.swift */,
+				F8FFF2A22C04A0B90015DAE6 /* General */,
 				F89491442B9B12ED00437A2E /* Login */,
-				F89491452B9B135000437A2E /* Components */,
 				F89491372B9B118100437A2E /* Home */,
 				F89491392B9B119100437A2E /* Board */,
 				F89491382B9B118700437A2E /* MyPage */,
-				F89491422B9B123600437A2E /* MainTabView.swift */,
 			);
-			path = Views;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		F89491372B9B118100437A2E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F894913C2B9B120B00437A2E /* HomeView.swift */,
+				F8FFF2A32C04A0BF0015DAE6 /* View */,
+				F8F7FFBD2BB09ABA00BC49E8 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -251,16 +228,9 @@
 		F89491382B9B118700437A2E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				F89491402B9B122000437A2E /* MyPageView.swift */,
-				F89491542B9B663F00437A2E /* ProfileHeaderView.swift */,
-				F89491562B9B665A00437A2E /* ProfileImageView.swift */,
-				F89491582B9B66D500437A2E /* SettingView.swift */,
-				F894916A2B9B85E500437A2E /* MyPostsView.swift */,
-				F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */,
-				F894916C2B9B85EE00437A2E /* MyRepliesView.swift */,
-				F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */,
-				F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */,
-				F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */,
+				F8FFF2A82C04A56C0015DAE6 /* Main */,
+				F8FFF2A52C04A0EC0015DAE6 /* Detail */,
+				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -268,16 +238,19 @@
 		F89491392B9B119100437A2E /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				F894913E2B9B121A00437A2E /* BoardView.swift */,
-				F894914A2B9B160800437A2E /* PostsView.swift */,
-				F894914C2B9B160F00437A2E /* PostDetailView.swift */,
-				F89491602B9B712F00437A2E /* PostHeaderView.swift */,
-				F89491622B9B73F000437A2E /* PostTextView.swift */,
-				F89491642B9B7BA300437A2E /* PostWriteView.swift */,
-				F8217C092BB20A8300FA84EF /* PostEditView.swift */,
-				F894914E2B9B161800437A2E /* RepliesView.swift */,
-				F89491502B9B162300437A2E /* ReplyWriteView.swift */,
-				F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */,
+				F8FFF2A92C04A5770015DAE6 /* Main */,
+				F8FFF2A72C04A2B70015DAE6 /* Post */,
+				F8FFF2A42C04A0C60015DAE6 /* Reply */,
+				F89491522B9B163B00437A2E /* BoardViewModel.swift */,
+				F8F7FFBB2BB07BEF00BC49E8 /* PostDetailViewModel.swift */,
+				F8F7FFB72BAF72EB00BC49E8 /* PostWriteViewModel.swift */,
+				F8217C072BB209D000FA84EF /* PostEditViewModel.swift */,
+				F8F7FFAF2BAF585400BC49E8 /* TeamViewModel.swift */,
+				F8F7FFB32BAF660E00BC49E8 /* RepliesViewModel.swift */,
+				F894915C2B9B6A8200437A2E /* ReplyViewModel.swift */,
+				F8F7FFB52BAF70A100BC49E8 /* ReplyWriteViewModel.swift */,
+				F8217C0D2BB211DA00FA84EF /* ReplyEditViewModel.swift */,
+				F89491482B9B13B300437A2E /* PostViewModel.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -285,19 +258,11 @@
 		F89491442B9B12ED00437A2E /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */,
-				F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */,
+				F8FFF2A12C04A0B10015DAE6 /* View */,
+				F8F7FFAD2BAF54A700BC49E8 /* RegisterationViewModel.swift */,
+				F8F7FFAB2BAF549A00BC49E8 /* LoginViewModel.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		F89491452B9B135000437A2E /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				F89491462B9B138D00437A2E /* PostCellView.swift */,
-				F894915A2B9B6A6E00437A2E /* ReplyCellView.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		F8FAF0752B9B052000C35971 = {
@@ -321,12 +286,11 @@
 		F8FAF0802B9B052000C35971 /* Jujamanru */ = {
 			isa = PBXGroup;
 			children = (
-				F894911F2B9B077500437A2E /* Views */,
-				F894911E2B9B076E00437A2E /* ViewModels */,
-				F894911D2B9B076800437A2E /* Models */,
+				F894911F2B9B077500437A2E /* Core */,
+				F894911D2B9B076800437A2E /* Model */,
 				F894911C2B9B076200437A2E /* Network */,
-				F894911B2B9B075B00437A2E /* Extensions */,
-				F894911A2B9B075400437A2E /* Utils */,
+				F894911B2B9B075B00437A2E /* Extension */,
+				F894911A2B9B075400437A2E /* Util */,
 				F8FAF0812B9B052000C35971 /* JujamanruApp.swift */,
 				F8FAF0832B9B052000C35971 /* ContentView.swift */,
 				F894916E2B9B90FF00437A2E /* Secrets.xcconfig */,
@@ -342,6 +306,87 @@
 				F8FAF0882B9B052100C35971 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F8FFF2A12C04A0B10015DAE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8F7FFA92BAF547D00BC49E8 /* LoginView.swift */,
+				F8217C0F2BB23D5F00FA84EF /* RegisterationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8FFF2A22C04A0B90015DAE6 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				F89491462B9B138D00437A2E /* PostCellView.swift */,
+				F894915A2B9B6A6E00437A2E /* ReplyCellView.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		F8FFF2A32C04A0BF0015DAE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F894913C2B9B120B00437A2E /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8FFF2A42C04A0C60015DAE6 /* Reply */ = {
+			isa = PBXGroup;
+			children = (
+				F894914E2B9B161800437A2E /* RepliesView.swift */,
+				F89491502B9B162300437A2E /* ReplyWriteView.swift */,
+				F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */,
+			);
+			path = Reply;
+			sourceTree = "<group>";
+		};
+		F8FFF2A52C04A0EC0015DAE6 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				F894916A2B9B85E500437A2E /* MyPostsView.swift */,
+				F8F7FFA32BAF24EF00BC49E8 /* MyPostCellView.swift */,
+				F894916C2B9B85EE00437A2E /* MyRepliesView.swift */,
+				F8F7FFA12BAF24B800BC49E8 /* MyReplyCellView.swift */,
+				F8F7FFA72BAF37E500BC49E8 /* ScrapView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		F8FFF2A72C04A2B70015DAE6 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				F894914A2B9B160800437A2E /* PostsView.swift */,
+				F894914C2B9B160F00437A2E /* PostDetailView.swift */,
+				F89491602B9B712F00437A2E /* PostHeaderView.swift */,
+				F89491622B9B73F000437A2E /* PostTextView.swift */,
+				F89491642B9B7BA300437A2E /* PostWriteView.swift */,
+				F8217C092BB20A8300FA84EF /* PostEditView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		F8FFF2A82C04A56C0015DAE6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F89491402B9B122000437A2E /* MyPageView.swift */,
+				F89491542B9B663F00437A2E /* ProfileHeaderView.swift */,
+				F89491562B9B665A00437A2E /* ProfileImageView.swift */,
+				F89491582B9B66D500437A2E /* SettingView.swift */,
+				F8F7FFB92BAF79B700BC49E8 /* TeamSelectView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F8FFF2A92C04A5770015DAE6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F894913E2B9B121A00437A2E /* BoardView.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,7 +541,6 @@
 				F8F7FFA82BAF37E500BC49E8 /* ScrapView.swift in Sources */,
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
 				F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */,
-				F89491262B9B084F00437A2E /* API+Extensions.swift in Sources */,
 				F8F7FFBE2BB09ABA00BC49E8 /* HomeViewModel.swift in Sources */,
 				F894916D2B9B85EE00437A2E /* MyRepliesView.swift in Sources */,
 				F89491342B9B08D100437A2E /* Reply.swift in Sources */,

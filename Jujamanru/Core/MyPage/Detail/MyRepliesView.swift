@@ -56,4 +56,5 @@ struct MyRepliesView: View {
 
 #Preview {
     MyRepliesView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

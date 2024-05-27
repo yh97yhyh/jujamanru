@@ -49,4 +49,6 @@ struct SettingView: View {
 
 #Preview {
     SettingView()
+        .environmentObject(AuthManager())
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

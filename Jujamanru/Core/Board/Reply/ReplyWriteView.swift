@@ -82,4 +82,5 @@ struct ReplyWriteTextFieldModifier: ViewModifier {
 
 #Preview {
     ReplyWriteView(viewModel: ReplyWriteViewModel(postId: 4, userId: "ssg1"))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

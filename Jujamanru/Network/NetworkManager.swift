@@ -8,6 +8,78 @@
 import Foundation
 import Alamofire
 
+enum NetworkError: Error {
+    case invalidResponse
+    case invalidData
+    case error(err: String)
+    case decodingError(err: String)
+}
+
+enum APIRouter: URLRequestConvertible {
+    case post(String, Parameters)
+    case get(String, Parameters)
+    case put(String, Parameters)
+    case putWithoutResponse(String)
+    case delete(String, Parameters)
+    case deleteWithoutResponse(String)
+    
+    var method: HTTPMethod {
+            switch self {
+            case .post:
+                return .post
+            case .get:
+                return .get
+            case .put, .putWithoutResponse:
+                return .put
+            case .delete, .deleteWithoutResponse:
+                return .delete
+            }
+        }
+    
+    var path: String {
+        switch self {
+        case .post(let urlString, _),
+                .get(let urlString, _),
+                .put(let urlString, _),
+                .putWithoutResponse(let urlString),
+                .delete(let urlString, _),
+                .deleteWithoutResponse(let urlString):
+            return urlString
+        }
+    }
+    
+    var parameters: Parameters? {
+        switch self {
+        case .post(_, let parameters),
+                .get(_, let parameters),
+                .put(_, let parameters),
+                .delete(_, let parameters):
+            return parameters
+        case .putWithoutResponse,
+                .deleteWithoutResponse:
+            return Parameters()
+        }
+    }
+    
+    func asURLRequest() throws -> URLRequest {
+        let url = try API.baseUrlString.asURL()
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        
+        urlRequest.httpMethod = method.rawValue
+        
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        switch self {
+        case .get:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        default:
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        }
+        
+        return urlRequest
+    }
+}
+
 final class NetworkManager<T: Codable> {
     
     static func callPost(urlString: String, parameters: Parameters, completion: @escaping (Result<T, NetworkError>) -> Void) {
@@ -176,12 +248,3 @@ final class NetworkManager<T: Codable> {
             }
     }
 }
-
-
-enum NetworkError: Error {
-    case invalidResponse
-    case invalidData
-    case error(err: String)
-    case decodingError(err: String)
-}
-

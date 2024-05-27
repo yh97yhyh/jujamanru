@@ -111,4 +111,6 @@ struct TeamButtonStyle: ButtonStyle {
 
 #Preview {
     BoardView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
+        .environmentObject(TeamViewModel())
 }

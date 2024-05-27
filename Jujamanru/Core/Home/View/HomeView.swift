@@ -139,4 +139,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView(viewModel: HomeViewModel(myTeamId: 1))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

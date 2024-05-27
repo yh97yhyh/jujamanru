@@ -15,6 +15,7 @@ struct PostTextView: View {
         VStack {
             Text(viewModel.post.text!)
                 .frame(height: 500, alignment: .leading)
+            Spacer()
         }
         .padding(.horizontal)
     }
@@ -22,4 +23,5 @@ struct PostTextView: View {
 
 #Preview {
     PostTextView(viewModel: PostDetailViewModel(postId: 4, userId: "ssg1"))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

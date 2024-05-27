@@ -66,4 +66,6 @@ struct ProfileHeaderView: View {
 
 #Preview {
     ProfileHeaderView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
+        .environmentObject(TeamViewModel())
 }

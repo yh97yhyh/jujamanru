@@ -50,4 +50,5 @@ struct MyPageView: View {
 
 #Preview {
     MyPageView()
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG2))
 }

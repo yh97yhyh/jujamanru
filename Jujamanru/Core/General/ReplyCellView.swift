@@ -70,6 +70,7 @@ struct ReplyCellView: View {
     }
 }
 
-//#Preview {
-//    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostViewModel(postId: 4, userId: "ssg1"), isWriteModalPresented: .constant(false), isEditModalPresented: .constant(false), isReplyRemoved: .constant(false))
-//}
+#Preview {
+    ReplyCellView(viewModel: ReplyViewModel(), postViewModel: PostViewModel(postId: 4, userId: "ssg1"), isWriteModalPresented: .constant(false), isEditModalPresented: .constant(false), isReplyRemoved: .constant(false))
+        .environmentObject(MyPageViewModel(User.MOCK_USER_SSG))
+}
