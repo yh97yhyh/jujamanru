@@ -1,11 +1,11 @@
 # 주자만루
 
-> 2024.03
+> 2024.03, 2024.05
 > 
 
 **Tech Spec**
 
-`iOS` `Swift` `SwiftUI` `Alamofire`
+`iOS` `Swift` `SwiftUI` `Combine` `Alamofire`
 
 ---
 
@@ -38,15 +38,6 @@
 ## Planning
 
 [Jujamanru Planning](https://docs.google.com/presentation/d/1z2i7LD6ECaTbBOmL2rnLFlmrePKS7nn8Bmm0twjr61M/edit?hl=ko#slide=id.p)
-
----
-
-## Features to add
-
-- [ ]  댓글 수정 수정하기
-- [ ]  마이페이지에서 작성글, 댓글 삭제하기
-- [ ]  스크랩 구현
-- [ ]  iOS 16 이하 버전에서 BoardView에서 스크롤뷰 위치 움직이는 거 수정
 
 ---
 
