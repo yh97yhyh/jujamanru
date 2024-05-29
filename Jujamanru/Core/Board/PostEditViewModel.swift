@@ -7,12 +7,15 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class PostEditViewModel: ObservableObject {
     @Published var post: Post
     @Published var selectedTeam = 0
     @Published var title = ""
     @Published var text = ""
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(post: Post) {
         self.post = post
@@ -40,8 +43,12 @@ class PostEditViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<Int>.request(route: .updatePost(postId: post.id, parameters: parameters)) { result in
-            completion(result)
-        }
+        NetworkManager<Int>.request(route: .updatePost(postId: post.id, parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { _ in
+                
+            }
+            .store(in: &cancellables)
     }
 }

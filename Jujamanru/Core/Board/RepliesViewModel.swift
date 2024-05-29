@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class RepliesViewModel: ObservableObject {
     
@@ -19,8 +20,9 @@ class RepliesViewModel: ObservableObject {
     private var fetchCount = 0
     private var page = 1
     private var totalPages = 0
-    
     @Published var isFetching = true
+    
+    var cancellables = Set<AnyCancellable>()
 
     init(_ replies: [Reply] = [], postId: Int) {
         self.replies = replies
@@ -37,17 +39,15 @@ class RepliesViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
-            switch result {
-            case .success(let repliesResponse):
-                self.replies = repliesResponse.content
-                self.totalPages = repliesResponse.totalPages
-                self.totalCount = repliesResponse.totalElements
-                print("succeed to get replies!")
-            case .failure(let error):
-                print("failed to get replies.. \(error.localizedDescription)")
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] repliesResponse in
+                self?.replies = repliesResponse.content
+                self?.totalPages = repliesResponse.totalPages
+                self?.totalCount = repliesResponse.totalElements
             }
-        }
+            .store(in: &cancellables)
     }
     
     func addReplies(_ postId: Int) {
@@ -60,17 +60,15 @@ class RepliesViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
-            switch result {
-            case .success(let repliesResponse):
-                self.isCanAddReplies = !repliesResponse.last
-                self.replies += repliesResponse.content
-                print("succeed to add replies \(self.page)page!")
-                self.page += 1
-            case .failure(let error):
-                print("failed to add replies \(self.page)page.. \(error.localizedDescription)")
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] repliesResponse in
+                self?.isCanAddReplies = !repliesResponse.last
+                self?.replies += repliesResponse.content
+                self?.page += 1
             }
-        }
+            .store(in: &cancellables)
     }
     
 }

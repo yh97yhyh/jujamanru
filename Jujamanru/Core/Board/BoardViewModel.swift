@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class BoardViewModel: ObservableObject {
     static let shared = BoardViewModel()
@@ -26,8 +27,9 @@ class BoardViewModel: ObservableObject {
     private var fetchCount = 0
     private var page = 1
     private var totalPages = 0
-    
     @Published var isFetching = true
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(_ teams: [Team] = [], _ posts: [Post] = [], _ notices: [Post] = []) {
 //        self.teams = teams
@@ -48,19 +50,18 @@ class BoardViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.posts = postsResponse.content
-                self.isCanAddPosts = !postsResponse.last
-                self.notices = postsResponse.content.filter { $0.isNotice == true }
-                self.totalPages = postsResponse.totalPages
-                self.totalCount = postsResponse.totalElements
-                print("succeed to get posts!")
-            case .failure(let error):
-                print("failed to get posts.. \(error.localizedDescription)")
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.posts = postsResponse.content
+                self?.isCanAddPosts = !postsResponse.last
+                self?.notices = postsResponse.content.filter { $0.isNotice == true }
+                self?.totalPages = postsResponse.totalPages
+                self?.totalCount = postsResponse.totalElements
             }
-        }
+            .store(in: &cancellables)
+
     }
     
     func addPosts() {
@@ -80,17 +81,15 @@ class BoardViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.isCanAddPosts = !postsResponse.last
-                self.posts += postsResponse.content
-                print("succeed to add posts \(self.page)page!")
-                self.page += 1
-            case .failure(let error):
-                print("failed to add posts \(self.page)page.. \(error.localizedDescription)")
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.isCanAddPosts = !postsResponse.last
+                self?.posts += postsResponse.content
+                self?.page += 1
             }
-        }
+            .store(in: &cancellables)
     }
     
     func toggleFetch() {

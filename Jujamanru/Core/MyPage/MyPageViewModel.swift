@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class MyPageViewModel: ObservableObject {
 //    static let shared = MyPageViewModel()
@@ -29,6 +30,8 @@ class MyPageViewModel: ObservableObject {
     private var repliesPage = 1
     private var totalRepliesPages = 0
     
+    var cancellables = Set<AnyCancellable>()
+    
     init(_ user: User, _ posts: [Post] = [], _ replies: [Reply] = [], _ scraps: [Post] = []) {
         self.user = user
         self.posts = posts.filter  { $0.createdBy == user.id }
@@ -40,18 +43,14 @@ class MyPageViewModel: ObservableObject {
     }
     
     func fetchMyTeam() {
-        NetworkManager<User>.request(route: .getUser(userId: user.id)) { result in
-            switch result {
-            case .success(let user):
-                self.user = user
-                self.myTeam = user.team
+        NetworkManager<User>.request(route: .getUser(userId: user.id))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] user in
+                self?.user = user
+                self?.myTeam = user.team
                 AuthManager.shared.saveuser(user)
-                print(self.myTeam!.name)
-                print("succeed to get user's team!")
-            case .failure(let error):
-                print("failed to get user's team.. \(error.localizedDescription)")
-            }
-        }
+            }.store(in: &cancellables)
     }
     
     func updateTeam(_ teamId: Int) {
@@ -59,15 +58,12 @@ class MyPageViewModel: ObservableObject {
             "teamId": teamId
         ]
         
-        NetworkManager<Int>.request(route: .updateTeam(userId: user.id, parameters: parameters)) { result in
-            switch result {
-            case .success(let teamId):
-                print("succeed to update team! \(teamId)")
-                self.fetchMyTeam()
-            case .failure(let error):
-                print("failed to update team.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<Int>.request(route: .updateTeam(userId: user.id, parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] teamId in
+                self?.fetchMyTeam()
+            }.store(in: &cancellables)
     }
     
     func fetchMyPosts() {
@@ -75,18 +71,15 @@ class MyPageViewModel: ObservableObject {
             "userId": user.id
         ]
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.posts = postsResponse.content
-                self.isCanAddPosts = !postsResponse.last
-                self.totalPostPages = postsResponse.totalPages
-                self.totalPostsCount = postsResponse.totalElements
-                print("succeed to get my posts!")
-            case .failure(let error):
-                print("failed to get my posts.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.posts = postsResponse.content
+                self?.isCanAddPosts = !postsResponse.last
+                self?.totalPostPages = postsResponse.totalPages
+                self?.totalPostsCount = postsResponse.totalElements
+            }.store(in: &cancellables)
     }
     
     func addPosts() {
@@ -99,17 +92,14 @@ class MyPageViewModel: ObservableObject {
             "page": postsPage
         ]
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.isCanAddPosts = !postsResponse.last
-                self.posts += postsResponse.content
-                print("succeed to add my posts \(self.postsPage)page!")
-                self.postsPage += 1
-            case .failure(let error):
-                print("failed to add my posts \(self.postsPage)page.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.isCanAddPosts = !postsResponse.last
+                self?.posts += postsResponse.content
+                self?.postsPage += 1
+            }.store(in: &cancellables)
     }
     
     func fetchMyReplies() {
@@ -117,17 +107,14 @@ class MyPageViewModel: ObservableObject {
                 "userId": user.id
             ]
         
-        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
-            switch result {
-            case .success(let repliesResponse):
-                self.replies = repliesResponse.content
-                self.totalRepliesPages = repliesResponse.totalPages
-                self.totalRepliesCount = repliesResponse.totalElements
-                print("succeed to get my replies!")
-            case .failure(let error):
-                print("failed to get my replies.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] repliesResponse in
+                self?.replies = repliesResponse.content
+                self?.totalRepliesPages = repliesResponse.totalPages
+                self?.totalRepliesCount = repliesResponse.totalElements
+            }.store(in: &cancellables)
     }
     
     func addReplies(_ postId: Int) {
@@ -140,16 +127,14 @@ class MyPageViewModel: ObservableObject {
                 "postId": postId
             ]
         
-        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.isCanAddReplies = !postsResponse.last
-                self.replies += postsResponse.content
-                print("succeed to add my replies \(self.repliesPage)page!")
-                self.repliesPage += 1
-            case .failure(let error):
-                print("failed to add my replies \(self.repliesPage)page.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<RepliesResponse>.request(route: .getReplies(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.isCanAddReplies = !postsResponse.last
+                self?.replies += postsResponse.content
+                self?.repliesPage += 1
+            }.store(in: &cancellables)
+        
     }
 }

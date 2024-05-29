@@ -7,12 +7,15 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class AuthManager: ObservableObject {
     static let shared = AuthManager()
     
     @Published var isLoggedIn: Bool = false
     @Published var currentUser: User?
+    
+    var cancellables = Set<AnyCancellable>()
     
     init() {
         isLoggedIn = getUserId() != nil
@@ -22,16 +25,25 @@ class AuthManager: ObservableObject {
     }
     
     func login(parameters: Parameters) {
-        NetworkManager<UserAuth>.request(route: .login(parameters)) { result in
-            switch result {
-            case .success(let userAuth):
+        NetworkManager<UserAuth>.request(route: .login(parameters))
+            .sink { completion in
+                
+            } receiveValue: { [weak self] userAuth in
                 let user = User(id: userAuth.id, nickName: userAuth.nickName, isAdmin: userAuth.isAdmin, team: userAuth.team)
-                self.saveuser(user)
-                print("succeed to login! \(user.id)!")
-            case .failure(let error):
-                print("failed to login.. \(error.localizedDescription)")
+                self?.saveuser(user)
             }
-        }
+            .store(in: &cancellables)
+        
+//        NetworkManager<UserAuth>.request(route: .login(parameters)) { result in
+//            switch result {
+//            case .success(let userAuth):
+//                let user = User(id: userAuth.id, nickName: userAuth.nickName, isAdmin: userAuth.isAdmin, team: userAuth.team)
+//                self.saveuser(user)
+//                print("succeed to login! \(user.id)!")
+//            case .failure(let error):
+//                print("failed to login.. \(error.localizedDescription)")
+//            }
+//        }
     }
 
     func logout() {
@@ -47,19 +59,31 @@ class AuthManager: ObservableObject {
     }
 
     func registerAndLogin(parameters: Parameters) {
-        NetworkManager<UserAuth>.request(route: .signup(parameters)) { result in
-            switch result {
-            case .success(let user):
+        NetworkManager<UserAuth>.request(route: .signup(parameters))
+            .sink { completion in
+                
+            } receiveValue: { [weak self] userAuth in
                 let loginParameters: Parameters = [
                     "userId": parameters["userId"] as! String,
                     "password": parameters["password"] as! String
                 ]
-                self.login(parameters: loginParameters)
-                print("succeed to sign up! \(user.id)")
-            case .failure(let error):
-                print("failed to sign up.. \(error.localizedDescription)")
+                self?.login(parameters: loginParameters)
             }
-        }
+            .store(in: &cancellables)
+
+//        NetworkManager<UserAuth>.request(route: .signup(parameters)) { result in
+//            switch result {
+//            case .success(let user):
+//                let loginParameters: Parameters = [
+//                    "userId": parameters["userId"] as! String,
+//                    "password": parameters["password"] as! String
+//                ]
+//                self.login(parameters: loginParameters)
+//                print("succeed to sign up! \(user.id)")
+//            case .failure(let error):
+//                print("failed to sign up.. \(error.localizedDescription)")
+//            }
+//        }
     }
     
     func saveuser(_ user: User) {

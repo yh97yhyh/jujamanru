@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import Combine
 
 class ReplyViewModel: ObservableObject {
     @Published var reply: Reply
     @Published var datetime: String
+    
+    var cancellables = Set<AnyCancellable>()
 
     init(_ reply: Reply = Reply.MOCK_REPLIES[0]) {
         self.reply = reply
@@ -17,8 +20,12 @@ class ReplyViewModel: ObservableObject {
     }
     
     func deleteReply(completion: @escaping (Int) -> Void) {
-        NetworkManager<Int>.requestWithoutResponse(route: .deleteReply(replyId: reply.id)) { result in
-            completion(result)
-        }
+        NetworkManager<Int>.requestWithoutResponse(route: .deleteReply(replyId: reply.id))
+            .sink { _ in
+                
+            } receiveValue: { _ in
+                
+            }
+            .store(in: &cancellables)
     }
 }

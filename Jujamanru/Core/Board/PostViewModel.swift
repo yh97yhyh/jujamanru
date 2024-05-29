@@ -7,10 +7,13 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class PostViewModel: ObservableObject {
     @Published var post: Post
     @Published var datetime: String
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(_ post: Post = Post.MOCK_POSTS[0], postId: Int, userId: String) {
         self.post = post
@@ -25,29 +28,12 @@ class PostViewModel: ObservableObject {
                 "userId": userId
             ]
         
-        NetworkManager<Post>.request(route: .getPost(postId: postId, parameters: parameters)) { result in
-            switch result {
-            case .success(let post):
-                self.post = post
-                self.datetime = post.timeView
-            case .failure(let error):
-                print("failed to get post.. \(error.localizedDescription)")
+        NetworkManager<Post>.request(route: .getPost(postId: postId, parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] post in
+                self?.post = post
+                self?.datetime = post.timeView
             }
-        }
-    }
-    
-//    func addViewCount() {
-//        print("postId : \(post.id)")
-//        DispatchQueue.global().async {
-//            NetworkManager<Int>.callPut(urlString: "/posts/\(self.post.id)/view-count", parameters: Parameters()) { result in
-//                switch result {
-//                case .success:
-//                    print("succeed to update view count!")
-//                case .failure(let error):
-//                    print("failed to update view count.. \(error.localizedDescription)")
-//                }
-//            }
-//        }
-//    }
-    
+            .store(in: &cancellables)
 }

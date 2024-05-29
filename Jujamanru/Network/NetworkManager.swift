@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 enum NetworkError: Error {
     case invalidResponse
@@ -112,40 +113,73 @@ enum APIRouter: URLRequestConvertible {
 }
 
 final class NetworkManager<T: Codable> {
-    
-    static func request(route: APIRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        AF.request(route)
+    static func request(route: APIRouter) -> AnyPublisher<T, NetworkError> {
+        return AF.request(route)
             .validate()
-            .responseDecodable(of: T.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completion(.success(value))
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        switch statusCode {
-                        case 401:
-                            completion(.failure(.error(err: "Unauthorized")))
-                        default:
-                            completion(.failure(.error(err: "Status code: \(statusCode)")))
-                        }
-                    } else {
-                        completion(.failure(.error(err: error.localizedDescription)))
+            .publishDecodable(type: T.self)
+            .tryMap { response -> T in
+                guard let value = response.value else {
+                    throw NetworkError.error(err: "Decoding error")
+                }
+                return value
+            }
+            .mapError { error -> NetworkError in
+                if let statusCode = (error.asAFError?.responseCode) {
+                    switch statusCode {
+                    case 401:
+                        return .error(err: "Unauthorized")
+                    default:
+                        return .error(err: "Status code: \(statusCode)")
                     }
+                } else {
+                    return .error(err: error.localizedDescription)
                 }
             }
+            .eraseToAnyPublisher()
     }
     
-    static func requestWithoutResponse(route: APIRouter, completion: @escaping (Int) -> Void) {
-        AF.request(route)
+    static func requestWithoutResponse(route: APIRouter) -> AnyPublisher<Int, Never> {
+        return AF.request(route)
             .validate()
-            .response { response in
-                switch response.result {
-                case .success:
-                    completion(1)
-                case .failure:
-                    completion(0)
-                }
-            }
+            .publishData()
+            .map { _ in return 1 }
+            .replaceError(with: 0)
+            .eraseToAnyPublisher()
     }
+    
+//    static func request(route: APIRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
+//        AF.request(route)
+//            .validate()
+//            .responseDecodable(of: T.self) { response in
+//                switch response.result {
+//                case .success(let value):
+//                    completion(.success(value))
+//                case .failure(let error):
+//                    if let statusCode = response.response?.statusCode {
+//                        switch statusCode {
+//                        case 401:
+//                            completion(.failure(.error(err: "Unauthorized")))
+//                        default:
+//                            completion(.failure(.error(err: "Status code: \(statusCode)")))
+//                        }
+//                    } else {
+//                        completion(.failure(.error(err: error.localizedDescription)))
+//                    }
+//                }
+//            }
+//    }
+//    
+//    static func requestWithoutResponse(route: APIRouter, completion: @escaping (Int) -> Void) {
+//        AF.request(route)
+//            .validate()
+//            .response { response in
+//                switch response.result {
+//                case .success:
+//                    completion(1)
+//                case .failure:
+//                    completion(0)
+//                }
+//            }
+//    }
 }
 

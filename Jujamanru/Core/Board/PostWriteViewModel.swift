@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class PostWriteViewModel: ObservableObject {
     @Published var userId: String
@@ -15,10 +16,12 @@ class PostWriteViewModel: ObservableObject {
     @Published var title = ""
     @Published var text = ""
     
+    var cancellables = Set<AnyCancellable>()
+
+    
     init(userId: String) {
         self.userId = userId
     }
-    
     
     func writePost(completion: @escaping (Result<Int, NetworkError>) -> Void) {
         var parameters = Parameters()
@@ -41,9 +44,13 @@ class PostWriteViewModel: ObservableObject {
             ]
         }
         
-        NetworkManager<Int>.request(route: .writePost(parameters)) { result in
-            completion(result)
-        }
+        NetworkManager<Int>.request(route: .writePost(parameters))
+            .sink { completion in
+                
+            } receiveValue: { val in
+                
+            }
+            .store(in: &cancellables)
     }
     
 }

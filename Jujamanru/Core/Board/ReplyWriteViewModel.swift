@@ -7,12 +7,15 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class ReplyWriteViewModel: ObservableObject {
     @Published var postId: Int
     @Published var userId: String
-    
     @Published var text: String = ""
+    
+    var cancellables = Set<AnyCancellable>()
+
     
     init(postId: Int, userId: String) {
         self.postId = postId
@@ -26,8 +29,12 @@ class ReplyWriteViewModel: ObservableObject {
             "text": text
         ]
         
-        NetworkManager<Int>.request(route: .writeReply(parameters)) { result in
-            completion(result)
-        }
+        NetworkManager<Int>.request(route: .writeReply(parameters))
+            .sink { _ in
+                
+            } receiveValue: { _ in
+                
+            }
+            .store(in: &cancellables)
     }
 }

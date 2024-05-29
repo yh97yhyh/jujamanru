@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 class TeamViewModel: ObservableObject {
     static let shared = TeamViewModel()
     
     @Published var teams: [Team]
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(_ teams: [Team] = Team.MOCK_TEAMS) {
         self.teams = teams
@@ -18,14 +21,12 @@ class TeamViewModel: ObservableObject {
     }
     
     func fetchTeams() {
-        NetworkManager<[Team]>.request(route: .getTeams) { result in
-            switch result {
-            case .success(let teams):
-                self.teams = teams
-                print("succeed to get teams!")
-            case .failure(let error):
-                print("failed to get teams.. \(error.localizedDescription)")
+        NetworkManager<[Team]>.request(route: .getTeams)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] teams in
+                self?.teams = teams
             }
-        }
+            .store(in: &cancellables)
     }
 }

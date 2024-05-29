@@ -7,11 +7,14 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class HomeViewModel: ObservableObject {
     @Published var popularPosts: [Post]
     @Published var myTeamPopularPosts: [Post]
     @Published var notices: [Post]
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(_ popularPosts: [Post] = [], _ myTeamPopularPosts: [Post] = [], _ notices: [Post] = [], myTeamId: Int? = nil) {
         self.popularPosts = popularPosts
@@ -28,24 +31,12 @@ class HomeViewModel: ObservableObject {
                 "isPopular": true
             ]
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.popularPosts = postsResponse.content
-                print("succeed to get popular posts!")
-            case .failure(let error):
-                print("failed to get popular posts.. \(error.localizedDescription)")
-            }
-        }
-//        NetworkManager<PostsResponse>.callGet(urlString: "/posts", parameters: parameters) { result in
-//            switch result {
-//            case .success(let postsResponse):
-//                self.popularPosts = postsResponse.content
-//                print("succeed to get popular posts!")
-//            case .failure(let error):
-//                print("failed to get popular posts.. \(error.localizedDescription)")
-//            }
-//        }
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.popularPosts = postsResponse.content
+            }.store(in: &cancellables)
     }
     
     func fetchMyTeamPopularPosts(_ myTeamId: Int?) {
@@ -58,15 +49,12 @@ class HomeViewModel: ObservableObject {
                 "teamId": myTeamId!
             ]
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.myTeamPopularPosts = postsResponse.content
-                print("succeed to get my team popular posts!")
-            case .failure(let error):
-                print("failed to get my ream popular posts.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse  in
+                self?.myTeamPopularPosts = postsResponse.content
+            }.store(in: &cancellables)
     }
     
     func fetchNotices() {
@@ -74,14 +62,11 @@ class HomeViewModel: ObservableObject {
                 "isNotice": true
             ]
         
-        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters)) { result in
-            switch result {
-            case .success(let postsResponse):
-                self.notices = postsResponse.content
-                print("succeed to get notices!")
-            case .failure(let error):
-                print("failed to get notices.. \(error.localizedDescription)")
-            }
-        }
+        NetworkManager<PostsResponse>.request(route: .getPosts(parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { [weak self] postsResponse in
+                self?.notices = postsResponse.content
+            }.store(in: &cancellables)
     }
 }

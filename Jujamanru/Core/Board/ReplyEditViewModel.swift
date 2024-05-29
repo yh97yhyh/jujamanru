@@ -7,15 +7,17 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 class ReplyEditViewModel: ObservableObject {
     @Published var reply: Reply
     @Published var text: String = ""
     
+    var cancellables = Set<AnyCancellable>()
+    
     init(_ reply: Reply) {
         self.reply = reply
         self.text = reply.text
-//        print(reply)
     }
     
     func editReply(completion: @escaping (Result<Int, NetworkError>) -> Void) {
@@ -25,8 +27,11 @@ class ReplyEditViewModel: ObservableObject {
             "text": text
         ]
         
-        NetworkManager<Int>.request(route: .updateReply(replyId: reply.id, parameters: parameters)) { result in
-            completion(result)
-        }
+        NetworkManager<Int>.request(route: .updateReply(replyId: reply.id, parameters: parameters))
+            .sink { _ in
+                
+            } receiveValue: { _ in
+                
+            }.store(in: &cancellables)
     }
 }
