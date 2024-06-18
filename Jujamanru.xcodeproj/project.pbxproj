@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1EEA78DEE5FAAE0174C8CAB0 /* Pods_Jujamanru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */; };
+		F80F6F312C21A462003859CA /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F302C21A462003859CA /* DiaryView.swift */; };
+		F80F6F342C21A533003859CA /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F332C21A533003859CA /* DiaryViewModel.swift */; };
+		F80F6F382C21A913003859CA /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F372C21A913003859CA /* Record.swift */; };
+		F80F6F3D2C21AAA6003859CA /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */; };
 		F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C072BB209D000FA84EF /* PostEditViewModel.swift */; };
 		F8217C0A2BB20A8300FA84EF /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C092BB20A8300FA84EF /* PostEditView.swift */; };
 		F8217C0C2BB211D000FA84EF /* ReplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */; };
@@ -72,6 +76,10 @@
 		65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.debug.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.debug.xcconfig"; sourceTree = "<group>"; };
 		69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jujamanru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.release.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.release.xcconfig"; sourceTree = "<group>"; };
+		F80F6F302C21A462003859CA /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
+		F80F6F332C21A533003859CA /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
+		F80F6F372C21A913003859CA /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		F8217C072BB209D000FA84EF /* PostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewModel.swift; sourceTree = "<group>"; };
 		F8217C092BB20A8300FA84EF /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyEditView.swift; sourceTree = "<group>"; };
@@ -162,6 +170,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F80F6F2F2C21A43E003859CA /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				F80F6F322C21A519003859CA /* View */,
+				F80F6F332C21A533003859CA /* DiaryViewModel.swift */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
+		F80F6F322C21A519003859CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F80F6F302C21A462003859CA /* DiaryView.swift */,
+				F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F80F6F352C21A854003859CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAF0852B9B052100C35971 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		F894911A2B9B075400437A2E /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +233,7 @@
 				F89491332B9B08D100437A2E /* Reply.swift */,
 				F89491352B9B0F4800437A2E /* Team.swift */,
 				F8F7FF9D2BAF1ACB00BC49E8 /* Common.swift */,
+				F80F6F372C21A913003859CA /* Record.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +246,7 @@
 				F89491442B9B12ED00437A2E /* Login */,
 				F89491372B9B118100437A2E /* Home */,
 				F89491392B9B119100437A2E /* Board */,
+				F80F6F2F2C21A43E003859CA /* Diary */,
 				F89491382B9B118700437A2E /* MyPage */,
 			);
 			path = Core;
@@ -286,15 +322,15 @@
 		F8FAF0802B9B052000C35971 /* Jujamanru */ = {
 			isa = PBXGroup;
 			children = (
+				F8FAF0812B9B052000C35971 /* JujamanruApp.swift */,
+				F8FAF0832B9B052000C35971 /* ContentView.swift */,
 				F894911F2B9B077500437A2E /* Core */,
 				F894911D2B9B076800437A2E /* Model */,
 				F894911C2B9B076200437A2E /* Network */,
 				F894911B2B9B075B00437A2E /* Extension */,
 				F894911A2B9B075400437A2E /* Util */,
-				F8FAF0812B9B052000C35971 /* JujamanruApp.swift */,
-				F8FAF0832B9B052000C35971 /* ContentView.swift */,
+				F80F6F352C21A854003859CA /* Resources */,
 				F894916E2B9B90FF00437A2E /* Secrets.xcconfig */,
-				F8FAF0852B9B052100C35971 /* Assets.xcassets */,
 				F8FAF0872B9B052100C35971 /* Preview Content */,
 			);
 			path = Jujamanru;
@@ -508,6 +544,7 @@
 				F894913B2B9B11BD00437A2E /* MyPageViewModel.swift in Sources */,
 				F894913D2B9B120B00437A2E /* HomeView.swift in Sources */,
 				F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */,
+				F80F6F382C21A913003859CA /* Record.swift in Sources */,
 				F89491362B9B0F4800437A2E /* Team.swift in Sources */,
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,
 				F8F7FFB62BAF70A100BC49E8 /* ReplyWriteViewModel.swift in Sources */,
@@ -534,6 +571,7 @@
 				F89491412B9B122000437A2E /* MyPageView.swift in Sources */,
 				F894912A2B9B087200437A2E /* Bundle+Extensions.swift in Sources */,
 				F8F7FFBA2BAF79B700BC49E8 /* TeamSelectView.swift in Sources */,
+				F80F6F342C21A533003859CA /* DiaryViewModel.swift in Sources */,
 				F8F7FFB42BAF660E00BC49E8 /* RepliesViewModel.swift in Sources */,
 				F8F7FFAE2BAF54A700BC49E8 /* RegisterationViewModel.swift in Sources */,
 				F8217C0C2BB211D000FA84EF /* ReplyEditView.swift in Sources */,
@@ -542,7 +580,9 @@
 				F89491632B9B73F000437A2E /* PostTextView.swift in Sources */,
 				F8FAF0822B9B052000C35971 /* JujamanruApp.swift in Sources */,
 				F8F7FFBE2BB09ABA00BC49E8 /* HomeViewModel.swift in Sources */,
+				F80F6F312C21A462003859CA /* DiaryView.swift in Sources */,
 				F894916D2B9B85EE00437A2E /* MyRepliesView.swift in Sources */,
+				F80F6F3D2C21AAA6003859CA /* DiaryDetailView.swift in Sources */,
 				F89491342B9B08D100437A2E /* Reply.swift in Sources */,
 				F894914F2B9B161800437A2E /* RepliesView.swift in Sources */,
 				F89491592B9B66D500437A2E /* SettingView.swift in Sources */,

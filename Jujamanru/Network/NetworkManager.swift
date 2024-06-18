@@ -146,40 +146,5 @@ final class NetworkManager<T: Codable> {
             .replaceError(with: 0)
             .eraseToAnyPublisher()
     }
-    
-//    static func request(route: APIRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
-//        AF.request(route)
-//            .validate()
-//            .responseDecodable(of: T.self) { response in
-//                switch response.result {
-//                case .success(let value):
-//                    completion(.success(value))
-//                case .failure(let error):
-//                    if let statusCode = response.response?.statusCode {
-//                        switch statusCode {
-//                        case 401:
-//                            completion(.failure(.error(err: "Unauthorized")))
-//                        default:
-//                            completion(.failure(.error(err: "Status code: \(statusCode)")))
-//                        }
-//                    } else {
-//                        completion(.failure(.error(err: error.localizedDescription)))
-//                    }
-//                }
-//            }
-//    }
-//    
-//    static func requestWithoutResponse(route: APIRouter, completion: @escaping (Int) -> Void) {
-//        AF.request(route)
-//            .validate()
-//            .response { response in
-//                switch response.result {
-//                case .success:
-//                    completion(1)
-//                case .failure:
-//                    completion(0)
-//                }
-//            }
-//    }
-}
 
+}

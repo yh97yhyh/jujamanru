@@ -40,6 +40,7 @@ class MyPageViewModel: ObservableObject {
         
         fetchMyPosts()
         fetchMyReplies()
+        fetchMyTeamImage()
     }
     
     func fetchMyTeam() {
@@ -136,5 +137,25 @@ class MyPageViewModel: ObservableObject {
                 self?.repliesPage += 1
             }.store(in: &cancellables)
         
+    }
+    
+    func fetchMyTeamImage() -> String? {
+        guard let myTeam = myTeam else {
+            return nil
+        }
+        
+        switch myTeam.id {
+        case 1: return "lg-twins-logo.png"
+        case 2: return "ky-wiz-logo.png"
+        case 3: return "ssg-landers-logo.png"
+        case 4: return "nc-dinos-logo.png"
+        case 5: return "doosan-bears-logo.png"
+        case 6: return "kia-tigers-logo.png"
+        case 7: return "lotte-giants-logo.png"
+        case 8: return "samsung-lions-logo.png"
+        case 9: return "hanwha-eagles-logo.png"
+        case 10: return "kiwoom-heros-logo.png"
+        default: return nil
+        }
     }
 }

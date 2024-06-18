@@ -25,8 +25,8 @@ class PostViewModel: ObservableObject {
     
     func fetchPost(_ postId: Int, _ userId: String) {
         let parameters: Parameters = [
-                "userId": userId
-            ]
+            "userId": userId
+        ]
         
         NetworkManager<Post>.request(route: .getPost(postId: postId, parameters: parameters))
             .sink { _ in
@@ -36,4 +36,5 @@ class PostViewModel: ObservableObject {
                 self?.datetime = post.timeView
             }
             .store(in: &cancellables)
+    }
 }
