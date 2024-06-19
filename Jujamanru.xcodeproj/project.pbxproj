@@ -174,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				F80F6F322C21A519003859CA /* View */,
-				F80F6F332C21A533003859CA /* DiaryViewModel.swift */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -246,7 +245,6 @@
 				F89491442B9B12ED00437A2E /* Login */,
 				F89491372B9B118100437A2E /* Home */,
 				F89491392B9B119100437A2E /* Board */,
-				F80F6F2F2C21A43E003859CA /* Diary */,
 				F89491382B9B118700437A2E /* MyPage */,
 			);
 			path = Core;
@@ -266,7 +264,9 @@
 			children = (
 				F8FFF2A82C04A56C0015DAE6 /* Main */,
 				F8FFF2A52C04A0EC0015DAE6 /* Detail */,
+				F80F6F2F2C21A43E003859CA /* Diary */,
 				F894913A2B9B11BD00437A2E /* MyPageViewModel.swift */,
+				F80F6F332C21A533003859CA /* DiaryViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";

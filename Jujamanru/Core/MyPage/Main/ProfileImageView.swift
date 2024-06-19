@@ -11,11 +11,19 @@ struct ProfileImageView: View {
     @EnvironmentObject var viewModel: MyPageViewModel
 
     var body: some View {
-        Image(systemName: "person.circle.fill")
-            .resizable()
-            .frame(width: 100, height: 100)
-            .clipShape(Circle())
-            .foregroundColor(Color(.systemGray4))
+        if let userProfileImage = viewModel.userProfileImage {
+            Image(userProfileImage)
+                .resizable()
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+                .foregroundColor(Color(.systemGray4))
+        } else {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+                .foregroundColor(Color(.systemGray4))
+        }
     }
 }
 

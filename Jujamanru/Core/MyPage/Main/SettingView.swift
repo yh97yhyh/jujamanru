@@ -26,10 +26,10 @@ struct SettingView: View {
                     Text("스크랩 보기")
                         .foregroundColor(.black)
                 }
-//                NavigationLink(destination: Text("로그아웃")) {
-//                    Text("로그아웃")
-//                        .foregroundColor(.black)
-//                }
+                NavigationLink(destination: DiaryView()) {
+                    Text("직관일기")
+                        .foregroundColor(.black)
+                }
                 Button {
                     authManager.logout()
                 } label: {

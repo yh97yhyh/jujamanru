@@ -35,24 +35,15 @@ struct MainTabView: View {
                             Text("게시판")
                         }
                         .tag(1)
-                    DiaryView()
-                        .onAppear {
-                            selectedIndex = 2
-                        }
-                        .tabItem {
-                            Image(systemName: "book.closed.fill")
-                            Text("직관일기")
-                        }
-                        .tag(2)
                     MyPageView()
                         .onAppear {
-                            selectedIndex = 3
+                            selectedIndex = 2
                         }
                         .tabItem {
                             Image(systemName: "person.fill")
                             Text("마이페이지")
                         }
-                        .tag(3)
+                        .tag(2)
                 }
                 .accentColor(.black)
             }

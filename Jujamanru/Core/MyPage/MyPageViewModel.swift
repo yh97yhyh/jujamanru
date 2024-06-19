@@ -14,6 +14,7 @@ class MyPageViewModel: ObservableObject {
     
     @Published var user: User
     @Published var myTeam: Team?
+    @Published var userProfileImage: String?
     @Published var posts: [Post]
     @Published var replies: [Reply]
     @Published var scraps: [Post]
@@ -40,7 +41,7 @@ class MyPageViewModel: ObservableObject {
         
         fetchMyPosts()
         fetchMyReplies()
-        fetchMyTeamImage()
+        fetchTeamImage(user.team?.id)
     }
     
     func fetchMyTeam() {
@@ -50,6 +51,7 @@ class MyPageViewModel: ObservableObject {
             } receiveValue: { [weak self] user in
                 self?.user = user
                 self?.myTeam = user.team
+                self?.fetchTeamImage(user.team?.id)
                 AuthManager.shared.saveuser(user)
             }.store(in: &cancellables)
     }
@@ -139,23 +141,23 @@ class MyPageViewModel: ObservableObject {
         
     }
     
-    func fetchMyTeamImage() -> String? {
-        guard let myTeam = myTeam else {
-            return nil
+    func fetchTeamImage(_ teamId: Int?) {
+        guard let teamId = teamId else {
+            return
         }
         
-        switch myTeam.id {
-        case 1: return "lg-twins-logo.png"
-        case 2: return "ky-wiz-logo.png"
-        case 3: return "ssg-landers-logo.png"
-        case 4: return "nc-dinos-logo.png"
-        case 5: return "doosan-bears-logo.png"
-        case 6: return "kia-tigers-logo.png"
-        case 7: return "lotte-giants-logo.png"
-        case 8: return "samsung-lions-logo.png"
-        case 9: return "hanwha-eagles-logo.png"
-        case 10: return "kiwoom-heros-logo.png"
-        default: return nil
+        switch teamId {
+        case 1: userProfileImage = "ssg-landers-logo"
+        case 2: userProfileImage = "kia-tigers-logo"
+        case 3: userProfileImage = "doosan-bears-logo"
+        case 4: userProfileImage = "lotte-giants-logo"
+        case 5: userProfileImage = "samsung-lions-logo"
+        case 6: userProfileImage = "nc-dinos-logo"
+        case 7: userProfileImage = "lg-twins-logo"
+        case 8: userProfileImage = "kt-wiz-logo"
+        case 9: userProfileImage = "kiwoom-heroes-logo"
+        case 10: userProfileImage = "hanwha-eagles-logo"
+        default: userProfileImage = nil
         }
     }
 }
