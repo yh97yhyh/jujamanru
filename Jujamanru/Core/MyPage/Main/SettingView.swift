@@ -26,7 +26,7 @@ struct SettingView: View {
                     Text("스크랩 보기")
                         .foregroundColor(.black)
                 }
-                NavigationLink(destination: DiaryView()) {
+                NavigationLink(destination: DiaryView(viewModel: DiaryViewModel(viewModel.user))) {
                     Text("직관일기")
                         .foregroundColor(.black)
                 }

@@ -14,18 +14,7 @@ struct PostsView: View {
     @Binding var selectedTeam: Int
     @State var isSeeNotice = true
     @State private var isEndReached: Bool = false
-    
-//    private var filteredPosts: [Post] {
-//        if selectedTeam == 0 {
-////            return viewModel.posts.sorted(by: { $0.createdDatetime > $1.createdDatetime })
-//            return viewModel.posts
-//        } else {
-//            return viewModel.posts
-////                .filter { $0.teamId == selectedTeam }
-////                .sorted(by: { $0.createdDatetime > $1.createdDatetime })
-//        }
-//    }
-    
+
     private var newPostsCount: Int {
         viewModel.posts.filter { post in
             let currentDate = Date()

@@ -17,10 +17,11 @@ enum NetworkError: Error {
 }
 
 enum APIRouter: URLRequestConvertible {
-    case writePost(Parameters)
-    case writeReply(Parameters)
     case login(Parameters)
     case signup(Parameters)
+    case writePost(Parameters)
+    case writeReply(Parameters)
+    case writeGameRecord(Parameters)
     
     case updateViewCount(postId: Int)
     case updatePost(postId: Int, parameters: Parameters)
@@ -32,33 +33,38 @@ enum APIRouter: URLRequestConvertible {
     case getTeams
     case getReplies(parameters: Parameters)
     case getUser(userId: String)
+    case getGameRecords(userId: String)
+    case getGameRecord(gameRecordId: Int)
     
     case deletePost(postId: Int)
     case deleteReply(replyId: Int)
+    case deleteGameRecord(gameRecordId: Int)
     
     var method: HTTPMethod {
         switch self {
-        case .writePost, .writeReply, .signup, .login:
+        case .signup, .login, .writePost, .writeReply, .writeGameRecord:
             return .post
-        case .getPosts, .getPost, .getTeams, .getReplies, .getUser:
+        case .getPosts, .getPost, .getTeams, .getReplies, .getUser, .getGameRecords, .getGameRecord:
             return .get
         case .updateViewCount, .updatePost, .updateReply, .updateTeam:
             return .put
-        case .deletePost, .deleteReply:
+        case .deletePost, .deleteReply, .deleteGameRecord:
             return .delete
         }
     }
     
     var path: String {
         switch self {
-        case .writePost:
-            return "/posts"
-        case .writeReply:
-            return "/replies"
         case .login:
             return "/auth/login"
         case .signup:
             return "/auth/signup"
+        case .writePost:
+            return "/posts"
+        case .writeReply:
+            return "/replies"
+        case .writeGameRecord:
+            return "/game-records"
         case .updateViewCount(let postId):
             return "/posts/\(postId)/view-count"
         case .updatePost(let postId, _):
@@ -77,18 +83,24 @@ enum APIRouter: URLRequestConvertible {
             return "/replies"
         case .getUser(let userId):
             return "/users/\(userId)"
+        case .getGameRecords(let userId):
+            return "/game-records/list/\(userId)"
+        case .getGameRecord(let gameRecordId):
+            return "/game-records/\(gameRecordId)"
         case .deletePost(let postId):
             return "/posts/\(postId)"
         case .deleteReply(let replyId):
             return "/replies/\(replyId)"
+        case .deleteGameRecord(let gameRecordId):
+            return "/game-records/\(gameRecordId)"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .writePost(let parameters), .writeReply(let parameters), .login(let parameters), .signup(let parameters), .updatePost(_, let parameters), .updateReply(_, let parameters), .updateTeam(_, let parameters), .getPosts(let parameters), .getPost(_, let parameters), .getReplies(let parameters):
+        case .login(let parameters), .signup(let parameters), .writePost(let parameters), .writeReply(let parameters), .writeGameRecord(let parameters), .updatePost(_, let parameters), .updateReply(_, let parameters), .updateTeam(_, let parameters), .getPosts(let parameters), .getPost(_, let parameters), .getReplies(let parameters):
             return parameters
-        case .updateViewCount, .getTeams, .getUser, .deletePost, .deleteReply:
+        case .updateViewCount, .getTeams, .getUser, .deletePost, .deleteReply, .getGameRecords, .getGameRecord, .deleteGameRecord:
             return Parameters()
         }
     }
