@@ -10,6 +10,7 @@
 		1EEA78DEE5FAAE0174C8CAB0 /* Pods_Jujamanru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */; };
 		F806E2C52C29D1A60034F893 /* DiaryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C42C29D1A60034F893 /* DiaryCellViewModel.swift */; };
 		F806E2C72C29DB500034F893 /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C62C29DB500034F893 /* DiaryDetailViewModel.swift */; };
+		F806E2C92C29DC400034F893 /* DiaryWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C82C29DC400034F893 /* DiaryWriteView.swift */; };
 		F80F6F312C21A462003859CA /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F302C21A462003859CA /* DiaryView.swift */; };
 		F80F6F342C21A533003859CA /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F332C21A533003859CA /* DiaryViewModel.swift */; };
 		F80F6F382C21A913003859CA /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F372C21A913003859CA /* GameRecord.swift */; };
@@ -81,6 +82,7 @@
 		821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.release.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.release.xcconfig"; sourceTree = "<group>"; };
 		F806E2C42C29D1A60034F893 /* DiaryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellViewModel.swift; sourceTree = "<group>"; };
 		F806E2C62C29DB500034F893 /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
+		F806E2C82C29DC400034F893 /* DiaryWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWriteView.swift; sourceTree = "<group>"; };
 		F80F6F302C21A462003859CA /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		F80F6F332C21A533003859CA /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
 		F80F6F372C21A913003859CA /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				F80F6F302C21A462003859CA /* DiaryView.swift */,
 				F8FD64BA2C23131A00FAF896 /* DiaryCellView.swift */,
 				F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */,
+				F806E2C82C29DC400034F893 /* DiaryWriteView.swift */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				F89491222B9B080400437A2E /* View+Extensions.swift in Sources */,
 				F8F7FFBC2BB07BEF00BC49E8 /* PostDetailViewModel.swift in Sources */,
 				F8F7FF982BAF184300BC49E8 /* UIColor+Extensions.swift in Sources */,
+				F806E2C92C29DC400034F893 /* DiaryWriteView.swift in Sources */,
 				F8F7FFA62BAF37A700BC49E8 /* AuthManager.swift in Sources */,
 				F89491242B9B083A00437A2E /* API.swift in Sources */,
 				F89491472B9B138D00437A2E /* PostCellView.swift in Sources */,

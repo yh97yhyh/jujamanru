@@ -35,6 +35,12 @@ struct DiaryView: View {
                     .font(.headline)
                 
                 Spacer()
+                
+                NavigationLink(destination: DiaryWriteView()) {
+                    Image(systemName: "square.and.pencil")
+                        .imageScale(.large)
+                        .foregroundColor(.black)
+                }
 
             }
             .padding(.horizontal)
@@ -42,18 +48,29 @@ struct DiaryView: View {
             Divider()
             
             VStack(alignment: .leading) {
-                HStack {
-                    Text("\(myPageviewModel.user.nickName)님은 현재 ")
-                    + Text("\(viewModel.visitCount)회 ")
-                        .foregroundColor(.red)
-                    + Text("방문,")
-                    Spacer()
-                }
-                HStack {
-                    Text("\(viewModel.winRate) ")
-                        .foregroundColor(.red)
-                    + Text("입니다.")
-                    Spacer()
+                if viewModel.visitCount < 1 {
+                    HStack {
+                        Text("\(myPageviewModel.user.nickName)님은 현재 직관 기록이 없습니다.")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("직관 일기를 작성해주세요!")
+                        Spacer()
+                    }
+                } else {
+                    HStack {
+                        Text("\(myPageviewModel.user.nickName)님은 현재 ")
+                        + Text("\(viewModel.visitCount)회 ")
+                            .foregroundColor(.red)
+                        + Text("방문,")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("\(viewModel.winRate) ")
+                            .foregroundColor(.red)
+                        + Text("입니다.")
+                        Spacer()
+                    }
                 }
                     
             }
@@ -70,7 +87,9 @@ struct DiaryView: View {
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
                     ForEach(viewModel.records, id: \.self) { record in
-                        DiaryCellView(viewModel: DiaryCellViewModel(record))
+                        NavigationLink(destination: DiaryDetailView(viewModel: DiaryDetailViewModel(record))) {
+                            DiaryCellView(viewModel: DiaryCellViewModel(record))
+                        }
                     }
                 }
             }

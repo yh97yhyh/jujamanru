@@ -29,7 +29,7 @@ enum GameResult: String, Codable {
 
 extension GameRecord {
     static let MOCK_GAME_RECORS: [GameRecord] = [
-        .init(id: 1, matchDate: "2024-06-01", myTeamId: 1, myTeamName: "SSG", opponentTeamId: 2, opponentTeamName: "기아", gameResult: .win, text: "아싸 이겼다~~", createdBy: "ssg1", createdDatetime: "2024-06-01 23:17:10", images: []),
+        .init(id: 1, matchDate: "2024-06-01", myTeamId: 1, myTeamName: "SSG", opponentTeamId: 2, opponentTeamName: "기아", gameResult: .win, text: "아싸 이겼다~~", createdBy: "ssg1", createdDatetime: "2024-06-01 23:17:10", images: ["nari1539_2_0_1719237372241.jpg", "nari1539_2_1_1719237372261.jpg"]),
         .init(id: 1, matchDate: "2024-06-02", myTeamId: 1, myTeamName: "SSG", opponentTeamId: 2, opponentTeamName: "기아", gameResult: .win, text: "또 이겼당 ㅎㅎㅎㅎ", createdBy: "ssg1", createdDatetime: "2024-06-02 23:17:10", images: [])
     ]
 }

@@ -10,7 +10,8 @@ import Alamofire
 import Combine
 
 class DiaryCellViewModel: ObservableObject {
-    @Published var gameRecord: GameRecord
+    var gameRecord: GameRecord
+//    @Published var gameRecord: GameRecord
     @Published var gameResult: String = ""
     @Published var matchTeams: String = ""
     @Published var gameDate: String = ""
@@ -21,7 +22,7 @@ class DiaryCellViewModel: ObservableObject {
         self.gameRecord = gameRecord
         self.gameResult = getGameResult()
         self.matchTeams = getMatchTeams()
-        self.gameDate = getMatchDate()
+        self.gameDate = getGameDate()
     }
     
     private func getGameResult() -> String {
@@ -39,7 +40,7 @@ class DiaryCellViewModel: ObservableObject {
         return "\(gameRecord.myTeamName) VS \(gameRecord.opponentTeamName)"
     }
     
-    private func getMatchDate() -> String {
+    private func getGameDate() -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd"
         
@@ -48,19 +49,9 @@ class DiaryCellViewModel: ObservableObject {
             outputFormatter.dateFormat = "yyyy.MM.dd"
             
             let formattedDate = outputFormatter.string(from: date)
-            
             return formattedDate
         } else {
             return gameRecord.matchDate
         }
     }
-    
-//    func fetchGameRecord(_ gameRecordId: Int) {
-//        NetworkManager<GameRecord>.request(route: .getGameRecord(gameRecordId: gameRecordId))
-//            .sink { _ in
-//                
-//            } receiveValue: { [weak self] gameRecord in
-//                self?.gameRecord = gameRecord
-//            }.store(in: &cancellables)
-//    }
 }

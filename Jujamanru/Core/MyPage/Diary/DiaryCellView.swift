@@ -26,6 +26,7 @@ struct DiaryCellView: View {
             Text(viewModel.matchTeams)
                 .font(.subheadline)
                 .fontWeight(.semibold)
+                .foregroundColor(.black)
         }
     }
 }

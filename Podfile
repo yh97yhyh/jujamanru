@@ -7,5 +7,7 @@ target 'Jujamanru' do
 
   # Pods for Jujamanru
   pod 'Alamofire'
+  pod 'Kingfisher', '~> 7.0'
+  pod 'lottie-ios'
 
 end
