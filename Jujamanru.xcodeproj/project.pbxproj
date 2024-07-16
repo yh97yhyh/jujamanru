@@ -15,6 +15,7 @@
 		F80F6F342C21A533003859CA /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F332C21A533003859CA /* DiaryViewModel.swift */; };
 		F80F6F382C21A913003859CA /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F372C21A913003859CA /* GameRecord.swift */; };
 		F80F6F3D2C21AAA6003859CA /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */; };
+		F8170A3C2C46BDFA00CAAEA7 /* DiaryWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8170A3B2C46BDFA00CAAEA7 /* DiaryWriteViewModel.swift */; };
 		F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C072BB209D000FA84EF /* PostEditViewModel.swift */; };
 		F8217C0A2BB20A8300FA84EF /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C092BB20A8300FA84EF /* PostEditView.swift */; };
 		F8217C0C2BB211D000FA84EF /* ReplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */; };
@@ -87,6 +88,7 @@
 		F80F6F332C21A533003859CA /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
 		F80F6F372C21A913003859CA /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		F80F6F3C2C21AAA6003859CA /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
+		F8170A3B2C46BDFA00CAAEA7 /* DiaryWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWriteViewModel.swift; sourceTree = "<group>"; };
 		F8217C072BB209D000FA84EF /* PostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewModel.swift; sourceTree = "<group>"; };
 		F8217C092BB20A8300FA84EF /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		F8217C0B2BB211D000FA84EF /* ReplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyEditView.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				F80F6F332C21A533003859CA /* DiaryViewModel.swift */,
 				F806E2C42C29D1A60034F893 /* DiaryCellViewModel.swift */,
 				F806E2C62C29DB500034F893 /* DiaryDetailViewModel.swift */,
+				F8170A3B2C46BDFA00CAAEA7 /* DiaryWriteViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				F894913B2B9B11BD00437A2E /* MyPageViewModel.swift in Sources */,
 				F894913D2B9B120B00437A2E /* HomeView.swift in Sources */,
 				F8217C082BB209D000FA84EF /* PostEditViewModel.swift in Sources */,
+				F8170A3C2C46BDFA00CAAEA7 /* DiaryWriteViewModel.swift in Sources */,
 				F80F6F382C21A913003859CA /* GameRecord.swift in Sources */,
 				F89491362B9B0F4800437A2E /* Team.swift in Sources */,
 				F8FAF0842B9B052000C35971 /* ContentView.swift in Sources */,

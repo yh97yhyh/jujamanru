@@ -36,7 +36,7 @@ struct DiaryView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: DiaryWriteView()) {
+                NavigationLink(destination: DiaryWriteView(viewModel: DiaryWriteViewModel())) {
                     Image(systemName: "square.and.pencil")
                         .imageScale(.large)
                         .foregroundColor(.black)

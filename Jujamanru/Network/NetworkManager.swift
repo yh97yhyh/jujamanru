@@ -22,6 +22,7 @@ enum APIRouter: URLRequestConvertible {
     case writePost(Parameters)
     case writeReply(Parameters)
     case writeGameRecord(Parameters)
+    case writeGameRecordWithImages(parameters: Parameters, images: [UIImage])
     
     case updateViewCount(postId: Int)
     case updatePost(postId: Int, parameters: Parameters)
@@ -42,7 +43,7 @@ enum APIRouter: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .signup, .login, .writePost, .writeReply, .writeGameRecord:
+        case .signup, .login, .writePost, .writeReply, .writeGameRecord, .writeGameRecordWithImages:
             return .post
         case .getPosts, .getPost, .getTeams, .getReplies, .getUser, .getGameRecords, .getGameRecord:
             return .get
@@ -63,7 +64,7 @@ enum APIRouter: URLRequestConvertible {
             return "/posts"
         case .writeReply:
             return "/replies"
-        case .writeGameRecord:
+        case .writeGameRecord, .writeGameRecordWithImages:
             return "/game-records"
         case .updateViewCount(let postId):
             return "/posts/\(postId)/view-count"
@@ -98,10 +99,19 @@ enum APIRouter: URLRequestConvertible {
     
     var parameters: Parameters? {
         switch self {
-        case .login(let parameters), .signup(let parameters), .writePost(let parameters), .writeReply(let parameters), .writeGameRecord(let parameters), .updatePost(_, let parameters), .updateReply(_, let parameters), .updateTeam(_, let parameters), .getPosts(let parameters), .getPost(_, let parameters), .getReplies(let parameters):
+        case .login(let parameters), .signup(let parameters), .writePost(let parameters), .writeReply(let parameters), .writeGameRecord(let parameters), .writeGameRecordWithImages(let parameters, _), .updatePost(_, let parameters), .updateReply(_, let parameters), .updateTeam(_, let parameters), .getPosts(let parameters), .getPost(_, let parameters), .getReplies(let parameters):
             return parameters
         case .updateViewCount, .getTeams, .getUser, .deletePost, .deleteReply, .getGameRecords, .getGameRecord, .deleteGameRecord:
             return Parameters()
+        }
+    }
+    
+    var images: [UIImage]? {
+        switch self {
+        case .writeGameRecordWithImages(_, let images):
+            return images
+        default:
+            return nil
         }
     }
     
@@ -116,8 +126,15 @@ enum APIRouter: URLRequestConvertible {
         switch method {
         case .get:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+//        default:
+//            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+//        }
         default:
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            if let images = images {
+                // Do not set Content-Type here for multipart/form-data
+            } else {
+                urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            }
         }
         
         return urlRequest
@@ -158,5 +175,45 @@ final class NetworkManager<T: Codable> {
             .replaceError(with: 0)
             .eraseToAnyPublisher()
     }
-
+    
+    static func requestFormData(route: APIRouter) -> AnyPublisher<T, NetworkError> {
+        return Future<T, NetworkError> { promise in
+            AF.upload(multipartFormData: { multipartFormData in
+                if let parameters = route.parameters {
+                    for (key, value) in parameters {
+                        if let data = try? JSONSerialization.data(withJSONObject: value, options: []) {
+                            multipartFormData.append(data, withName: key, mimeType: "application/json")
+                        }
+                    }
+                }
+                if let images = route.images {
+                    for image in images {
+                        if let imageData = image.jpegData(compressionQuality: 1.0) {
+                            multipartFormData.append(imageData, withName: "images", fileName: "image.jpg", mimeType: "image/jpeg")
+                        }
+                    }
+                }
+            }, with: route)
+            .validate()
+            .responseDecodable(of: T.self) { response in
+                switch response.result {
+                case .success(let value):
+                    promise(.success(value))
+                case .failure(let error):
+                    if let statusCode = response.response?.statusCode {
+                        switch statusCode {
+                        case 401:
+                            promise(.failure(.error(err: "Unauthorized")))
+                        default:
+                            promise(.failure(.error(err: "Status code: \(statusCode)")))
+                        }
+                    } else {
+                        promise(.failure(.error(err: error.localizedDescription)))
+                    }
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
 }
