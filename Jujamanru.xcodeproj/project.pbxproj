@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1EEA78DEE5FAAE0174C8CAB0 /* Pods_Jujamanru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */; };
+		F801AC852C5FBC84005D5789 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F801AC842C5FBC84005D5789 /* UIImage+Extension.swift */; };
 		F806E2C52C29D1A60034F893 /* DiaryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C42C29D1A60034F893 /* DiaryCellViewModel.swift */; };
 		F806E2C72C29DB500034F893 /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C62C29DB500034F893 /* DiaryDetailViewModel.swift */; };
 		F806E2C92C29DC400034F893 /* DiaryWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806E2C82C29DC400034F893 /* DiaryWriteView.swift */; };
@@ -81,6 +82,7 @@
 		65CE7779DC3991A40A6ED020 /* Pods-Jujamanru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.debug.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.debug.xcconfig"; sourceTree = "<group>"; };
 		69462E0A76BFB42569C83520 /* Pods_Jujamanru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jujamanru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821E480E96AE358325E0ABF0 /* Pods-Jujamanru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jujamanru.release.xcconfig"; path = "Target Support Files/Pods-Jujamanru/Pods-Jujamanru.release.xcconfig"; sourceTree = "<group>"; };
+		F801AC842C5FBC84005D5789 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F806E2C42C29D1A60034F893 /* DiaryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellViewModel.swift; sourceTree = "<group>"; };
 		F806E2C62C29DB500034F893 /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
 		F806E2C82C29DC400034F893 /* DiaryWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWriteView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				F89491212B9B080400437A2E /* View+Extensions.swift */,
 				F89491292B9B087200437A2E /* Bundle+Extensions.swift */,
 				F8F7FF972BAF184300BC49E8 /* UIColor+Extensions.swift */,
+				F801AC842C5FBC84005D5789 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				F894914F2B9B161800437A2E /* RepliesView.swift in Sources */,
 				F89491592B9B66D500437A2E /* SettingView.swift in Sources */,
 				F89491652B9B7BA400437A2E /* PostWriteView.swift in Sources */,
+				F801AC852C5FBC84005D5789 /* UIImage+Extension.swift in Sources */,
 				F894913F2B9B121A00437A2E /* BoardView.swift in Sources */,
 				F8F7FFB02BAF585400BC49E8 /* TeamViewModel.swift in Sources */,
 				F89491692B9B7DC500437A2E /* DatetimeUtils.swift in Sources */,

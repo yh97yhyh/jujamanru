@@ -177,43 +177,83 @@ final class NetworkManager<T: Codable> {
     }
     
     static func requestFormData(route: APIRouter) -> AnyPublisher<T, NetworkError> {
-        return Future<T, NetworkError> { promise in
-            AF.upload(multipartFormData: { multipartFormData in
-                if let parameters = route.parameters {
-                    for (key, value) in parameters {
-                        if let data = try? JSONSerialization.data(withJSONObject: value, options: []) {
-                            multipartFormData.append(data, withName: key, mimeType: "application/json")
+            return Future<T, NetworkError> { promise in
+                AF.upload(multipartFormData: { multipartFormData in
+                    // Serialize parameters into JSON
+                    if let parameters = route.parameters,
+                       let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
+                        multipartFormData.append(jsonData, withName: "saveRequest", mimeType: "application/json")
+                    }
+                    
+                    // Append images
+                    if let images = route.images {
+                        for image in images {
+                            if let imageData = image.jpegData(compressionQuality: 1.0) {
+                                multipartFormData.append(imageData, withName: "images", fileName: "image.jpg", mimeType: "image/jpeg")
+                            }
                         }
                     }
-                }
-                if let images = route.images {
-                    for image in images {
-                        if let imageData = image.jpegData(compressionQuality: 1.0) {
-                            multipartFormData.append(imageData, withName: "images", fileName: "image.jpg", mimeType: "image/jpeg")
+                }, with: route)
+                .validate()
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let value):
+                        promise(.success(value))
+                    case .failure(let error):
+                        if let statusCode = response.response?.statusCode {
+                            switch statusCode {
+                            case 401:
+                                promise(.failure(.error(err: "Unauthorized")))
+                            default:
+                                promise(.failure(.error(err: "Status code: \(statusCode)")))
+                            }
+                        } else {
+                            promise(.failure(.error(err: error.localizedDescription)))
                         }
-                    }
-                }
-            }, with: route)
-            .validate()
-            .responseDecodable(of: T.self) { response in
-                switch response.result {
-                case .success(let value):
-                    promise(.success(value))
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        switch statusCode {
-                        case 401:
-                            promise(.failure(.error(err: "Unauthorized")))
-                        default:
-                            promise(.failure(.error(err: "Status code: \(statusCode)")))
-                        }
-                    } else {
-                        promise(.failure(.error(err: error.localizedDescription)))
                     }
                 }
             }
+            .eraseToAnyPublisher()
         }
-        .eraseToAnyPublisher()
-    }
     
+//    static func requestFormData(route: APIRouter) -> AnyPublisher<T, NetworkError> {
+//        return Future<T, NetworkError> { promise in
+//            AF.upload(multipartFormData: { multipartFormData in
+//                if let parameters = route.parameters {
+//                    for (key, value) in parameters {
+//                        if let data = try? JSONSerialization.data(withJSONObject: value, options: []) {
+//                            multipartFormData.append(data, withName: key, mimeType: "application/json")
+//                        }
+//                    }
+//                }
+//                if let images = route.images {
+//                    for image in images {
+//                        if let imageData = image.jpegData(compressionQuality: 1.0) {
+//                            multipartFormData.append(imageData, withName: "images", fileName: "image.jpg", mimeType: "image/jpeg")
+//                        }
+//                    }
+//                }
+//            }, with: route)
+//            .validate()
+//            .responseDecodable(of: T.self) { response in
+//                switch response.result {
+//                case .success(let value):
+//                    promise(.success(value))
+//                case .failure(let error):
+//                    if let statusCode = response.response?.statusCode {
+//                        switch statusCode {
+//                        case 401:
+//                            promise(.failure(.error(err: "Unauthorized")))
+//                        default:
+//                            promise(.failure(.error(err: "Status code: \(statusCode)")))
+//                        }
+//                    } else {
+//                        promise(.failure(.error(err: error.localizedDescription)))
+//                    }
+//                }
+//            }
+//        }
+//        .eraseToAnyPublisher()
+//    }
+//    
 }

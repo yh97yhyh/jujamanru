@@ -21,10 +21,12 @@ struct GameRecord: Codable, Identifiable, Hashable {
     let images: [String]?
 }
 
-enum GameResult: String, Codable {
+enum GameResult: String, Codable, CaseIterable, Identifiable {
     case win = "WIN"
     case draw = "DRAW"
     case lose = "LOSE"
+    
+    var id: String { self.rawValue }
 }
 
 extension GameRecord {

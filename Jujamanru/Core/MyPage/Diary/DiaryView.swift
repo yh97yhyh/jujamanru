@@ -10,6 +10,7 @@ import SwiftUI
 struct DiaryView: View {
     @EnvironmentObject var myPageviewModel: MyPageViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var isInit = true
     
     @StateObject var viewModel: DiaryViewModel
     
@@ -36,7 +37,7 @@ struct DiaryView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: DiaryWriteView(viewModel: DiaryWriteViewModel())) {
+                NavigationLink(destination: DiaryWriteView(viewModel: DiaryWriteViewModel(userId: myPageviewModel.user.id))) {
                     Image(systemName: "square.and.pencil")
                         .imageScale(.large)
                         .foregroundColor(.black)
@@ -96,6 +97,12 @@ struct DiaryView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !isInit {
+                viewModel.fetchMyGameRecords()
+            }
+            isInit = false
+        }
     }
 }
 

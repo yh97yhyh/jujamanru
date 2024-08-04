@@ -66,7 +66,7 @@ struct DiaryDetailView: View {
     }
 }
 
-struct BannerView: View {
+private struct BannerView: View {
     @StateObject var viewModel: DiaryDetailViewModel
     @State private var currentIndex = 0
     
